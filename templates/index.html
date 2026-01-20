@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Skill Match AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Skill Match AI</h1>
+        <p class="subtitle">AI-Based Resume Shortlisting System</p>
+
+        <form method="POST">
+            <div class="card">
+                <label>Job Description</label>
+                <textarea name="job_description" placeholder="Paste the job description here..." required></textarea>
+            </div>
+
+            <div class="card">
+                <label>Resumes</label>
+                <small>Separate each resume using a blank line</small>
+                <textarea name="resumes" placeholder="Paste resumes here..." required></textarea>
+            </div>
+
+            <button type="submit">Rank Resumes</button>
+        </form>
+
+        {% if results %}
+        <div class="results">
+            <h2>Ranking Results</h2>
+            <table>
+                <tr>
+                    <th>Resume</th>
+                    <th>Match Score (%)</th>
+                </tr>
+                {% for r in results %}
+                <tr>
+                    <td>Resume {{ r.resume_no }}</td>
+                    <td>{{ r.score }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>
