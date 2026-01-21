@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #000000;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: white;
+}
+
+.app {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+    color: #2563eb;
+}
+
+header p {
+    margin-top: 6px;
+    color: #555;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+}
+
+small {
+    color: #666;
+}
+
+textarea {
+    width: 100%;
+    height: 140px;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    resize: vertical;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+button:hover {
+    background: #1e4ed8;
+}
+
+.results h2 {
+    margin-top: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th,
+td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+    text-align: left;
+    background: #f9fafb;
+}
+
+.score-bar {
+    position: relative;
+    background: #e5e7eb;
+    border-radius: 6px;
+    height: 20px;
+}
+
+.score-bar .fill {
+    background: #22c55e;
+    height: 100%;
+    border-radius: 6px;
+}
+
+.score-bar span {
+    position: absolute;
+    right: 8px;
+    top: 1px;
+    font-size: 12px;
+    font-weight: 600;
+}

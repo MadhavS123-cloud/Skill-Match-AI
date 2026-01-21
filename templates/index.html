@@ -36,16 +36,21 @@
                     <th>Resume</th>
                     <th>Match Score (%)</th>
                 </tr>
+
                 {% for r in results %}
                 <tr>
                     <td>Resume {{ r.resume_no }}</td>
                     <td>{{ r.score }}</td>
                 </tr>
                 {% endfor %}
+
             </table>
         </div>
         {% endif %}
+
     </div>
+
+    <!-- Fixed potential syntax issues -->
 
 </body>
 
