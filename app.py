@@ -1,39 +1,34 @@
-from flask import Flask, render_template, request
-from models.resume_ranker import rank_resumes
+from flask import Flask, render_template, request, redirect, url_for, session
 
-app = Flask(__name__)   # ✅ app MUST be created BEFORE routes
+app = Flask(__name__)
+app.secret_key = "skill-match-secret"
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    error = None
+    if request.method == "POST":
+        if request.form["username"] == "admin" and request.form["password"] == "admin123":
+            session["user"] = "admin"
+            return redirect(url_for("index"))
+        else:
+            error = "Invalid username or password"
+    return render_template("login.html", error=error)
+
+@app.route("/logout")
+def logout():
+    session.pop("user", None)
+    return redirect(url_for("login"))
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    results = None
+    if "user" not in session:
+        return redirect(url_for("login"))
 
-    if request.method == "POST":
-        job_description = request.form["job_description"]
-
-        raw_resumes = request.form["resumes"]
-
-        resumes_text = [
-            r.strip()
-            for r in raw_resumes.split("\r\n\r\n")
-            if r.strip()
-        ]
-
-        # Debug line (temporary)
-        print("Number of resumes:", len(resumes_text))
-
-        ranked = rank_resumes(resumes_text, job_description)
-
-        results = [
-            {
-                "resume_no": idx + 1,
-                "score": round(min(score[0] * 100, 100), 2)
-            }
-            for idx, score in ranked
-        ]
-
-    return render_template("index.html", results=results)
+    return render_template("index.html")
 
 
 if __name__ == "__main__":
+    print(app.url_map)
     app.run(debug=True)

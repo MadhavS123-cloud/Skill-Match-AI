@@ -120,3 +120,63 @@ th {
     font-size: 12px;
     font-weight: 600;
 }
+
+/* -------- LOGIN PAGE -------- */
+
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f172a;
+    /* dark background */
+}
+
+.login-card {
+    background: #ffffff;
+    padding: 30px;
+    width: 360px;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.login-card h2 {
+    margin-bottom: 5px;
+    color: #2563eb;
+}
+
+.subtitle {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.login-card button {
+    width: 100%;
+    padding: 12px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-card button:hover {
+    background: #1e40af;
+}
+
+.error {
+    color: #dc2626;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
