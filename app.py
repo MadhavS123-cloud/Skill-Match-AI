@@ -1,62 +1,51 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, redirect, url_for, session
+from flask_dance.contrib.google import make_google_blueprint, google
+import os
 
 app = Flask(__name__)
-app.secret_key = "skill-match-secret"
+app.secret_key = "dev-secret-key"
 
-# TEMP in-memory user store (for demo)
-users = {
-    "admin": "admin123"
-}
+google_bp = make_google_blueprint(
+    client_id=os.environ.get("GOOGLE_CLIENT_ID"),
+    client_secret=os.environ.get("GOOGLE_CLIENT_SECRET"),
+    scope=["profile", "email"]
+)
 
+app.register_blueprint(google_bp, url_prefix="/login")
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    error = None
-
-    if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
-
-        if username in users and users[username] == password:
-            session["user"] = username
-            return redirect(url_for("index"))
-        else:
-            error = "Invalid username or password"
-
-    return render_template("login.html", error=error)
-
-
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    error = None
-
-    if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
-
-        if username in users:
-            error = "User already exists"
-        else:
-            users[username] = password
-            session["user"] = username
-            return redirect(url_for("index"))
-
-    return render_template("register.html", error=error)
-
-
-@app.route("/logout")
-def logout():
-    session.pop("user", None)
-    return redirect(url_for("login"))
-
+from flask_dance.contrib.google import google
 
 @app.route("/")
 def index():
-    if "user" not in session:
+    if not google.authorized:
         return redirect(url_for("login"))
 
-    return render_template("index.html")
+    resp = google.get("/oauth2/v2/userinfo")
+    if not resp.ok:
+        return "Failed to fetch user info"
 
+    user_info = resp.json()
+    return render_template(
+        "index.html",
+        user=user_info
+    )
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("login"))
+
+
+@app.route("/login")
+def login():
+    if google.authorized:
+        return redirect(url_for("index"))
+    return render_template("login.html")
+@app.route("/register")
+def register():
+    if google.authorized:
+        return redirect(url_for("index"))
+    return render_template("register.html")
 
 if __name__ == "__main__":
+    print(app.url_map)
     app.run(debug=True)
