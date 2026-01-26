@@ -3,44 +3,68 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skill Match AI</title>
-    <!-- <link rel="stylesheet" href="/static/style.css"> -->
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
 
-    <div class="container">
-        <h1>Skill Match AI</h1>
-        <p class="subtitle">AI-Based Resume Shortlisting System</p>
+    <div class="app">
+        <header>
+            <h1>Skill Match AI</h1>
+            <p>AI-Based Resume Shortlisting System</p>
+            <button class="theme-toggle-btn" id="themeToggle">🌙 Dark Mode</button>
+        </header>
 
-        <form method="POST">
+
+        <form method="POST" enctype="multipart/form-data">
             <div class="card">
                 <label>Job Description</label>
-                <textarea name="job_description" placeholder="Paste the job description here..." required></textarea>
+                <textarea name="job_description" placeholder="Paste the job description here..."
+                    required>{{ request.form.get('job_description', '') }}</textarea>
             </div>
 
             <div class="card">
-                <label>Resumes</label>
-                <small>Separate each resume using a blank line</small>
-                <textarea name="resumes" placeholder="Paste resumes here..." required></textarea>
+                <label>Upload Resumes (PDF/TXT)</label>
+                <input type="file" name="resume_files" multiple accept=".pdf,.txt">
+
+                <div class="or-divider">
+                    <span>OR</span>
+                </div>
+
+                <label>Paste Resumes Text</label>
+                <small>Separate each resume using a blank line (double newline)</small>
+                <textarea name="resumes_text"
+                    placeholder="Paste resumes here...">{{ request.form.get('resumes_text', '') }}</textarea>
             </div>
 
-            <button type="submit">Rank Resumes</button>
+            <button type="submit" class="primary-btn">Rank Resumes 🚀</button>
         </form>
 
         {% if results %}
-        <div class="results">
+        <div class="results card">
             <h2>Ranking Results</h2>
             <table>
                 <tr>
-                    <th>Resume</th>
-                    <th>Match Score (%)</th>
+                    <th>Rank</th>
+                    <th>Score</th>
+                    <th>Preview</th>
                 </tr>
 
                 {% for r in results %}
                 <tr>
-                    <td>Resume {{ r.resume_no }}</td>
-                    <td>{{ r.score }}</td>
+                    <td>#{{ r.resume_no }}</td>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div
+                                style="flex: 1; height: 8px; background: var(--score-bar-bg); border-radius: 4px; overflow: hidden; width: 100px;">
+                                <div style="width: {{ r.score }}%; background: #22c55e; height: 100%;"></div>
+                            </div>
+                            <span style="font-weight: 700; color: var(--text-color);">{{ r.score }}%</span>
+                        </div>
+                    </td>
+                    <td style="color: var(--text-muted); font-size: 0.9em;">{{ r.content }}</td>
                 </tr>
                 {% endfor %}
 
@@ -50,7 +74,29 @@
 
     </div>
 
-    <!-- Fixed potential syntax issues -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Check local storage or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            html.setAttribute('data-theme', savedTheme);
+            themeToggle.innerText = savedTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            html.setAttribute('data-theme', 'dark');
+            themeToggle.innerText = '☀️ Light Mode';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggle.innerText = newTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+        });
+    </script>
 
 </body>
 
