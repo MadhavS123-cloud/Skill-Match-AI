@@ -1,2 +1,7 @@
 flask
 scikit-learn
+flask-dance
+requests
+python-dotenv
+blinker
+PyPDF2
