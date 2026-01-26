@@ -67,10 +67,16 @@ header p {
     margin-top: 10px;
 }
 
-.theme-toggle-btn {
+.header-actions {
     position: absolute;
     top: 0;
     right: 0;
+    display: flex;
+    gap: 10px;
+}
+
+.theme-toggle-btn,
+.signin-btn {
     background: transparent;
     border: 2px solid var(--border-color);
     color: var(--text-color);
@@ -79,13 +85,18 @@ header p {
     cursor: pointer;
     font-weight: 600;
     font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-block;
 }
 
-.theme-toggle-btn:hover {
+.theme-toggle-btn:hover,
+.signin-btn:hover {
     background: var(--card-bg);
     border-color: var(--primary-color);
     color: var(--primary-color);
 }
+
+
 
 .card {
     background: var(--card-bg);
@@ -224,6 +235,30 @@ td {
 .google-btn:hover {
     background: #f9fafb;
     border-color: #d1d5db;
+}
+
+.github-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    background: #24292e;
+    color: white;
+    border: 1px solid #24292e;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    margin-top: 10px;
+}
+
+.github-btn:hover {
+    background: #2f363d;
+    border-color: #2f363d;
 }
 
 .divider {
