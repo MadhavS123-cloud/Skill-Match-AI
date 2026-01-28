@@ -3,104 +3,408 @@
 
 <head>
     <meta charset="UTF-8">
+    <title>Skill Match AI - Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skill Match AI</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
 
-    <div class="app">
-        <header>
-            <h1>Skill Match AI</h1>
-            <p>AI-Based Resume Shortlisting System</p>
-            <div class="header-actions">
-                <a href="/signin" class="signin-btn">Sign In</a>
-                <button class="theme-toggle-btn" id="themeToggle">🌙 Dark Mode</button>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>Skill Match AI</h1>
             </div>
-        </header>
+            <div class="user-section">
+                <button id="toggleChat" class="assistant-btn">
+                    <span>AI Assistant</span>
+                </button>
+                <div class="user-info">
+                    <img src="{{ user.picture }}" alt="Profile" class="user-avatar">
+                    <div class="user-details">
+                        <div class="user-name">{{ user.name }}</div>
+                        <div class="user-email">{{ user.email }}</div>
+                    </div>
+                </div>
+                <a href="/logout" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </header>
 
+    <!-- Main Content -->
+    <main class="container">
+        <div class="welcome-section">
+            <h2 class="page-title">Resume Analyzer</h2>
+            <p class="page-subtitle">Evaluation and ranking tool powered by artificial intelligence.</p>
+        </div>
 
-        <form method="POST" enctype="multipart/form-data">
-            <div class="card">
-                <label>Job Description</label>
-                <textarea name="job_description" placeholder="Paste the job description here..."
-                    required>{{ request.form.get('job_description', '') }}</textarea>
+        <form method="POST" class="dashboard-form">
+            <!-- Job Description Card -->
+            <div class="card fade-in">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">Job Specification</h3>
+                        <p class="card-subtitle">Define the core requirements and qualifications</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <textarea name="job_description"
+                        placeholder="Enter job description, required skills, qualifications, and experience..." required
+                        class="input-field"></textarea>
+                </div>
             </div>
 
-            <div class="card">
-                <label>Upload Resumes (PDF/TXT)</label>
-                <input type="file" name="resume_files" multiple accept=".pdf,.txt">
-
-                <div class="or-divider">
-                    <span>OR</span>
+            <!-- Resumes Card with Tabs -->
+            <div class="card fade-in" style="animation-delay: 0.1s">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">Candidate Analysis</h3>
+                        <p class="card-subtitle">Input resume data for AI-driven evaluation</p>
+                    </div>
                 </div>
 
-                <label>Paste Resumes Text</label>
-                <small>Separate each resume using a blank line (double newline)</small>
-                <textarea name="resumes_text"
-                    placeholder="Paste resumes here...">{{ request.form.get('resumes_text', '') }}</textarea>
+                <!-- Tab Buttons -->
+                <div class="tab-container">
+                    <button type="button" class="tab-btn active" data-tab="paste">
+                        Plain Text
+                    </button>
+                    <button type="button" class="tab-btn" data-tab="upload">
+                        Document Upload
+                    </button>
+                </div>
+
+                <div class="card-body">
+                    <!-- Paste Tab Content -->
+                    <div class="tab-content active" id="paste-tab">
+                        <textarea name="resumes" id="resumes-textarea"
+                            placeholder="Paste candidate resumes here... (separate each resume with a blank line)"
+                            class="input-field" rows="8"></textarea>
+                    </div>
+
+                    <!-- Upload Tab Content -->
+                    <div class="tab-content" id="upload-tab">
+                        <div class="file-upload-zone" id="dropZone">
+                            <div class="upload-icon">📁</div>
+                            <p class="upload-text">Drag & drop resume files here</p>
+                            <p class="upload-subtext">or</p>
+                            <label for="resume_files" class="file-select-btn">Browse Files</label>
+                            <input type="file" name="resume_files" id="resume_files" multiple
+                                accept=".pdf,.docx,.doc,.txt" style="display: none;">
+                            <p class="upload-hint">Supported: PDF, DOCX, TXT (Max 16MB each)</p>
+                        </div>
+                        <div class="file-list" id="fileList"></div>
+                    </div>
+                </div>
             </div>
 
-            <button type="submit" class="primary-btn">Rank Resumes 🚀</button>
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn fade-in" style="animation-delay: 0.2s">
+                <span>Evaluate Candidates</span>
+            </button>
         </form>
 
+        <!-- Results Section -->
         {% if results %}
-        <div class="results card">
-            <h2>Ranking Results</h2>
-            <table>
-                <tr>
-                    <th>Rank</th>
-                    <th>Score</th>
-                    <th>Preview</th>
-                </tr>
+        <div class="results-section fade-in" style="animation-delay: 0.3s">
+            <div class="results-header">
+                <h2 class="results-title">Analysis Results</h2>
+                <p class="results-subtitle">{{ results|length }} profiles analyzed</p>
+            </div>
 
+            <div class="results-grid">
                 {% for r in results %}
-                <tr>
-                    <td>#{{ r.resume_no }}</td>
-                    <td>
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <div
-                                style="flex: 1; height: 8px; background: var(--score-bar-bg); border-radius: 4px; overflow: hidden; width: 100px;">
-                                <div style="width: {{ r.score }}%; background: #22c55e; height: 100%;"></div>
+                <div class="result-card fade-in" style="animation-delay: {{ loop.index0 * 0.15 + 0.5 }}s">
+                    <div class="rank-badge rank-{{ loop.index }}">
+                        {% if loop.index == 1 %}🥇
+                        {% elif loop.index == 2 %}🥈
+                        {% elif loop.index == 3 %}🥉
+                        {% else %}#{{ loop.index }}
+                        {% endif %}
+                    </div>
+                    <div class="result-content">
+                        <h4 class="resume-title">Resume {{ r.resume_no }}</h4>
+                        <div class="score-container">
+                            <div class="score-bar">
+                                <div class="score-fill score-{{ 'high' if r.score >= 70 else 'medium' if r.score >= 50 else 'low' }}"
+                                    style="width: {{ r.score }}%" data-score="{{ r.score }}">
+                                </div>
                             </div>
-                            <span style="font-weight: 700; color: var(--text-color);">{{ r.score }}%</span>
+                            <div class="score-value">{{ r.score }}%</div>
                         </div>
-                    </td>
-                    <td style="color: var(--text-muted); font-size: 0.9em;">{{ r.content }}</td>
-                </tr>
-                {% endfor %}
+                        <div class="match-label">
+                            {% if r.score >= 70 %}
+                            <span class="badge badge-success">Excellent Match</span>
+                            {% elif r.score >= 50 %}
+                            <span class="badge badge-warning">Good Match</span>
+                            {% else %}
+                            <span class="badge badge-danger">Needs Review</span>
+                            {% endif %}
+                        </div>
 
-            </table>
+                        <!-- ATS Insights Section -->
+                        <div class="ats-insights">
+                            <div class="ats-header">
+                                <span class="ats-label">ATS Compatibility</span>
+                                <span class="ats-score-badge">{{ r.ats_score }}%</span>
+                            </div>
+                            <div class="ats-progress">
+                                <div class="ats-bar" style="width: {{ r.ats_score }}%"></div>
+                            </div>
+                            <details class="ats-details">
+                                <summary>Insights and Optimization</summary>
+                                <p class="ats-summary">{{ r.ats_summary }}</p>
+                                <ul class="ats-tips">
+                                    {% for tip in r.ats_tips %}
+                                    <li>{{ tip }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
         {% endif %}
+    </main>
 
+    <!-- Chatbot Widget -->
+    <button id="themeToggle" class="theme-toggle-btn" title="Toggle Theme">
+        🌙
+    </button>
+
+    <!-- AI Assistant Side Drawer -->
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h3>AI Assistant</h3>
+            <button class="chat-close" id="closeChat">✕</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message message-ai">
+                Hello. I'm the Skill Match AI assistant. How can I assist you with your hiring analysis today?
+            </div>
+        </div>
+        <div class="chat-footer">
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Ask me anything...">
+                <button class="chat-send" id="sendBtn">➤</button>
+            </div>
+        </div>
     </div>
 
     <script>
+        // Theme Toggle Functionality
         const themeToggle = document.getElementById('themeToggle');
-        const html = document.documentElement;
+        const body = document.body;
 
-        // Check local storage or system preference
+        // Check for saved theme preference
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            html.setAttribute('data-theme', savedTheme);
-            themeToggle.innerText = savedTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
-        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            html.setAttribute('data-theme', 'dark');
-            themeToggle.innerText = '☀️ Light Mode';
+        if (savedTheme === 'light') {
+            body.classList.add('light-theme');
+            themeToggle.textContent = '☀️';
         }
 
         themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.classList.toggle('light-theme');
+            const isLight = body.classList.contains('light-theme');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            themeToggle.textContent = isLight ? '☀️' : '🌙';
+        });
 
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            themeToggle.innerText = newTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+        // Chatbot Functionality
+        const toggleChat = document.getElementById('toggleChat');
+        const closeChat = document.getElementById('closeChat');
+        const chatWindow = document.getElementById('chatWindow');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const chatMessages = document.getElementById('chatMessages');
+
+        toggleChat.addEventListener('click', () => {
+            chatWindow.classList.toggle('open');
+            if (chatWindow.classList.contains('open')) {
+                chatInput.focus();
+            }
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatWindow.classList.remove('open');
+        });
+
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Add user message to UI
+            addMessage(message, 'user');
+            chatInput.value = '';
+
+            // Add typing indicator
+            const typingId = addTypingIndicator();
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message })
+                });
+
+                const data = await response.json();
+                removeTypingIndicator(typingId);
+
+                if (data.response) {
+                    addMessage(data.response, 'ai');
+                } else if (data.error) {
+                    addMessage(`Error: ${data.error}`, 'ai');
+                } else {
+                    addMessage("Sorry, I encountered an unknown error. Please try again.", 'ai');
+                }
+            } catch (error) {
+                console.error('Chat error:', error);
+                removeTypingIndicator(typingId);
+                addMessage("Connection error. Is the server running?", 'ai');
+            }
+        }
+
+        function addMessage(text, sender) {
+            const div = document.createElement('div');
+            div.className = `message message-${sender}`;
+            div.textContent = text;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addTypingIndicator() {
+            const id = 'typing-' + Date.now();
+            const div = document.createElement('div');
+            div.id = id;
+            div.className = 'typing-indicator';
+            div.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return id;
+        }
+
+        function removeTypingIndicator(id) {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // Tab Switching
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabName = btn.dataset.tab;
+
+                // Remove active class from all tabs
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked tab
+                btn.classList.add('active');
+                document.getElementById(`${tabName}-tab`).classList.add('active');
+
+                // Clear the other input when switching
+                if (tabName === 'paste') {
+                    document.getElementById('resume_files').value = '';
+                    document.getElementById('fileList').innerHTML = '';
+                } else {
+                    document.getElementById('resumes-textarea').value = '';
+                }
+            });
+        });
+
+        // File Upload Handling
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('resume_files');
+        const fileList = document.getElementById('fileList');
+
+        // Prevent default drag behaviors
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        // Highlight drop zone when dragging over
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => {
+                dropZone.classList.add('drag-over');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => {
+                dropZone.classList.remove('drag-over');
+            }, false);
+        });
+
+        // Handle dropped files
+        dropZone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }, false);
+
+        // Handle file input change
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            const fileArray = Array.from(files);
+            displayFiles(fileArray);
+        }
+
+        function displayFiles(files) {
+            fileList.innerHTML = '';
+
+            if (files.length === 0) return;
+
+            files.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <span class="file-icon">📄</span>
+                    <span class="file-name">${file.name}</span>
+                    <span class="file-size">${formatFileSize(file.size)}</span>
+                `;
+                fileList.appendChild(fileItem);
+            });
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+
+        // Animate score bars on load
+        document.addEventListener('DOMContentLoaded', function () {
+            const scoreFills = document.querySelectorAll('.score-fill');
+            scoreFills.forEach((fill, index) => {
+                setTimeout(() => {
+                    fill.style.width = fill.dataset.score + '%';
+                }, 500 + (index * 100));
+            });
         });
     </script>
-
 </body>
 
 </html>

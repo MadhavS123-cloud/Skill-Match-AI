@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up | Skill Match AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #020617);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #111;
+        }
+
+        .signup-card {
+            background: #ffffff;
+            width: 380px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+
+        .signup-card h2 {
+            margin-bottom: 6px;
+            color: #1e40af;
+        }
+
+        .signup-card p {
+            margin-bottom: 24px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .google-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 15px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            background: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .google-btn:hover {
+            background: #f1f5f9;
+        }
+
+        .google-btn img {
+            width: 18px;
+            height: 18px;
+        }
+
+        .linkedin-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 15px;
+            border-radius: 6px;
+            border: 1px solid #0077b5;
+            background: #0077b5;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .linkedin-btn:hover {
+            background: #005582;
+            border-color: #005582;
+        }
+
+        .linkedin-btn img {
+            width: 18px;
+            height: 18px;
+            filter: brightness(0) invert(1);
+        }
+
+        .divider {
+            margin: 20px 0;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .footer-text {
+            margin-top: 18px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .footer-text a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="signup-card">
+        <h2>Sign Up</h2>
+        <p>Create your Skill Match AI account</p>
+
+        <!-- GOOGLE SIGNUP -->
+        <a href="/login/google" style="text-decoration: none;">
+            <button class="google-btn">
+                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google">
+                Sign up with Google
+            </button>
+        </a>
+
+        <!-- LINKEDIN SIGNUP -->
+        <a href="/login/linkedin" style="text-decoration: none;">
+            <button class="linkedin-btn">
+                <img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
+                    alt="LinkedIn">
+                Sign up with LinkedIn
+            </button>
+        </a>
+
+        <div class="divider">No password required</div>
+
+        <div class="footer-text">
+            Already have an account?
+            <a href="/login">Sign in</a>
+        </div>
+    </div>
+
+</body>
+
+</html>
