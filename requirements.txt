@@ -1,7 +1,6 @@
 flask
-scikit-learn
 flask-dance
-requests
+scikit-learn
 python-dotenv
-blinker
-PyPDF2
+oauthlib
+google-generativeai

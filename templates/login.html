@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome | Skill Match AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent: #f472b6;
+            --bg-dark: #0f172a;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: var(--text-main);
+        }
+
+        /* Animated Background */
+        .bg-animate {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 30%, #1e1b4b 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, #312e81 0%, transparent 50%);
+        }
+
+        .blob {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            filter: blur(80px);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: move 20s infinite alternate linear;
+        }
+
+        .blob-1 {
+            top: -100px;
+            left: -100px;
+        }
+
+        .blob-2 {
+            bottom: -100px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        @keyframes move {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(50px, 100px) scale(1.2);
+            }
+        }
+
+        .login-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            width: 420px;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            font-weight: 300;
+        }
+
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .btn-google {
+            background: white;
+            color: #1f2937;
+        }
+
+        .btn-google:hover {
+            background: #f1f5f9;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-linkedin {
+            background: #0077b5;
+            color: white;
+        }
+
+        .btn-linkedin:hover {
+            background: #005a8a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 119, 181, 0.3);
+        }
+
+        .btn img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .divider {
+            margin: 24px 0;
+            display: flex;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--glass-border);
+            margin: 0 16px;
+        }
+
+        .footer {
+            margin-top: 24px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: var(--accent);
+        }
+
+        /* Micro-interactions */
+        .login-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-animate">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="login-card">
+        <h1>Welcome</h1>
+        <p class="subtitle">to Skill Match AI</p>
+
+        <div class="social-buttons">
+            <a href="/login/google" class="btn btn-google">
+                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google">
+                Continue with Google
+            </a>
+
+            <a href="/login/linkedin" class="btn btn-linkedin">
+                <img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
+                    style="filter: brightness(0) invert(1);" alt="LinkedIn">
+                Continue with LinkedIn
+            </a>
+        </div>
+
+        <div class="divider">or use magic link</div>
+
+        <div class="footer">
+            New to the platform? <a href="/register">Join the waitlist</a>
+        </div>
+    </div>
+</body>
+
+</html>
