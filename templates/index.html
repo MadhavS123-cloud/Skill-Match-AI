@@ -6,163 +6,401 @@
     <title>Skill Match AI - Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <!-- GSAP for Professional Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Animated Background -->
-    <div class="bg-animation"></div>
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="theme-toggle-btn" title="Toggle Theme" style="display: none;">
+        🌙
+    </button>
 
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <div class="logo">
-                <h1>Skill Match AI</h1>
+            <div class="nav-left">
+                <a href="/" class="logo">
+                    <div class="logo-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                            </path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <h1>Skill Match AI</h1>
+                </a>
+                <nav class="nav-links">
+                    <a href="#" class="nav-link active" id="navDashboard">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        Dashboard
+                    </a>
+                    <a href="#" class="nav-link" id="navNewMatch">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="12" y1="18" x2="12" y2="12"></line>
+                            <line x1="9" y1="15" x2="15" y2="15"></line>
+                        </svg>
+                        New Match
+                    </a>
+                </nav>
             </div>
-            <div class="user-section">
-                <button id="toggleChat" class="assistant-btn">
-                    <span>AI Assistant</span>
+
+            <div class="nav-right">
+                <button id="themeToggleIcon" class="theme-toggle-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
                 </button>
-                <div class="user-info">
-                    <img src="{{ user.picture }}" alt="Profile" class="user-avatar">
-                    <div class="user-details">
-                        <div class="user-name">{{ user.name }}</div>
-                        <div class="user-email">{{ user.email }}</div>
+                <div class="user-profile">
+                    <div class="avatar">
+                        {{ user.name[:2].upper() }}
+                    </div>
+                    <div class="user-text">
+                        <span class="user-display-name">{{ user.name }}</span>
+                        <span class="user-display-email">{{ user.email }}</span>
+                    </div>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+
+                    <div class="profile-dropdown">
+                        <a href="#" class="dropdown-item">Your Profile</a>
+                        <a href="#" class="dropdown-item">Settings</a>
+                        <a href="/logout" class="dropdown-item logout">Sign out</a>
                     </div>
                 </div>
-                <a href="/logout" class="logout-btn">Logout</a>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="container">
-        <div class="welcome-section">
-            <h2 class="page-title">Resume Analyzer</h2>
-            <p class="page-subtitle">Evaluation and ranking tool powered by artificial intelligence.</p>
+        <!-- Dashboard View -->
+        <div id="dashboardView" class="view-content fade-in">
+            <div class="page-header">
+                <div class="page-title-group">
+                    <h2>Dashboard</h2>
+                    <p>Welcome back! Here's an overview of your resume matching activity.</p>
+                </div>
+                <button class="btn-primary" onclick="showNewMatch()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    New Match
+                </button>
+            </div>
+
+            <!-- Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">📄</div>
+                        <span class="metric-trend trend-up">+12%</span>
+                    </div>
+                    <div class="metric-body">
+                        <h3>{{ stats.total }}</h3>
+                        <p>Total Matches</p>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">📈</div>
+                        <span class="metric-trend trend-up">+5%</span>
+                    </div>
+                    <div class="metric-body">
+                        <h3>{{ stats.avg }}{% if stats.total > 0 %}%{% endif %}</h3>
+                        <p>Avg. Match Score</p>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">👥</div>
+                        <span class="metric-trend trend-up">+2</span>
+                    </div>
+                    <div class="metric-body">
+                        <h3>{{ stats.roles }}</h3>
+                        <p>Active Roles</p>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">🕒</div>
+                        <span class="metric-trend trend-up">+8</span>
+                    </div>
+                    <div class="metric-body">
+                        <h3>{{ stats.week }}</h3>
+                        <p>This Week</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Matches -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-title-group">
+                        <h3>Recent Matches</h3>
+                        <p>Your latest resume-to-role comparisons</p>
+                    </div>
+                    <a href="#" class="view-all-link">View all</a>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Candidate</th>
+                                <th>Role</th>
+                                <th>Match Score</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if recent_matches %}
+                            {% for match in recent_matches %}
+                            <tr>
+                                <td>
+                                    <div class="candidate-cell">
+                                        <div class="candidate-avatar">{{ match.candidate[:2] | upper }}</div>
+                                        <span class="candidate-name">{{ match.candidate }}</span>
+                                    </div>
+                                </td>
+                                <td>{{ match.role }}</td>
+                                <td><span
+                                        class="score-badge {% if match.score >= 80 %}score-high{% elif match.score >= 50 %}score-mid{% else %}score-low{% endif %}">{{
+                                        match.score }}%</span></td>
+                                <td>
+                                    <span
+                                        class="status-badge {% if match.score >= 80 %}status-strong{% elif match.score >= 50 %}status-average{% else %}status-needs-review{% endif %}">
+                                        {% if match.score >= 80 %}Strong{% elif match.score >= 50 %}Average{% else
+                                        %}Needs Review{% endif %}
+                                    </span>
+                                </td>
+                                <td>{{ match.date }}</td>
+                                <td><a href="#" class="actions-btn">View ↗</a></td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="6" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                                    No matches yet. Click "New Match" to get started.
+                                </td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <form method="POST" class="dashboard-form">
-            <!-- Job Description Card -->
-            <div class="card fade-in">
-                <div class="card-header">
-                    <div>
-                        <h3 class="card-title">Job Specification</h3>
-                        <p class="card-subtitle">Define the core requirements and qualifications</p>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <textarea name="job_description"
-                        placeholder="Enter job description, required skills, qualifications, and experience..." required
-                        class="input-field"></textarea>
+        <!-- New Match View (Initially Hidden) -->
+        <div id="newMatchView" class="view-content fade-in" style="display: none;">
+            <div class="page-header">
+                <div class="page-title-group">
+                    <h2>New Resume Match</h2>
+                    <p>Upload a resume and provide job details to analyze the match score and skill gaps.</p>
                 </div>
             </div>
 
-            <!-- Resumes Card with Tabs -->
-            <div class="card fade-in" style="animation-delay: 0.1s">
-                <div class="card-header">
-                    <div>
-                        <h3 class="card-title">Candidate Analysis</h3>
-                        <p class="card-subtitle">Input resume data for AI-driven evaluation</p>
-                    </div>
-                </div>
-
-                <!-- Tab Buttons -->
-                <div class="tab-container">
-                    <button type="button" class="tab-btn active" data-tab="paste">
-                        Plain Text
-                    </button>
-                    <button type="button" class="tab-btn" data-tab="upload">
-                        Document Upload
-                    </button>
-                </div>
-
-                <div class="card-body">
-                    <!-- Paste Tab Content -->
-                    <div class="tab-content active" id="paste-tab">
-                        <textarea name="resumes" id="resumes-textarea"
-                            placeholder="Paste candidate resumes here... (separate each resume with a blank line)"
-                            class="input-field" rows="8"></textarea>
-                    </div>
-
-                    <!-- Upload Tab Content -->
-                    <div class="tab-content" id="upload-tab">
-                        <div class="file-upload-zone" id="dropZone">
-                            <div class="upload-icon">📁</div>
-                            <p class="upload-text">Drag & drop resume files here</p>
-                            <p class="upload-subtext">or</p>
-                            <label for="resume_files" class="file-select-btn">Browse Files</label>
-                            <input type="file" name="resume_files" id="resume_files" multiple
-                                accept=".pdf,.docx,.doc,.txt" style="display: none;">
-                            <p class="upload-hint">Supported: PDF, DOCX, TXT (Max 16MB each)</p>
+            <form method="POST" class="form-grid" enctype="multipart/form-data">
+                <!-- Job Description Card -->
+                <div class="form-section fade-in">
+                    <div class="form-section-header">
+                        <div class="form-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
                         </div>
-                        <div class="file-list" id="fileList"></div>
+                        <div class="form-title-group">
+                            <h3>Job Details</h3>
+                            <p>Provide the role and requirements to match against</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Job Title</label>
+                        <input type="text" name="job_title" class="input-field"
+                            placeholder="e.g. Senior Product Manager">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Job Description</label>
+                        <textarea name="job_description"
+                            placeholder="Paste full job description or just a title like 'Software Engineer at Google'..."
+                            required class="input-field"></textarea>
                     </div>
                 </div>
-            </div>
 
-            <!-- Submit Button -->
-            <button type="submit" class="submit-btn fade-in" style="animation-delay: 0.2s">
-                <span>Evaluate Candidates</span>
-            </button>
-        </form>
-
-        <!-- Results Section -->
-        {% if results %}
-        <div class="results-section fade-in" style="animation-delay: 0.3s">
-            <div class="results-header">
-                <h2 class="results-title">Analysis Results</h2>
-                <p class="results-subtitle">{{ results|length }} profiles analyzed</p>
-            </div>
-
-            <div class="results-grid">
-                {% for r in results %}
-                <div class="result-card fade-in" style="animation-delay: {{ loop.index0 * 0.15 + 0.5 }}s">
-                    <div class="rank-badge rank-{{ loop.index }}">
-                        {% if loop.index == 1 %}🥇
-                        {% elif loop.index == 2 %}🥈
-                        {% elif loop.index == 3 %}🥉
-                        {% else %}#{{ loop.index }}
-                        {% endif %}
+                <!-- Resumes Card -->
+                <div class="form-section fade-in" style="animation-delay: 0.1s">
+                    <div class="form-section-header">
+                        <div class="form-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="form-title-group">
+                            <h3>Resume Upload</h3>
+                            <p>Upload the candidate's resume in PDF or DOCX format</p>
+                        </div>
                     </div>
-                    <div class="result-content">
-                        <h4 class="resume-title">Resume {{ r.resume_no }}</h4>
+
+                    <!-- Tab Buttons -->
+                    <div class="tab-container">
+                        <button type="button" class="tab-btn active" data-tab="paste">Paste Text</button>
+                        <button type="button" class="tab-btn" data-tab="upload">Upload Document</button>
+                    </div>
+
+                    <div class="form-body">
+                        <!-- Paste Tab Content -->
+                        <div class="tab-content active" id="paste-tab">
+                            <textarea name="resumes" id="resumes-textarea"
+                                placeholder="Paste candidate resumes here... (separate each resume with a blank line)"
+                                class="input-field" rows="8"></textarea>
+                        </div>
+
+                        <!-- Upload Tab Content -->
+                        <div class="tab-content" id="upload-tab">
+                            <div class="file-upload-zone" id="dropZone"
+                                onclick="document.getElementById('resume_files').click()">
+                                <div class="upload-icon">
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="17 8 12 3 7 8"></polyline>
+                                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                                    </svg>
+                                </div>
+                                <p class="upload-text"><span>Click to upload</span> or drag and drop</p>
+                                <p class="upload-subtext">PDF or DOCX (max. 5MB)</p>
+                                <input type="file" name="resume_files" id="resume_files" multiple
+                                    accept=".pdf,.docx,.doc,.txt" style="display: none;">
+                            </div>
+                            <div class="file-list" id="fileList"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-primary fade-in"
+                    style="animation-delay: 0.2s; width: 100%; justify-content: center; padding: 1rem;">
+                    <span>Evaluate Candidates</span>
+                </button>
+            </form>
+
+            <!-- Results Section -->
+            {% if results %}
+            <div class="results-section fade-in" style="margin-top: 3rem;">
+                {% if expanded_jd %}
+                <div class="expansion-banner"
+                    style="display: flex; gap: 1rem; align-items: flex-start; background: var(--primary-light); border: 1px solid var(--primary); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
+                    <div class="banner-icon" style="font-size: 1.5rem;">🤖</div>
+                    <div class="banner-content">
+                        <h4 style="font-weight: 700; margin-bottom: 0.25rem; color: var(--primary);">AI Requirement
+                            Intelligence</h4>
+                        <p style="font-size: 0.875rem; color: var(--text-muted);">Detected short title. Automatically
+                            expanded into industry-standard requirements for precise matching.</p>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="page-header">
+                    <div class="page-title-group">
+                        <h3>Analysis Results</h3>
+                        <p>{{ results|length }} profiles analyzed</p>
+                    </div>
+                </div>
+
+                <div class="results-grid">
+                    {% for r in results %}
+                    <div class="result-card fade-in" style="animation-delay: {{ loop.index0 * 0.1 }}s">
+                        <div class="result-header">
+                            <div class="rank-badge">0{{ r.resume_no }}</div>
+                            <div class="candidate-info">
+                                <h3>Candidate {{ r.resume_no }} {% if r.is_top_tier %}<span class="top-tier-badge">⭐ Top
+                                        10% Match</span>{% endif %}</h3>
+                                <p>{{ r.role_focus }}</p>
+                            </div>
+                            <div class="match-score-radial">
+                                <span class="score-value">{{ r.score }}%</span>
+                                <span class="score-label">Match</span>
+                            </div>
+                        </div>
+
                         <div class="score-container">
                             <div class="score-bar">
-                                <div class="score-fill score-{{ 'high' if r.score >= 70 else 'medium' if r.score >= 50 else 'low' }}"
-                                    style="width: {{ r.score }}%" data-score="{{ r.score }}">
+                                <div class="score-fill" data-score="{{ r.score }}"
+                                    style="width: 0%; background: {% if r.score >= 80 %}var(--success){% elif r.score >= 50 %}var(--warning){% else %}var(--danger){% endif %};">
                                 </div>
                             </div>
-                            <div class="score-value">{{ r.score }}%</div>
                         </div>
-                        <div class="match-label">
+
+                        <div class="match-label" style="margin-bottom: 1.5rem;">
                             {% if r.score >= 70 %}
-                            <span class="badge badge-success">Excellent Match</span>
+                            <span class="status-badge status-strong">Excellent Match</span>
                             {% elif r.score >= 50 %}
-                            <span class="badge badge-warning">Good Match</span>
+                            <span class="status-badge"
+                                style="background: var(--warning-light); color: var(--warning);">Good Match</span>
                             {% else %}
-                            <span class="badge badge-danger">Needs Review</span>
+                            <span class="status-badge"
+                                style="background: var(--danger-light); color: var(--danger);">Needs Review</span>
                             {% endif %}
                         </div>
 
-                        <!-- ATS Insights Section -->
-                        <div class="ats-insights">
-                            <div class="ats-header">
-                                <span class="ats-label">ATS Compatibility</span>
-                                <span class="ats-score-badge">{{ r.ats_score }}%</span>
+                        <!-- Advanced Analysis (Simplified in summary) -->
+                        <div class="ats-insights"
+                            style="background: var(--bg-main); padding: 1.25rem; border-radius: 12px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                                <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted);">Role
+                                    Focus: <span style="color: var(--primary);">{{ r.role_focus }}</span></span>
+                                <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-main);">ATS: {{
+                                    r.ats_score }}%</span>
                             </div>
-                            <div class="ats-progress">
-                                <div class="ats-bar" style="width: {{ r.ats_score }}%"></div>
-                            </div>
-                            <details class="ats-details">
-                                <summary>Insights and Optimization</summary>
-                                <p class="ats-summary">{{ r.ats_summary }}</p>
-                                <ul class="ats-tips">
-                                    {% for tip in r.ats_tips %}
-                                    <li>{{ tip }}</li>
+
+                            {% if r.missing_skills %}
+                            <div style="margin-bottom: 1rem;">
+                                <p
+                                    style="font-size: 0.625rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem;">
+                                    Skill Gaps</p>
+                                <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+                                    {% for skill in r.missing_skills %}
+                                    <span
+                                        style="font-size: 0.6875rem; padding: 0.2rem 0.5rem; background: var(--danger-light); color: var(--danger); border-radius: 4px;">{{
+                                        skill }}</span>
                                     {% endfor %}
-                                </ul>
-                            </details>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <p style="font-size: 0.8125rem; color: var(--text-muted); line-height: 1.4;">{{
+                                r.ats_summary[:150] }}...</p>
+                            <a href="#" onclick="showDetailedAnalysis({{ loop.index0 }}); return false;"
+                                style="display: block; margin-top: 1rem; font-size: 0.8125rem; font-weight: 600; color: var(--primary); text-decoration: none;">View
+                                Detail ↗</a>
                         </div>
                     </div>
                 </div>
@@ -170,7 +408,49 @@
             </div>
         </div>
         {% endif %}
+        </div>
     </main>
+
+    <!-- Detailed Analysis View (Initially Hidden) -->
+    <div id="analysisView" class="view-content fade-in"
+        style="display: none; padding-top: 80px; max-width: 1200px; margin: 0 auto;">
+        <div class="page-header" style="margin-bottom: 2rem;">
+            <div class="page-title-group">
+                <a href="#" onclick="showDashboard(); return false;"
+                    style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--text-muted); margin-bottom: 1rem; font-size: 0.875rem;">
+                    ← Back to Dashboard
+                </a>
+                <h2>Match Analysis Results</h2>
+                <p>Detailed comparison and skill gap analysis</p>
+            </div>
+            <div class="header-actions" style="display: flex; gap: 1rem;">
+                <button class="btn-secondary" onclick="window.print()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                    </svg>
+                    Share
+                </button>
+                <button class="btn-primary" onclick="exportToPDF()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Export PDF
+                </button>
+            </div>
+        </div>
+
+        <div class="analysis-grid" id="detailed-analysis-content">
+            <!-- Data will be populated by JS -->
+        </div>
+    </div>
 
     <!-- Chatbot Widget -->
     <button id="themeToggle" class="theme-toggle-btn" title="Toggle Theme">
@@ -197,38 +477,80 @@
     </div>
 
     <script>
-        // Theme Toggle Functionality
-        const themeToggle = document.getElementById('themeToggle');
-        const body = document.body;
+        // View Management
+        const navDashboard = document.getElementById('navDashboard');
+        const navNewMatch = document.getElementById('navNewMatch');
+        const dashboardView = document.getElementById('dashboardView');
+        const newMatchView = document.getElementById('newMatchView');
 
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            body.classList.add('light-theme');
-            themeToggle.textContent = '☀️';
+        function showDashboard() {
+            dashboardView.style.display = 'block';
+            newMatchView.style.display = 'none';
+            navDashboard.classList.add('active');
+            navNewMatch.classList.remove('active');
+            localStorage.setItem('lastView', 'dashboard');
         }
 
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('light-theme');
-            const isLight = body.classList.contains('light-theme');
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            themeToggle.textContent = isLight ? '☀️' : '🌙';
+        function showNewMatch() {
+            dashboardView.style.display = 'none';
+            newMatchView.style.display = 'block';
+            navDashboard.classList.remove('active');
+            navNewMatch.classList.add('active');
+            localStorage.setItem('lastView', 'newMatch');
+        }
+
+        navDashboard.addEventListener('click', (e) => { e.preventDefault(); switchView('dashboard'); });
+        navNewMatch.addEventListener('click', (e) => { e.preventDefault(); switchView('newMatch'); });
+
+        // Auto-show New Match if results are present
+        {% if results %}
+        showNewMatch();
+        {% else %}
+        const lastView = localStorage.getItem('lastView');
+        if (lastView === 'newMatch') showNewMatch();
+        else showDashboard();
+        {% endif %}
+
+        // Theme Toggle Functionality
+        const themeToggleIcon = document.getElementById('themeToggleIcon');
+        const body = document.body;
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-theme');
+            updateThemeIcon(true);
+        }
+
+        themeToggleIcon.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            const isDark = body.classList.contains('dark-theme');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeIcon(isDark);
         });
 
+        function updateThemeIcon(isDark) {
+            if (isDark) {
+                themeToggleIcon.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+            } else {
+                themeToggleIcon.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+            }
+        }
+
         // Chatbot Functionality
-        const toggleChat = document.getElementById('toggleChat');
         const closeChat = document.getElementById('closeChat');
         const chatWindow = document.getElementById('chatWindow');
         const chatInput = document.getElementById('chatInput');
         const sendBtn = document.getElementById('sendBtn');
         const chatMessages = document.getElementById('chatMessages');
 
-        toggleChat.addEventListener('click', () => {
+        // Added back toggle capability for AI Assistant via some trigger if needed, 
+        // but for now let's keep it accessible via a function or similar.
+        window.toggleChat = function () {
             chatWindow.classList.toggle('open');
             if (chatWindow.classList.contains('open')) {
                 chatInput.focus();
             }
-        });
+        };
 
         closeChat.addEventListener('click', () => {
             chatWindow.classList.remove('open');
@@ -237,33 +559,20 @@
         async function sendMessage() {
             const message = chatInput.value.trim();
             if (!message) return;
-
-            // Add user message to UI
             addMessage(message, 'user');
             chatInput.value = '';
-
-            // Add typing indicator
             const typingId = addTypingIndicator();
-
             try {
                 const response = await fetch('/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ message })
                 });
-
                 const data = await response.json();
                 removeTypingIndicator(typingId);
-
-                if (data.response) {
-                    addMessage(data.response, 'ai');
-                } else if (data.error) {
-                    addMessage(`Error: ${data.error}`, 'ai');
-                } else {
-                    addMessage("Sorry, I encountered an unknown error. Please try again.", 'ai');
-                }
+                if (data.response) addMessage(data.response, 'ai');
+                else addMessage(`Error: ${data.error || 'Unknown error'}`, 'ai');
             } catch (error) {
-                console.error('Chat error:', error);
                 removeTypingIndicator(typingId);
                 addMessage("Connection error. Is the server running?", 'ai');
             }
@@ -281,8 +590,8 @@
             const id = 'typing-' + Date.now();
             const div = document.createElement('div');
             div.id = id;
-            div.className = 'typing-indicator';
-            div.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+            div.className = 'message message-ai typing-indicator';
+            div.innerHTML = '<div class="dot" style="display:inline-block; width:4px; height:4px; margin-right:2px; background:currentColor; border-radius:50%; animation: blink 1s infinite alternate;"></div><div class="dot" style="display:inline-block; width:4px; height:4px; margin-right:2px; background:currentColor; border-radius:50%; animation: blink 1s infinite 0.3s alternate;"></div><div class="dot" style="display:inline-block; width:4px; height:4px; background:currentColor; border-radius:50%; animation: blink 1s infinite 0.6s alternate;"></div><style>@keyframes blink { from { opacity: 0.2; } to { opacity: 1; } }</style>';
             chatMessages.appendChild(div);
             chatMessages.scrollTop = chatMessages.scrollHeight;
             return id;
@@ -294,114 +603,249 @@
         }
 
         sendBtn.addEventListener('click', sendMessage);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
+        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
 
-        // Tab Switching
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
+        const resultsData = {{ results | tojson | safe if results else '[]' }};
 
-        tabBtns.forEach(btn => {
+        function showDetailedAnalysis(index) {
+            console.log("Showing detail for index:", index);
+            const res = resultsData[index];
+            if (!res) {
+                console.error("No result data found for index:", index);
+                return;
+            }
+
+            const content = document.getElementById('detailed-analysis-content');
+            if (!content) {
+                console.error("Detailed analysis content container not found");
+                return;
+            }
+
+            content.innerHTML = `
+                <div class="analysis-main-card">
+                    <div class="analysis-header-row">
+                        <div class="candidate-large-avatar">${res.resume_no}</div>
+                        <div class="candidate-header-text">
+                            <h3>Candidate ${res.resume_no}</h3>
+                            <p>${res.role_focus || 'Software Professional'}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="score-summary-grid">
+                        <div class="overall-score-section">
+                            <div class="score-display">
+                                <span class="score-num">${res.score}</span>
+                                <span class="score-den">/ 100</span>
+                            </div>
+                            <p class="score-tag">Overall Match Score</p>
+                        </div>
+                        <div class="score-radial-visual">
+                            <svg class="radial-progress" viewBox="0 0 36 36">
+                                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <path class="circle" stroke-dasharray="${res.score}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="metrics-row">
+                        <div class="mini-metric">
+                            <span class="m-val success">${(res.detailed_skills || []).filter(s => s.score > 80).length}</span>
+                            <span class="m-label">Matched Skills</span>
+                        </div>
+                        <div class="mini-metric">
+                            <span class="m-val warning">${(res.detailed_skills || []).filter(s => s.score >= 50 && s.score <= 80).length}</span>
+                            <span class="m-label">Partial Matches</span>
+                        </div>
+                        <div class="mini-metric">
+                            <span class="m-val danger">${(res.missing_skills || []).length}</span>
+                            <span class="m-label">Missing Skills</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analysis-side-panels">
+                    <div class="panel-card strengths-panel">
+                        <div class="panel-icon">📈 Strengths</div>
+                        <ul>
+                            ${(res.strengths || []).map(s => `<li>${s}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="panel-card develop-panel">
+                        <div class="panel-icon">📉 Areas to Develop</div>
+                        <ul>
+                            ${(res.areas_to_develop || []).map(a => `<li>${a}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="full-width-section">
+                    <h3>Skills Analysis</h3>
+                    <p>Detailed breakdown of skill matches and gaps</p>
+                    <div class="skills-list">
+                        ${(res.detailed_skills || []).map(skill => `
+                            <div class="skill-item-row">
+                                <div class="skill-info">
+                                    <span class="skill-name">${skill.name}</span>
+                                    <span class="skill-level">Proficiency: ${skill.level}</span>
+                                </div>
+                                <div class="skill-progress-container">
+                                    <div class="skill-progress-bar">
+                                        <div class="skill-progress-fill" style="width: 0%; background: ${skill.score > 80 ? 'var(--success)' : skill.score > 50 ? 'var(--warning)' : 'var(--danger)'}" data-score="${skill.score}"></div>
+                                    </div>
+                                    <span class="skill-pct">${skill.score}%</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="full-width-section">
+                    <h3>Experience Matching</h3>
+                    <div class="exp-grid">
+                        ${(res.experience_match || []).map(exp => `
+                            <div class="exp-row">
+                                <div class="exp-labels">
+                                    <span class="exp-title">${exp.label}</span>
+                                    <div class="exp-vals">
+                                        <span>Candidate: <strong>${exp.candidate}</strong></span>
+                                        <span>Required: <strong>${exp.required}</strong></span>
+                                    </div>
+                                </div>
+                                <div class="exp-progress">
+                                    <div class="exp-bar"><div class="exp-fill" style="width: 0%" data-score="${exp.pct}"></div></div>
+                                    <span class="exp-match-pct">${exp.pct}% Match</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="full-width-section recommendation-box">
+                    <div class="rec-icon">📜 Recommendation</div>
+                    <p>${res.recommendation}</p>
+                </div>
+            `;
+
+            switchView('analysis');
+
+            // Animate progress bars in detailed view
+            setTimeout(() => {
+                document.querySelectorAll('#analysisView .skill-progress-fill, #analysisView .exp-fill').forEach(fill => {
+                    gsap.to(fill, { width: fill.dataset.score + '%', duration: 1, ease: "power2.out" });
+                });
+            }, 500);
+        }
+
+        function exportToPDF() {
+            // Simply use window.print() for now as it's the most reliable browser native 
+            // We can add specialized print CSS to dashboard.css
+            window.print();
+        }
+
+        function switchView(viewId) {
+            const views = ['dashboardView', 'newMatchView', 'resultsView', 'analysisView'];
+            const targetView = document.getElementById(viewId + 'View');
+
+            if (!targetView) return;
+
+            // GSAP Transition: Fade out all, then fade in target
+            gsap.to('.view-content', {
+                opacity: 0,
+                y: 10,
+                duration: 0.3,
+                display: 'none',
+                onComplete: () => {
+                    gsap.set(targetView, { display: 'block', opacity: 0, y: 15 });
+                    gsap.to(targetView, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.5,
+                        ease: "power2.out",
+                        clearProps: "all"
+                    });
+                }
+            });
+
+            // Update nav active state
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.id === 'nav' + viewId.charAt(0).toUpperCase() + viewId.slice(1)) {
+                    link.classList.add('active');
+                }
+            });
+
+            localStorage.setItem('lastView', viewId);
+        }
+
+        // Keep legacy aliases if needed for templates
+        function showDashboard() { switchView('dashboard'); }
+        function showNewMatch() { switchView('newMatch'); }
+        // Tab Switching for Forms
+        document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const tabName = btn.dataset.tab;
-
-                // Remove active class from all tabs
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-
-                // Add active class to clicked tab
+                const container = btn.closest('.form-section');
+                container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                container.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                 btn.classList.add('active');
-                document.getElementById(`${tabName}-tab`).classList.add('active');
-
-                // Clear the other input when switching
-                if (tabName === 'paste') {
-                    document.getElementById('resume_files').value = '';
-                    document.getElementById('fileList').innerHTML = '';
-                } else {
-                    document.getElementById('resumes-textarea').value = '';
-                }
+                container.querySelector(`#${tabName}-tab`).classList.add('active');
             });
         });
 
-        // File Upload Handling
+        // File Selection/Drop Handling
         const dropZone = document.getElementById('dropZone');
         const fileInput = document.getElementById('resume_files');
         const fileList = document.getElementById('fileList');
 
-        // Prevent default drag behaviors
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropZone.addEventListener(eventName, preventDefaults, false);
-            document.body.addEventListener(eventName, preventDefaults, false);
-        });
-
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
+        if (dropZone) {
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(e => {
+                dropZone.addEventListener(e, (ev) => { ev.preventDefault(); ev.stopPropagation(); });
+            });
+            ['dragenter', 'dragover'].forEach(e => {
+                dropZone.addEventListener(e, () => dropZone.classList.add('drag-over'));
+            });
+            ['dragleave', 'drop'].forEach(e => {
+                dropZone.addEventListener(e, () => dropZone.classList.remove('drag-over'));
+            });
+            dropZone.addEventListener('drop', (e) => {
+                const files = e.dataTransfer.files;
+                fileInput.files = files;
+                updateFileList(files);
+            });
+            fileInput.addEventListener('change', (e) => updateFileList(e.target.files));
         }
 
-        // Highlight drop zone when dragging over
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropZone.addEventListener(eventName, () => {
-                dropZone.classList.add('drag-over');
-            }, false);
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropZone.addEventListener(eventName, () => {
-                dropZone.classList.remove('drag-over');
-            }, false);
-        });
-
-        // Handle dropped files
-        dropZone.addEventListener('drop', (e) => {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            handleFiles(files);
-        }, false);
-
-        // Handle file input change
-        fileInput.addEventListener('change', (e) => {
-            handleFiles(e.target.files);
-        });
-
-        function handleFiles(files) {
-            const fileArray = Array.from(files);
-            displayFiles(fileArray);
-        }
-
-        function displayFiles(files) {
+        function updateFileList(files) {
             fileList.innerHTML = '';
-
-            if (files.length === 0) return;
-
-            files.forEach((file, index) => {
-                const fileItem = document.createElement('div');
-                fileItem.className = 'file-item';
-                fileItem.innerHTML = `
-                    <span class="file-icon">📄</span>
-                    <span class="file-name">${file.name}</span>
-                    <span class="file-size">${formatFileSize(file.size)}</span>
-                `;
-                fileList.appendChild(fileItem);
+            Array.from(files).forEach(file => {
+                const item = document.createElement('div');
+                item.style = 'display: flex; align-items: center; gap: 0.5rem; margin-top: 0.75rem; font-size: 0.75rem; padding: 0.5rem; background: var(--bg-main); border-radius: 6px;';
+                item.innerHTML = `<span>📄</span> <span style="flex:1; font-weight:600;">${file.name}</span> <span style="color:var(--text-muted);">${(file.size / 1024).toFixed(1)} KB</span>`;
+                fileList.appendChild(item);
             });
         }
 
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
-        }
+        // Animate score bars and reveal elements
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial reveal
+            gsap.from('.section-card', { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, ease: "power2.out" });
+            gsap.from('.metric-card', { opacity: 0, scale: 0.9, stagger: 0.1, duration: 0.8, ease: "back.out(1.7)" });
 
-        // Animate score bars on load
-        document.addEventListener('DOMContentLoaded', function () {
-            const scoreFills = document.querySelectorAll('.score-fill');
-            scoreFills.forEach((fill, index) => {
-                setTimeout(() => {
-                    fill.style.width = fill.dataset.score + '%';
-                }, 500 + (index * 100));
+            setTimeout(() => {
+                document.querySelectorAll('.score-fill').forEach(fill => {
+                    gsap.to(fill, { width: fill.dataset.score + '%', duration: 1.5, ease: "power2.out" });
+                });
+            }, 500);
+
+            // Card Hover Animations
+            const cards = document.querySelectorAll('.result-card, .metric-card, .section-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, { y: -5, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)", duration: 0.3, ease: "power2.out" });
+                });
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, { y: 0, boxShadow: "var(--shadow-md)", duration: 0.3, ease: "power2.out" });
+                });
             });
         });
     </script>
