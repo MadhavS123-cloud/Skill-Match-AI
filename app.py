@@ -16,7 +16,8 @@ import google.generativeai as genai
 load_dotenv()
 
 # Allow OAuth over HTTP (ONLY for local development)
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+if os.getenv("FLASK_ENV") == "development":
+    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
 # =========================
 # Flask App Setup
