@@ -1,6 +1,5 @@
 flask
 flask-dance
-scikit-learn
 python-dotenv
 oauthlib
 google-generativeai
