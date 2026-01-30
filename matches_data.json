@@ -1,0 +1,1037 @@
+[
+  {
+    "role": "software engineer at google",
+    "candidate": "Candidate 1",
+    "score": 65,
+    "date": "Just now",
+    "timestamp": "2026-01-30T16:59:30.699871",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 65,
+      "similarity_score": 68.1,
+      "ats_score": 65,
+      "ats_summary": "This resume provides a solid foundation by hitting the necessary core languages (C++, Java, Python) and foundational concepts (DS/Algo, OS). However, it critically lacks the depth, quantification, and explicit mention of the high-scale distributed systems design and ownership mentality that the Google JD demands. The current format is too sparse to compete for a high-stakes role.",
+      "ats_tips": [
+        "Use Google-preferred verbs: Architected, Engineered, Deployed, Optimized, Scaled.",
+        "Explicitly mention which language was used for which project for better keyword matching.",
+        "Create a dedicated 'Technical Expertise' section that maps directly to the JD's required skills (e.g., 'Distributed Systems: Fault Tolerance, Consensus Mechanisms, RPC').",
+        "If you have experience with Go, add it immediately, as it is a top-tier language at Google."
+      ],
+      "missing_skills": [
+        "System Design (Architecture, Microservices, Caching, Load Balancing)",
+        "Site Reliability Engineering (SRE) Mindset/Ownership of Critical Infrastructure",
+        "Go (Programming Language)",
+        "Cloud Infrastructure (Kubernetes, Monitoring Systems)",
+        "Code/Design Review Participation",
+        "Troubleshooting Large Distributed Production Issues",
+        "Mentoring Junior Engineers",
+        "TCP/IP, HTTP Protocols",
+        "Concurrency/Multi-threading Deep Dive",
+        "Formal Documentation of Complex Designs"
+      ],
+      "roadmap": [
+        "Quantify *every* achievement. Replace 'Reduced latency' with 'Reduced median P95 latency by 40ms by optimizing X algorithm.'",
+        "Expand the 'Scalable Backend System' project to explicitly address distributed concepts: load balancing, fault tolerance, state management, or consistency models.",
+        "Integrate explicit keywords related to System Design, Architecture, and SRE practices (e.g., monitoring, post-mortems, SLOs) into project narratives."
+      ],
+      "role_focus": "High-Scale, Distributed Systems Software Engineer (Backend Emphasis)",
+      "risk_analysis": {
+        "level": "Medium",
+        "findings": [
+          "The resume is extremely light on substance, relying on bullet points that lack quantification and impact metrics.",
+          "The 'Distributed Systems' project lacks technical depth regarding scale (e.g., QPS, throughput, specific fault tolerance mechanisms).",
+          "Crucial Google/high-level SRE requirements like system architecture ownership, design reviews, and handling production incidents are completely absent.",
+          "The use of 'AI Resume\u2013Job Matcher' sounds like an automated tool, which can be a minor red flag for manual screeners."
+        ],
+        "skepticism_reason": "The candidate lists core technologies (Java, C++, Python, DS/Algo) which is positive, but the project descriptions are far too generic and high-level to prove the necessary expertise in *large-scale, reliable, distributed systems* required by Google."
+      },
+      "is_top_tier": false,
+      "strengths": [
+        "Quantify *every* achievement. Replace 'Reduced latency' with 'Reduced median P95 latency by 40ms by optimizing X algorithm.'",
+        "Expand the 'Scalable Backend System' project to explicitly address distributed concepts: load balancing, fault tolerance, state management, or consistency models.",
+        "Integrate explicit keywords related to System Design, Architecture, and SRE practices (e.g., monitoring, post-mortems, SLOs) into project narratives."
+      ],
+      "areas_to_develop": [
+        "Use Google-preferred verbs: Architected, Engineered, Deployed, Optimized, Scaled.",
+        "Explicitly mention which language was used for which project for better keyword matching."
+      ],
+      "detailed_skills": [
+        {
+          "name": "Programming Mastery (Java, Python, C++)",
+          "score": 95,
+          "level": "Advanced"
+        },
+        {
+          "name": "Algorithms & Data Structures",
+          "score": 85,
+          "level": "Advanced"
+        },
+        {
+          "name": "Distributed Systems",
+          "score": 80,
+          "level": "Intermediate"
+        },
+        {
+          "name": "OS Concepts",
+          "score": 75,
+          "level": "Intermediate"
+        },
+        {
+          "name": "REST APIs",
+          "score": 70,
+          "level": "Intermediate"
+        },
+        {
+          "name": "Performance Optimization (Latency Reduction)",
+          "score": 75,
+          "level": "Intermediate"
+        },
+        {
+          "name": "Computer Science Fundamentals (Implied via CS Degree)",
+          "score": 80,
+          "level": "Advanced"
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Experience Alignment",
+          "candidate": "Found",
+          "required": "High",
+          "pct": 60
+        },
+        {
+          "label": "Role Fit",
+          "candidate": "Relevant",
+          "required": "Optimal",
+          "pct": 68.1
+        }
+      ],
+      "recommendation": "This candidate shows strong potential with a 68.1% match. Consider an interview to assess soft skills.",
+      "content": "IMPROVED RESUME \u2013 SOFTWARE ENGINEER (GOOGLE TARGETED)\nCore Skills\nJava, Python, C++\nData Structures, Algorithms, OS, Networks\nREST APIs, Distributed Systems\nLinux, Git, SQL\nProjects\nAI Resume\u2013Job Matc...",
+      "feedback_loop": {
+        "current_percentile": 40,
+        "gap_to_top_10": 65,
+        "sections_to_improve": [
+          {
+            "section": "Projects",
+            "current_issue": "Descriptions are vague ('Optimized performance', 'Reduced latency') and lack specific metrics or architectural details relevant to massive scale.",
+            "improvement": "Rewrite projects to detail the architectural choices made (e.g., database choice, caching layer, failure scenarios handled) and provide quantifiable impact (e.g., Users served, QPS handled, latency improvement).",
+            "impact": "High"
+          },
+          {
+            "section": "Core Skills",
+            "current_issue": "Lacks crucial high-level skills mentioned in the JD (System Design, SRE).",
+            "improvement": "Add 'System Architecture,' 'Kubernetes/Cloud,' and 'Reliability Engineering' to the Core Skills section, even if only foundational experience is available.",
+            "impact": "High"
+          },
+          {
+            "section": "Overall Structure/Substance",
+            "current_issue": "Too brief; provides no evidence of rigorous code review participation, documentation contribution, or mentorship, which are explicitly required.",
+            "improvement": "If space allows, add a brief section highlighting collaboration, design review involvement, or process improvement initiatives.",
+            "impact": "Medium"
+          }
+        ],
+        "quick_wins": [
+          "Replace 'AI Resume\u2013Job Matcher' with a project name that highlights the core technical challenge (e.g., 'High-Throughput Ranking Service').",
+          "Add 'System Design' explicitly to the Core Skills list."
+        ],
+        "major_upgrades": [
+          "Rewrite project descriptions using the STAR method, focusing heavily on distributed challenges and solutions.",
+          "Flesh out the 'Scalable Backend System' to sound like it could handle Google traffic volumes, even if hypothetical scaling was involved."
+        ]
+      },
+      "improvement_priority": [
+        "Quantify Project Impact",
+        "Integrate System Design & SRE Keywords",
+        "Expand on Distributed System Complexity"
+      ],
+      "company_style_fit": {
+        "best_fit": "Startup",
+        "fit_score": 85,
+        "summary": "The resume uses short, action-oriented bullets and clear ownership, making it an excellent fit for fast-paced startup culture, though it needs heavier quantification for a perfect Big Tech match.",
+        "culture_breakdown": {
+          "microsoft_fit": 70,
+          "startup_fit": 95,
+          "research_fit": 10
+        },
+        "style_details": {
+          "bullet_length": {
+            "assessment": "Concise",
+            "recommendation": "The bullets are very brief, which suits a fast-paced startup environment. For senior roles, consider expanding slightly to include technical depth or specific architectural choices, while retaining brevity."
+          },
+          "quantification_style": {
+            "score": 60,
+            "examples_found": [
+              "10K+ users"
+            ],
+            "recommendation": "Quantification is present but sparse. To appeal to Big Tech (Microsoft), aggressively quantify performance improvements (e.g., 'Reduced latency by 40%') and scale."
+          },
+          "ownership_language": {
+            "score": 95,
+            "strong_phrases": [
+              "Built ranking pipeline",
+              "Designed APIs"
+            ],
+            "weak_phrases": [
+              "Optimized performance",
+              "Reduced latency"
+            ],
+            "recommendation": "Uses strong action verbs ('Built', 'Designed'), which strongly aligns with startup culture where direct ownership is key. Ensure passive verbs like 'Optimized' are paired with strong ownership context if possible."
+          },
+          "engineering_maturity": {
+            "level": "Mid",
+            "signals_found": [
+              "Distributed Systems",
+              "REST APIs",
+              "Handling 10K+ users"
+            ],
+            "recommendation": "Signals mid-level experience (handling scale/APIs). To signal Senior/Staff level (required by Microsoft), explicitly mention trade-offs, architectural decisions, or system design ownership."
+          }
+        },
+        "top_improvements": [
+          "Quantify all performance improvements (e.g., latency, accuracy) using specific percentages or absolute numbers.",
+          "Expand the 'Scalable Backend System' bullet to name the technologies or architecture used (e.g., 'Designed containerized REST APIs using Go/Kubernetes...').",
+          "Ensure every bullet starts with a powerful, unique action verb that denotes full ownership."
+        ]
+      },
+      "evolution": {
+        "delta": 30,
+        "old_score": 35,
+        "new_score": 65,
+        "signals": [
+          {
+            "type": "skill_filled",
+            "message": "Successfully added key skills: Five nines reliability (High Availability), Cloud Computing Environments (GCP highly advantageous), Operational Support/Monitoring",
+            "impact": "High"
+          },
+          {
+            "type": "risk_reduced",
+            "message": "Resume skepticism reduced from High to Medium",
+            "impact": "Medium"
+          },
+          {
+            "type": "ats_improved",
+            "message": "ATS optimization improved by 30%",
+            "impact": "Low"
+          }
+        ],
+        "takeaway": "Your resume is evolving! Score increased by +30 points due to better skill alignment."
+      }
+    },
+    "evolution": {
+      "delta": 30,
+      "old_score": 35,
+      "new_score": 65,
+      "signals": [
+        {
+          "type": "skill_filled",
+          "message": "Successfully added key skills: Five nines reliability (High Availability), Cloud Computing Environments (GCP highly advantageous), Operational Support/Monitoring",
+          "impact": "High"
+        },
+        {
+          "type": "risk_reduced",
+          "message": "Resume skepticism reduced from High to Medium",
+          "impact": "Medium"
+        },
+        {
+          "type": "ats_improved",
+          "message": "ATS optimization improved by 30%",
+          "impact": "Low"
+        }
+      ],
+      "takeaway": "Your resume is evolving! Score increased by +30 points due to better skill alignment."
+    }
+  },
+  {
+    "role": "software engineer at google",
+    "candidate": "Candidate 1",
+    "score": 35,
+    "date": "Just now",
+    "timestamp": "2026-01-30T16:57:07.474279",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 35,
+      "similarity_score": 73.7,
+      "ats_score": 35,
+      "ats_summary": "This resume currently lacks the depth and specific technical keywords required for a Google Software Engineer role, especially concerning large-scale distributed systems and operational maturity. While CS fundamentals (Algorithms, Python/Java) are present, the context of 'scale' and 'robustness' mandated by the JD is completely missing. The ATS is unlikely to rank this highly without significant keyword injection and context addition.",
+      "ats_tips": [
+        "Move beyond just listing skills; demonstrate *how* you used them to solve problems at scale (e.g., 'Optimized Python service latency by 40% by implementing asynchronous queuing for petabyte-scale data ingestion').",
+        "Address the language gap: If you know C++ or Go, feature it prominently. If not, emphasize advanced performance tuning in Python/Java.",
+        "Quantify everything. Google engineers operate at the edge of performance; vague project descriptions won't pass.",
+        "Ensure the B.Tech education is paired with relevant coursework/GPA if the 3+ years of professional experience isn't fully demonstrated."
+      ],
+      "missing_skills": [
+        "C++ (Core Google Language)",
+        "Go (Core Google Language)",
+        "Designing and implementing large-scale distributed systems",
+        "Microservices architecture",
+        "Petabyte scale systems",
+        "Five nines reliability (High Availability)",
+        "Cloud Computing Environments (GCP highly advantageous)",
+        "Cloud-native application development principles",
+        "NoSQL solutions (beyond MongoDB)",
+        "High-volume data processing techniques",
+        "Rigorous engineering standards/Code Quality enforcement",
+        "CI/CD pipelines",
+        "Thorough testing methodologies (Unit, Integration, E2E)",
+        "Performance optimization in distributed environments",
+        "Operational Support/Monitoring",
+        "Experience with large-scale production deployment",
+        "Technical Design Documentation (TDD)"
+      ],
+      "roadmap": [
+        "Immediately restructure the Experience section (not provided, but critical) to quantify achievements using metrics related to scale, latency, and availability.",
+        "Integrate strong keywords like 'distributed systems,' 'fault tolerance,' 'microservices,' and 'cloud' directly into project descriptions and experience bullet points.",
+        "If proficiency exists, explicitly highlight experience with C++ or Go, or detail advanced work in Python/Java on large systems.",
+        "Create a dedicated 'Technologies & Architecture' section that clearly lists Google-relevant frameworks, database experience (especially NoSQL beyond basic MongoDB), and cloud exposure (if any)."
+      ],
+      "role_focus": "Senior/Mid-Level Backend Software Engineer focused on large-scale, globally distributed, fault-tolerant systems, likely targeting L3/L4 at Google.",
+      "risk_analysis": {
+        "level": "High",
+        "findings": [
+          "Skills list is too generic and lacks scale context.",
+          "Missing explicit mention of C++ or Go, which are primary languages for Google infrastructure.",
+          "No evidence of experience with the massive scale (petabyte, high availability) required by the JD.",
+          "Project descriptions (Matcher App, E-commerce) are too vague to imply large-scale backend work.",
+          "Missing critical keywords related to distributed systems, cloud-native architecture, and production hardening (CI/CD, testing frameworks)."
+        ],
+        "skepticism_reason": "The resume reads like a standard entry to mid-level application, not one targeting a highly specialized, massive-scale role at Google. The core requirements around distributed systems and operational excellence at scale are entirely unsupported by the provided text."
+      },
+      "is_top_tier": false,
+      "strengths": [
+        "Immediately restructure the Experience section (not provided, but critical) to quantify achievements using metrics related to scale, latency, and availability.",
+        "Integrate strong keywords like 'distributed systems,' 'fault tolerance,' 'microservices,' and 'cloud' directly into project descriptions and experience bullet points.",
+        "If proficiency exists, explicitly highlight experience with C++ or Go, or detail advanced work in Python/Java on large systems."
+      ],
+      "areas_to_develop": [
+        "Move beyond just listing skills; demonstrate *how* you used them to solve problems at scale (e.g., 'Optimized Python service latency by 40% by implementing asynchronous queuing for petabyte-scale data ingestion').",
+        "Address the language gap: If you know C++ or Go, feature it prominently. If not, emphasize advanced performance tuning in Python/Java."
+      ],
+      "detailed_skills": [
+        {
+          "name": "Python",
+          "score": 90,
+          "level": "Advanced"
+        },
+        {
+          "name": "Java",
+          "score": 85,
+          "level": "Advanced"
+        },
+        {
+          "name": "Data Structures & Algorithms",
+          "score": 95,
+          "level": "Expert"
+        },
+        {
+          "name": "SQL",
+          "score": 70,
+          "level": "Intermediate"
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Experience Alignment",
+          "candidate": "Found",
+          "required": "High",
+          "pct": 90
+        },
+        {
+          "label": "Role Fit",
+          "candidate": "Relevant",
+          "required": "Optimal",
+          "pct": 73.7
+        }
+      ],
+      "recommendation": "This candidate shows strong potential with a 73.7% match. Consider an interview to assess soft skills.",
+      "content": "BASE RESUME \u2013 SOFTWARE ENGINEER\nSkills\nPython, Java, JavaScript\nData Structures & Algorithms\nSQL, MongoDB\nGit, Flask\nProjects\nResume Matcher App \u2013 Flask + NLP\nE-commerce Website \u2013 Full Stack\nEducation...",
+      "feedback_loop": {
+        "current_percentile": 25,
+        "gap_to_top_10": 65,
+        "sections_to_improve": [
+          {
+            "section": "Projects/Experience",
+            "current_issue": "Projects are too generic ('Resume Matcher App', 'E-commerce Website') and do not imply distributed, high-volume backend work.",
+            "improvement": "Rewrite project descriptions to focus on system design, concurrency, database choices for scale, and deployment challenges, mirroring the JD's requirements.",
+            "impact": "High"
+          },
+          {
+            "section": "Skills Section",
+            "current_issue": "Lacks key infrastructure/architectural skills (CI/CD, Cloud, Distributed Systems patterns).",
+            "improvement": "Replace generic listings with required concepts: 'Distributed Systems Design,' 'Microservices,' 'GCP/Cloud Architecture,' 'CI/CD Pipelines (Jenkins/Spinnaker/etc.).'",
+            "impact": "High"
+          },
+          {
+            "section": "Overall Narrative",
+            "current_issue": "The resume fails to convey ownership, operational excellence, or experience with complexity/ambiguity.",
+            "improvement": "Incorporate strong action verbs related to debugging production issues, ensuring reliability (5-nines), and conducting rigorous code reviews.",
+            "impact": "Medium"
+          }
+        ],
+        "quick_wins": [
+          "Add a 'Technical Architecture & Scale' sub-section under Skills.",
+          "Explicitly mention testing frameworks used in projects.",
+          "Ensure 'Data Structures & Algorithms' is reinforced by project complexity."
+        ],
+        "major_upgrades": [
+          "Develop 2-3 detailed bullet points for each relevant job experience focusing only on scale, architecture, and performance gains.",
+          "Create a 'Summary/Profile' at the top that immediately states proficiency in large-scale backend development and core languages."
+        ]
+      },
+      "improvement_priority": [
+        "Address Missing Scale/Distributed Systems Keywords (Highest Priority)",
+        "Flesh out Experience/Project descriptions with quantifiable results",
+        "Introduce C++/Go if applicable, or emphasize performance tuning in Java/Python"
+      ],
+      "company_style_fit": {
+        "best_fit": "Startup",
+        "fit_score": 65,
+        "summary": "The resume uses extremely concise project titles, aligning with a fast, output-focused startup mentality, but critically lacks the metrics and depth required by Big Tech or Research roles.",
+        "culture_breakdown": {
+          "microsoft_fit": 40,
+          "startup_fit": 75,
+          "research_fit": 15
+        },
+        "style_details": {
+          "bullet_length": {
+            "assessment": "Concise",
+            "recommendation": "Since content is very minimal, concise bullets are inherently favored. Expand context in project descriptions if targeting senior roles."
+          },
+          "quantification_style": {
+            "score": 10,
+            "examples_found": [],
+            "recommendation": "Lacks any quantifiable impact metrics (%, $, scale). Must add numbers to demonstrate scope and success, especially for tech roles."
+          },
+          "ownership_language": {
+            "score": 75,
+            "strong_phrases": [
+              "Resume Matcher App",
+              "E-commerce Website"
+            ],
+            "weak_phrases": [
+              "(No explicit action verbs used in this minimal text)"
+            ],
+            "recommendation": "The structure implies ownership (listing projects), but without associated action verbs ('Built', 'Developed', 'Launched'), the ownership signal is weak."
+          },
+          "engineering_maturity": {
+            "level": "Junior",
+            "signals_found": [
+              "Listing core languages and basic frameworks (Flask)",
+              "Focus only on project titles rather than architectural decisions or scale."
+            ],
+            "recommendation": "Needs depth on system design, trade-offs made, and the complexity of the projects undertaken to signal mid/senior levels."
+          }
+        },
+        "top_improvements": [
+          "Add specific metrics to all project descriptions (e.g., 'Improved matching accuracy by 15% using custom NLP models').",
+          "Replace project titles with strong action verbs detailing *what* you built (e.g., 'Engineered a full-stack e-commerce platform...').",
+          "Integrate scale/complexity details within the project descriptions to move beyond basic tool listing."
+        ]
+      },
+      "evolution": null
+    },
+    "evolution": null
+  },
+  {
+    "role": "swe at google",
+    "candidate": "Candidate 1",
+    "score": 45,
+    "date": "Just now",
+    "timestamp": "2026-01-30T16:52:25.139039",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 45,
+      "similarity_score": 68.4,
+      "ats_score": 45,
+      "ats_summary": "This resume is highly optimized for an ML-focused or general Python backend role but presents significant gaps for a core Infrastructure/Systems Software Engineer role at Google. The ATS will flag strong matches for Python and basic tools, but the critical missing components are distributed systems expertise, concurrency, C++/Go proficiency, and operational resilience knowledge. The score reflects the mismatch between the candidate's demonstrated focus (ML/Web) and the role's focus (High-Scale Systems).",
+      "ats_tips": [
+        "If applying for this specific SWE role, immediately reduce the prominence of NLP/ML terms.",
+        "Replace Flask/Frontend skills with lower-level backend technologies if possible, or emphasize Python usage for performance-critical services.",
+        "If the candidate has done any work related to networking, data serialization, or multi-threading, these must be quantified.",
+        "Update the 'Software Engineer (Entry-Level / Intern)' title to reflect the target level if applying for a full-time role (e.g., 'Software Engineer' or 'Aspiring Distributed Systems Engineer')."
+      ],
+      "missing_skills": [
+        "C++ or Go proficiency (Core Google languages)",
+        "Distributed Systems Design",
+        "Fault-Tolerant/Scalable Software Solutions",
+        "Microservices Architecture",
+        "High-Volume System Development",
+        "Concurrency/Asynchronous Processing",
+        "CI/CD pipeline development/improvement",
+        "High Availability/Low Latency Optimization",
+        "Experience with large-scale data processing technologies",
+        "Relational/NoSQL (Beyond SQLite/MySQL basics)",
+        "Monitoring, Alerting, Logging (Operational Concerns)",
+        "Security Best Practices (Beyond basic auth)",
+        "Experience operating at Google scale (Petabytes/Billions of users)",
+        "Mentoring or Technical Leadership"
+      ],
+      "roadmap": [
+        "Reframe all projects and skills around 'Scalability' and 'Performance' rather than 'AI/ML application'.",
+        "Aggressively learn and build demonstrable projects using C++ or Go focused on backend infrastructure or concurrency.",
+        "Incorporate core CS principles (e.g., specific algorithm optimizations, complexity analysis) directly into bullet points, rather than just listing them."
+      ],
+      "role_focus": "Entry-Level Software Engineer (SWE) targeting large-scale, distributed systems development, heavily emphasizing core CS fundamentals and systems programming.",
+      "risk_analysis": {
+        "level": "High",
+        "findings": [
+          "The candidate's entire profile points toward an entry-level/intern role, while the JD describes a role requiring expertise in high-volume, globally distributed systems.",
+          "The stated skills are heavily skewed toward AI/ML (NLP, Sentence Transformers) and light web development (Flask), which are not the core required competencies (Distributed Systems, C++/Go).",
+          "Missing keywords related to core infrastructure, scalability, fault tolerance, and operational excellence (SRE overlap).",
+          "Lack of any demonstrable experience with system optimization or handling large-scale production loads."
+        ],
+        "skepticism_reason": "The candidate presents as a strong candidate for an entry-level ML/Backend role, but their current skill set does not align with the technical depth and systems-level requirements expected for a general SWE role at a company operating at Google's scale."
+      },
+      "is_top_tier": false,
+      "strengths": [
+        "Reframe all projects and skills around 'Scalability' and 'Performance' rather than 'AI/ML application'.",
+        "Aggressively learn and build demonstrable projects using C++ or Go focused on backend infrastructure or concurrency.",
+        "Incorporate core CS principles (e.g., specific algorithm optimizations, complexity analysis) directly into bullet points, rather than just listing them."
+      ],
+      "areas_to_develop": [
+        "If applying for this specific SWE role, immediately reduce the prominence of NLP/ML terms.",
+        "Replace Flask/Frontend skills with lower-level backend technologies if possible, or emphasize Python usage for performance-critical services."
+      ],
+      "detailed_skills": [
+        {
+          "name": "Python proficiency",
+          "score": 75,
+          "level": "Intermediate"
+        },
+        {
+          "name": "Git/Version Control",
+          "score": 80,
+          "level": "Intermediate"
+        },
+        {
+          "name": "Data Structures/Algorithms Fundamentals (Implied by entry-level/education)",
+          "score": 65,
+          "level": "Intermediate"
+        },
+        {
+          "name": "REST APIs",
+          "score": 60,
+          "level": "Intermediate"
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Experience Alignment",
+          "candidate": "Found",
+          "required": "High",
+          "pct": 60
+        },
+        {
+          "label": "Role Fit",
+          "candidate": "Relevant",
+          "required": "Optimal",
+          "pct": 68.4
+        }
+      ],
+      "recommendation": "This candidate shows strong potential with a 68.4% match. Consider an interview to assess soft skills.",
+      "content": "Madhav Sachdeva\nIndia | madhav.sachdeva@email.com\nGitHub: github.com/madhavs123-cloud | LinkedIn: linkedin.com/in/madhav-sachdeva\nSoftware Engineer (Entry-Level / Intern)\nProblem-driven software engin...",
+      "feedback_loop": {
+        "current_percentile": 30,
+        "gap_to_top_10": 65,
+        "sections_to_improve": [
+          {
+            "section": "Technical Skills (Languages)",
+            "current_issue": "Only lists Python, JavaScript, SQL. Missing C++ or Go, which are highly preferred/implied.",
+            "improvement": "Add C++ or Go, even if proficiency level is listed as 'Learning' or 'Intermediate' based on coursework.",
+            "impact": "High"
+          },
+          {
+            "section": "Projects",
+            "current_issue": "Projects are heavily ML/NLP focused (Skill Match AI, Resume Analyzer) and do not address distributed systems or high-scale concerns.",
+            "improvement": "Create/Add a project showcasing experience with concurrency, microservices using Docker/Kubernetes, or building a high-throughput service using Go/C++.",
+            "impact": "High"
+          },
+          {
+            "section": "Experience Summary",
+            "current_issue": "Focuses on 'backend development' and 'ML techniques', missing keywords like 'Scalability', 'Fault Tolerance', and 'Distributed Systems'.",
+            "improvement": "Inject 2-3 core JD keywords into the opening summary to signal relevance immediately to the ATS.",
+            "impact": "Medium"
+          }
+        ],
+        "quick_wins": [
+          "Reformat 'Technical Skills' to list C++ or Go first if any coursework exists.",
+          "Add a dedicated bullet point under 'Education' mentioning specific advanced Data Structures/Algorithms courses/grades."
+        ],
+        "major_upgrades": [
+          "Develop a significant, self-contained project demonstrating mastery of either multi-threading/concurrency or a foundational distributed pattern (e.g., a simple consensus algorithm implementation or a distributed cache prototype)."
+        ]
+      },
+      "improvement_priority": [
+        "Address core systems programming languages (C++/Go).",
+        "Integrate distributed systems concepts into projects/skills.",
+        "Eliminate focus on niche ML techniques that distract from the core SWE requirement."
+      ],
+      "company_style_fit": {
+        "best_fit": "Startup",
+        "fit_score": 80,
+        "summary": "The resume heavily emphasizes direct action and project completion, strongly aligning with a fast-paced Startup environment.",
+        "culture_breakdown": {
+          "microsoft_fit": 40,
+          "startup_fit": 85,
+          "research_fit": 20
+        },
+        "style_details": {
+          "bullet_length": {
+            "assessment": "Concise",
+            "recommendation": "The bullets are very concise, which is good for startups, but for a slightly larger company, adding a touch more context on the 'why' or 'how' might be beneficial."
+          },
+          "quantification_style": {
+            "score": 10,
+            "examples_found": [],
+            "recommendation": "Zero quantification is present. For all bullet points, inject metrics, scale, or impact (e.g., 'Improved processing speed by X%' or 'Handled Y concurrent users')."
+          },
+          "ownership_language": {
+            "score": 95,
+            "strong_phrases": [
+              "Built an AI system",
+              "Implemented Google OAuth",
+              "Extracted skills and generated feedback"
+            ],
+            "weak_phrases": [],
+            "recommendation": "The ownership language is strong, favoring active verbs ('Built', 'Implemented', 'Extracted'), which perfectly suits the startup expectation of self-starters."
+          },
+          "engineering_maturity": {
+            "level": "Junior",
+            "signals_found": [
+              "Applied machine learning",
+              "Building end-to-end applications",
+              "Familiarity with modern ML techniques"
+            ],
+            "recommendation": "The language focuses on implementation and application rather than architecture, scalability, or trade-offs, which is appropriate for an entry-level candidate but limits appeal to Staff+ roles."
+          }
+        },
+        "top_improvements": [
+          "Quantify every single achievement in the Projects section to show measurable impact.",
+          "Integrate keywords related to scale or complexity (e.g., 'low-latency', 'high-throughput') if applicable, even at a small scale.",
+          "Ensure the summary clearly states the desired role (e.g., 'Entry-Level Backend Engineer seeking high-impact role')."
+        ]
+      },
+      "evolution": {
+        "delta": -30.900000000000006,
+        "old_score": 75.9,
+        "new_score": 45,
+        "signals": [
+          {
+            "type": "skill_filled",
+            "message": "Successfully added key skills: Cloud Computing Architectures (especially GCP), Networking Protocols (TCP/IP, HTTP), Operating System Concepts deep dive",
+            "impact": "High"
+          }
+        ],
+        "takeaway": "Your resume is evolving! Score slightly decreased. Ensure the new changes didn't remove critical keywords."
+      }
+    },
+    "evolution": {
+      "delta": -30.900000000000006,
+      "old_score": 75.9,
+      "new_score": 45,
+      "signals": [
+        {
+          "type": "skill_filled",
+          "message": "Successfully added key skills: Cloud Computing Architectures (especially GCP), Networking Protocols (TCP/IP, HTTP), Operating System Concepts deep dive",
+          "impact": "High"
+        }
+      ],
+      "takeaway": "Your resume is evolving! Score slightly decreased. Ensure the new changes didn't remove critical keywords."
+    }
+  },
+  {
+    "role": "swe at google",
+    "candidate": "Candidate 1",
+    "score": 75.9,
+    "date": "Just now",
+    "timestamp": "2026-01-30T16:46:13.628431",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 75.9,
+      "ats_score": 45,
+      "ats_summary": "This resume demonstrates strong fundamentals in Python backend development and applied ML, positioning the candidate well for entry-level general SWE or ML Engineer roles. However, it is critically mismatched against the specific requirements of a high-stakes, mid-to-senior level Distributed Systems Software Engineer role at Google, lacking the required deep systems expertise, language proficiency (C++/Go), and large-scale production experience.",
+      "ats_tips": [
+        "**Crucially adjust the target role.** This profile is not competitive for the 'Software Engineer (SWE) \u2013 Distributed Systems & Product Innovation' role which demands mastery and significant tenure.",
+        "Replace 'Entry-Level / Intern' in the title with a title matching the actual experience level to avoid immediate ATS/Recruiter disqualification for this specific job.",
+        "If the candidate is applying for an Internship, the summary needs to emphasize CS fundamentals and rapid learning ability rather than 'experienced in building end-to-end applications'.",
+        "Map project accomplishments to the JD using action verbs like 'Designed,' 'Maintained,' or 'Deployed,' even if on a small scale, to bridge the functional gap."
+      ],
+      "missing_skills": [
+        "C++ or Go (Expert proficiency required)",
+        "Distributed Systems (large-scale, high-availability focus)",
+        "Microservices architecture experience",
+        "RPC frameworks",
+        "Sharding or Eventual Consistency models",
+        "Advanced Algorithms (beyond fundamentals)",
+        "Concurrent Programming expertise",
+        "Operating System Concepts deep dive",
+        "Networking Protocols (TCP/IP, HTTP)",
+        "CI/CD pipelines experience",
+        "Cloud Computing Architectures (especially GCP)",
+        "Experience with large-scale production environments or on-call rotation",
+        "Mentoring experience"
+      ],
+      "roadmap": [
+        "Re-target the resume entirely for an Entry-Level/Intern SWE role, as the current profile is not competitive for the stated Distributed Systems role.",
+        "If still targeting Google SWE Internships, pivot project descriptions to emphasize system design fundamentals (e.g., API design, data storage challenges, concurrency handling) over specific ML flavor-of-the-month applications.",
+        "If possible, gain experience (academic or personal) in systems programming languages like C++ or Go, and build a project demonstrating interaction with complex data stores or concurrent processing."
+      ],
+      "role_focus": "Entry-Level Software Engineer / Intern focused on Backend Development and Machine Learning applications.",
+      "risk_analysis": {
+        "level": "High",
+        "findings": [
+          "Experience Mismatch: The candidate presents as an entry-level student (Expected 2028 graduation) applying for a senior/mid-level role requiring 4+ years of professional experience and mastery.",
+          "Keyword Gap: Lacks almost all core high-scale, distributed systems keywords required by the JD (e.g., C++, Go, RPC, sharding, high-availability).",
+          "Project Focus Mismatch: Projects are heavily focused on ML/NLP for resume processing, which is far removed from building 'foundational products or internal infrastructure' at massive scale.",
+          "Skill Density Imbalance: Lists ML/NLP skills prominently, which are not primary requirements, while missing core systems engineering requirements."
+        ],
+        "skepticism_reason": "The resume clearly targets an entry-level profile (student status, simple project scope, focus on Python/ML) for a role explicitly requiring mastery of distributed systems, 4+ years of experience, and proficiency in C++/Go. The mismatch between experience level and role requirements is the primary source of skepticism."
+      },
+      "is_top_tier": false,
+      "strengths": [
+        "Strong relevant experience",
+        "Technical keyword density is high",
+        "Good leadership indicators"
+      ],
+      "areas_to_develop": [
+        "Could clarify specific project impacts",
+        "Mention more industry-standard tools"
+      ],
+      "detailed_skills": [
+        {
+          "name": "Python/Flask",
+          "score": 95,
+          "level": "Expert"
+        },
+        {
+          "name": "Database Management",
+          "score": 88,
+          "level": "Advanced"
+        },
+        {
+          "name": "Team Leadership",
+          "score": 82,
+          "level": "Advanced"
+        },
+        {
+          "name": "Cloud Deployment",
+          "score": 45,
+          "level": "Beginner"
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Years of Experience",
+          "candidate": "5 years",
+          "required": "5+ years",
+          "pct": 100
+        },
+        {
+          "label": "Direct Project Impact",
+          "candidate": "High",
+          "required": "High",
+          "pct": 95
+        }
+      ],
+      "recommendation": "This candidate shows strong potential with a 75.9% match. Consider an interview to assess soft skills.",
+      "content": "Madhav Sachdeva\nIndia | madhav.sachdeva@email.com\nGitHub: github.com/madhavs123-cloud | LinkedIn: linkedin.com/in/madhav-sachdeva\nSoftware Engineer (Entry-Level / Intern)\nProblem-driven software engin...",
+      "feedback_loop": {
+        "current_percentile": 30,
+        "gap_to_top_10": 80,
+        "sections_to_improve": [
+          {
+            "section": "Role Targeting & Summary",
+            "current_issue": "The current summary and title scream entry-level and ML focus, directly contradicting the senior Distributed Systems JD.",
+            "improvement": "If applying for the stated role, the summary must be rewritten to focus ONLY on distributed systems fundamentals, large-scale problem-solving, and C++/Go proficiency (even if that experience is academic/personal).",
+            "impact": "High"
+          },
+          {
+            "section": "Technical Skills",
+            "current_issue": "Missing core required skills like C++, Go, RPC, Sharding, TCP/IP, CI/CD. Focus is too heavily on ML/Python/Flask.",
+            "improvement": "If attempting to match the JD, these missing system skills must be added or demonstrated via projects. If staying ML-focused, the JD must change.",
+            "impact": "High"
+          },
+          {
+            "section": "Projects",
+            "current_issue": "Projects (Skill Match AI) show practical application of ML, not large-scale backend infrastructure design (fault tolerance, scaling, high concurrency).",
+            "improvement": "Reframe the 'Skill Match AI' project description to focus on the engineering challenges: 'Designed scalable API endpoints using Flask...' or 'Implemented robust authentication via JWT...' rather than focusing solely on the ML outcome.",
+            "impact": "Medium"
+          }
+        ],
+        "quick_wins": [
+          "Ensure the 'Education' date (Expected 2028) is prominently displayed to confirm entry-level status, which should prompt a move to an Internship track.",
+          "If this resume *is* for an internship, tailor the summary to match internship keywords (e.g., 'eager to apply strong CS fundamentals in backend development...')."
+        ],
+        "major_upgrades": [
+          "Acquire demonstrated competence (academic or personal project) in C++ or Go.",
+          "Develop a significant project that explicitly involves concurrency, microservice interaction (even local mock), or deep data storage/caching strategies.",
+          "Rewrite the entire resume focusing only on one track: Distributed Systems or ML Engineering."
+        ]
+      },
+      "improvement_priority": [
+        "Role Targeting Alignment (Critical: Fix the applicant level mismatch)",
+        "Systems Skill Inclusion (Must add C++/Go/Distributed Concepts)",
+        "Project Re-framing (Show engineering discipline over pure ML outcome)"
+      ],
+      "company_style_fit": {
+        "best_fit": "Startup",
+        "fit_score": 75,
+        "summary": "The resume uses concise, action-oriented language and emphasizes direct contribution, strongly aligning with a fast-paced Startup culture.",
+        "culture_breakdown": {
+          "microsoft_fit": 40,
+          "startup_fit": 85,
+          "research_fit": 30
+        },
+        "style_details": {
+          "bullet_length": {
+            "assessment": "Concise",
+            "recommendation": "The descriptions are short and punchy, which aligns well with fast-paced environments. For more senior roles, consider adding context on *why* the feature was built."
+          },
+          "quantification_style": {
+            "score": 10,
+            "examples_found": [
+              "AI system to rank resumes against job descriptions using semantic similarity."
+            ],
+            "recommendation": "Crucially missing metrics. Quantify the impact (e.g., 'Improved shortlisting accuracy by X%', 'Reduced manual review time by Y hours', or even scale of data processed)."
+          },
+          "ownership_language": {
+            "score": 85,
+            "strong_phrases": [
+              "Built an AI system",
+              "Implemented Google OAuth",
+              "Extracted skills and generated feedback"
+            ],
+            "weak_phrases": [],
+            "recommendation": "Very strong action verbs used ('Built', 'Implemented', 'Extracted'). Excellent for startup culture where direct contribution is valued."
+          },
+          "engineering_maturity": {
+            "level": "Junior",
+            "signals_found": [
+              "Familiarity with specific techniques (Sentence Transformers, TF-IDF)",
+              "Focus on building end-to-end applications"
+            ],
+            "recommendation": "The focus is on execution and applying known ML techniques rather than high-level architecture or system trade-offs, typical for entry-level/intern profiles."
+          }
+        },
+        "top_improvements": [
+          "Quantify every major achievement in the Projects section (e.g., speed, accuracy, scale).",
+          "Incorporate complexity by briefly mentioning architectural choices or trade-offs made (e.g., 'chose Flask over Django for rapid prototyping').",
+          "Standardize and slightly expand the scope described in the 'Skills' section to better match Big Tech expectations for breadth."
+        ]
+      },
+      "evolution": {
+        "delta": 12.200000000000003,
+        "old_score": 63.7,
+        "new_score": 75.9,
+        "signals": [
+          {
+            "type": "skill_filled",
+            "message": "Successfully added key skills: C++ or Java (Expert proficiency strongly preferred/required by JD), Containerization and Orchestration (Docker, Kubernetes), Concurrency/Multithreading expertise",
+            "impact": "High"
+          }
+        ],
+        "takeaway": "Your resume is evolving! Score increased by +12.200000000000003 points due to better skill alignment."
+      }
+    },
+    "evolution": {
+      "delta": 12.200000000000003,
+      "old_score": 63.7,
+      "new_score": 75.9,
+      "signals": [
+        {
+          "type": "skill_filled",
+          "message": "Successfully added key skills: C++ or Java (Expert proficiency strongly preferred/required by JD), Containerization and Orchestration (Docker, Kubernetes), Concurrency/Multithreading expertise",
+          "impact": "High"
+        }
+      ],
+      "takeaway": "Your resume is evolving! Score increased by +12.200000000000003 points due to better skill alignment."
+    }
+  },
+  {
+    "role": "swe at google",
+    "candidate": "Candidate 1",
+    "score": 63.7,
+    "date": "Just now",
+    "timestamp": "2026-01-30T16:43:49.252973",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 63.7,
+      "ats_score": 55,
+      "ats_summary": "This resume is well-structured and clearly presents foundational skills, especially in Python and introductory ML/NLP applications, suitable for an internship or entry-level data/backend role. However, it significantly under-represents the core requirements of the 'Core Engineering & Scalable Systems' SWE role at Google, which demands deep expertise in high-concurrency, high-performance distributed systems, typically demonstrated through C++/Java proficiency and hands-on infrastructure scaling experience.",
+      "ats_tips": [
+        "For this specific Google role, replace 'Entry-Level / Intern' self-description with the official title ('Software Engineer').",
+        "Quantify project impact, even if academic (e.g., 'Processed X thousand documents,' 'Achieved Y latency improvement').",
+        "The 'Education' section shows an Expected Graduation in 2028, which suggests this resume is highly targeted at pre-graduation roles. Ensure the hiring manager understands this context if applying for a full-time position.",
+        "Replace SQLite/MySQL with mentions of distributed/large-scale databases if any related coursework or project touched upon them (e.g., Cassandra, Spanner concepts, even theoretically)."
+      ],
+      "missing_skills": [
+        "C++ or Java (Expert proficiency strongly preferred/required by JD)",
+        "Deep understanding of designing and implementing highly available and fault-tolerant distributed systems (Microservices, Load Balancing, Consensus Mechanisms)",
+        "Experience with large-scale database systems (beyond SQLite/MySQL)",
+        "Networking protocols (TCP/IP, HTTP)",
+        "Concurrency/Multithreading expertise",
+        "Containerization and Orchestration (Docker, Kubernetes)",
+        "Experience with performance tuning, profiling, and debugging complex production environments",
+        "Experience with Google's internal frameworks (though not explicitly required, familiarity is a plus)"
+      ],
+      "roadmap": [
+        "Re-contextualize profile: Shift framing from 'Entry-Level/Intern' to 'Aspiring SWE focused on scaling challenges' if applying for this specific role, or target appropriate entry-level SWE roles.",
+        "Augment technical depth: Prioritize projects or claimed knowledge that demonstrate distributed system principles (e.g., concurrency, fault tolerance, load balancing concepts), even if academic.",
+        "Expand language profile: Introduce C++ or Java experience, as Python alone is insufficient for this specific JD's core requirements.",
+        "Integrate DevOps/Infra knowledge: Add Docker and basic Kubernetes concepts to project experience to match the 'Tools' section of the JD."
+      ],
+      "role_focus": "Entry-Level Software Engineer specializing in Python/Backend development with practical exposure to Machine Learning and Data Analysis.",
+      "risk_analysis": {
+        "level": "Medium",
+        "findings": [
+          "Experience Mismatch: The profile strongly aligns with an Intern/New Grad focused on Python/ML application development, while the JD demands expertise in building, optimizing, and maintaining *large-scale, high-concurrency, low-latency distributed systems* typically requiring C++/Java expertise.",
+          "Skill Density Imbalance: High-level concepts like 'Sentence Transformers' and 'Semantic Similarity' are present, but there is no evidence (through project scope or claimed experience) of handling the scale, reliability, or performance demands required by Google's core systems.",
+          "Incomplete Toolset: Critical enterprise/large-scale tools like Docker, Kubernetes, and explicit networking knowledge are absent.",
+          "Entry-Level Positioning: The candidate explicitly labels themselves as Entry-Level/Intern, which clashes significantly with the JD's implied requirement for 'Deep technical expertise' and experience in complex distributed systems."
+        ],
+        "skepticism_reason": "The candidate presents as an enthusiastic beginner/intern with strong academic project experience in Python/ML, whereas the role targets senior-level engineering expertise in building and scaling core, low-latency distributed infrastructure."
+      },
+      "is_top_tier": false,
+      "strengths": [
+        "Strong relevant experience",
+        "Technical keyword density is high",
+        "Good leadership indicators"
+      ],
+      "areas_to_develop": [
+        "Could clarify specific project impacts",
+        "Mention more industry-standard tools"
+      ],
+      "detailed_skills": [
+        {
+          "name": "Python/Flask",
+          "score": 95,
+          "level": "Expert"
+        },
+        {
+          "name": "Database Management",
+          "score": 88,
+          "level": "Advanced"
+        },
+        {
+          "name": "Team Leadership",
+          "score": 82,
+          "level": "Advanced"
+        },
+        {
+          "name": "Cloud Deployment",
+          "score": 45,
+          "level": "Beginner"
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Years of Experience",
+          "candidate": "5 years",
+          "required": "5+ years",
+          "pct": 100
+        },
+        {
+          "label": "Direct Project Impact",
+          "candidate": "High",
+          "required": "High",
+          "pct": 95
+        }
+      ],
+      "recommendation": "This candidate shows strong potential with a 63.7% match. Consider an interview to assess soft skills.",
+      "content": "Madhav Sachdeva\nIndia | madhav.sachdeva@email.com\nGitHub: github.com/madhavs123-cloud | LinkedIn: linkedin.com/in/madhav-sachdeva\nSoftware Engineer (Entry-Level / Intern)\nProblem-driven software engin...",
+      "feedback_loop": {
+        "current_percentile": 30,
+        "gap_to_top_10": 70,
+        "sections_to_improve": [
+          {
+            "section": "Role Alignment/Summary",
+            "current_issue": "The summary explicitly targets entry-level/intern roles and focuses heavily on ML/NLP, conflicting with the JD's focus on core, high-scale backend infrastructure.",
+            "improvement": "Revise summary to emphasize 'Deep fundamentals in algorithms, data structures, and concurrent programming,' explicitly mentioning 'designing fault-tolerant, high-throughput backend services' in Python/Go/C++.",
+            "impact": "High"
+          },
+          {
+            "section": "Technical Skills",
+            "current_issue": "Lacks mandatory senior SWE infrastructure skills (Containers, Networking, Performance Tuning) and primary language (C++/Java).",
+            "improvement": "Add C++ or Java. Introduce Docker/Kubernetes. Dedicate a sub-section to 'Systems Knowledge' covering OS, Concurrency, and Networking principles, even if referencing coursework.",
+            "impact": "High"
+          },
+          {
+            "section": "Projects",
+            "current_issue": "Projects focus narrowly on NLP/Semantic Similarity, lacking scope to demonstrate distributed system challenges (e.g., consistency, concurrency management, microservice communication).",
+            "improvement": "If possible, reframe one project to highlight backend architecture, state management, or inter-service communication using REST/gRPC principles, detailing load simulation or error handling.",
+            "impact": "Medium"
+          }
+        ],
+        "quick_wins": [
+          "Ensure the LinkedIn profile matches the professional tone established in the resume.",
+          "List Git proficiency under 'Tools' if it isn't already implied by GitHub presence."
+        ],
+        "major_upgrades": [
+          "Develop a substantial project demonstrating concurrent processing or distributed caching principles.",
+          "Obtain basic certification or complete a guided tutorial series on Kubernetes/Cloud Infrastructure to bridge the DevOps knowledge gap."
+        ]
+      },
+      "improvement_priority": [
+        "Technical Skills: Addressing C++/Java and Distributed Systems fundamentals.",
+        "Role Alignment/Summary: Reorienting focus from ML application to Core Systems Engineering.",
+        "Projects: Adding evidence of scale/performance handling."
+      ],
+      "company_style_fit": {
+        "best_fit": "Startup",
+        "fit_score": 70,
+        "summary": "The style is highly action-oriented and concise, strongly favoring a Startup environment where demonstrating immediate project execution is valued over deep, quantified metrics.",
+        "culture_breakdown": {
+          "microsoft_fit": 40,
+          "startup_fit": 85,
+          "research_fit": 30
+        },
+        "style_details": {
+          "bullet_length": {
+            "assessment": "Concise",
+            "recommendation": "The bullets are very brief. For Big Tech, consider expanding bullets slightly to detail 'how' and 'impact' rather than just 'what' was done."
+          },
+          "quantification_style": {
+            "score": 20,
+            "examples_found": [],
+            "recommendation": "This resume lacks almost all quantitative metrics (%, $, scale). Startups value outcomes, but Big Tech *requires* metrics. Add scale, latency improvements, or user impact."
+          },
+          "ownership_language": {
+            "score": 85,
+            "strong_phrases": [
+              "Built an AI system",
+              "Implemented Google OAuth",
+              "Extracted skills"
+            ],
+            "weak_phrases": [
+              "Experienced in building..."
+            ],
+            "recommendation": "The language is strong and action-oriented ('Built', 'Implemented'), which aligns well with Startup culture where ownership demonstration is key for entry-level roles."
+          },
+          "engineering_maturity": {
+            "level": "Junior",
+            "signals_found": [
+              "Implemented Google OAuth",
+              "semantic similarity",
+              "NLP techniques"
+            ],
+            "recommendation": "The projects show good foundational capability but lack signals of architectural depth, trade-off analysis, or scaling challenges typical of Senior/Staff roles at Big Tech."
+          }
+        },
+        "top_improvements": [
+          "Integrate quantifiable results (e.g., 'Improved resume match accuracy by X%', 'Handled Y concurrent users').",
+          "Expand project descriptions slightly to detail system architecture or technical challenges overcome.",
+          "Ensure every bullet starts with a strong action verb related to building, optimizing, or solving."
+        ]
+      },
+      "evolution": null
+    },
+    "evolution": null
+  },
+  {
+    "role": "swe at google",
+    "candidate": "Candidate 1",
+    "score": 69.5,
+    "date": "Just now",
+    "timestamp": "2026-01-30T16:26:30.131085"
+  }
+]

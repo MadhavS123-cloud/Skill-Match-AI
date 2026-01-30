@@ -1,4 +1,6 @@
 import os
+import json
+from datetime import datetime
 from flask import Flask, redirect, url_for, render_template, request, session
 from flask_dance.contrib.google import make_google_blueprint, google
 from flask_dance.contrib.linkedin import make_linkedin_blueprint, linkedin
@@ -8,6 +10,8 @@ from models.resume_ranker import rank_resumes
 from models.ats_checker import check_ats_friendliness
 from models.job_expander import expand_job_requirements
 from models.file_parser import extract_text_from_file
+from models.style_analyzer import analyze_company_style
+from models.evolution_tracker import track_evolution
 import google.generativeai as genai
 
 # =========================
@@ -16,13 +20,37 @@ import google.generativeai as genai
 load_dotenv()
 
 # Allow OAuth over HTTP (ONLY for local development)
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+if os.getenv("FLASK_ENV") == "development" or os.getenv("FLASK_DEBUG") == "1":
+    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
 # =========================
 # Flask App Setup
 # =========================
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-key")
+
+# =========================
+# Persistent Storage (JSON file)
+# =========================
+MATCHES_FILE = os.path.join(os.path.dirname(__file__), 'matches_data.json')
+
+def load_matches():
+    """Load all matches from persistent storage"""
+    try:
+        if os.path.exists(MATCHES_FILE):
+            with open(MATCHES_FILE, 'r') as f:
+                return json.load(f)
+    except Exception as e:
+        print(f"Error loading matches: {e}")
+    return []
+
+def save_matches(matches):
+    """Save matches to persistent storage"""
+    try:
+        with open(MATCHES_FILE, 'w') as f:
+            json.dump(matches, f, indent=2)
+    except Exception as e:
+        print(f"Error saving matches: {e}")
 
 # =========================
 # Gemini AI Setup
@@ -105,20 +133,35 @@ def index():
             "email": "LinkedIn User" # Getting email requires a separate complex call, skipping for simplicity in this view
         }
 
-    # Get recent matches from session for dashboard
-    recent_matches = session.get("recent_matches", [])
+    # Get recent matches from PERSISTENT storage (not session)
+    all_matches = load_matches()
+    recent_matches = all_matches[:10]  # Show last 10 in dashboard
     
-    # Calculate Realistic Dashboard Metrics
-    total_matches = len(recent_matches)
-    avg_score = round(sum(m['score'] for m in recent_matches) / total_matches, 1) if total_matches > 0 else 0
-    active_roles = len(set(m['role'] for m in recent_matches))
-    matches_this_week = len([m for m in recent_matches if "today" in m.get('date', '').lower() or "now" in m.get('date', '').lower()]) # Simple logic for now
+    # Calculate REAL Dashboard Metrics (no fake numbers)
+    total_matches = len(all_matches)
+    avg_score = round(sum(m['score'] for m in all_matches) / total_matches, 1) if total_matches > 0 else 0
+    active_roles = len(set(m['role'] for m in all_matches))
+    
+    # Count matches from this week (last 7 days)
+    from datetime import timedelta
+    week_ago = datetime.now() - timedelta(days=7)
+    matches_this_week = 0
+    for m in all_matches:
+        try:
+            date_str = m.get('timestamp', '')
+            if date_str:
+                match_date = datetime.fromisoformat(date_str)
+                if match_date >= week_ago:
+                    matches_this_week += 1
+        except:
+            if "now" in m.get('date', '').lower() or "today" in m.get('date', '').lower():
+                matches_this_week += 1
     
     stats = {
-        "total": total_matches if total_matches > 0 else 248, # Fallback to mock if empty? No, let's use real 0 if empty or user might prefer mock for first view.
-        "avg": avg_score if total_matches > 0 else "0%",
-        "roles": active_roles if total_matches > 0 else 0,
-        "week": matches_this_week if total_matches > 0 else 0
+        "total": total_matches,  # REAL count, no fake 248
+        "avg": f"{avg_score}%" if total_matches > 0 else "0%",
+        "roles": active_roles,
+        "week": matches_this_week
     }
     
     results = None
@@ -152,32 +195,36 @@ def index():
                 score = round(float(score_vec[0]) * 100, 1)
                 ats_results = check_ats_friendliness(raw_resumes[index], process_description)
                 
+                # NEW: Company Style Analysis
+                style_analysis = analyze_company_style(raw_resumes[index])
+                
                 # Top 10% Logic: Score > 90 or Rank 1 in a pool
                 is_top_tier = score >= 90 or (rank == 0 and len(ranked_results) > 1)
                 
-                # Mock Detailed Data for Analysis View (In production, this would come from the AI/LLM)
-                strengths = ["Strong relevant experience", "Technical keyword density is high", "Good leadership indicators"]
-                areas_to_develop = ["Could clarify specific project impacts", "Mention more industry-standard tools"]
+                # Get Matched and Missing skills directly from AI for consistency
+                detailed_skills = ats_results.get("matched_skills", [])
+                missing_skills = ats_results.get("missing_skills", [])
                 
-                detailed_skills = [
-                    {"name": "Python/Flask", "score": 95, "level": "Expert"},
-                    {"name": "Database Management", "score": 88, "level": "Advanced"},
-                    {"name": "Team Leadership", "score": 82, "level": "Advanced"},
-                    {"name": "Cloud Deployment", "score": 45, "level": "Beginner"}
-                ]
+                # If AI failed to provide matched skills, provide a sensible empty state
+                if not detailed_skills:
+                    detailed_skills = []
+
+                strengths = ats_results.get("roadmap", ["Experience Alignment", "Technical keyword consistency"])[:3]
+                areas_to_develop = ats_results.get("tips", ["Quantify projectile impacts", "Mention industry-standard tools"])[:2]
                 
                 experience_match = [
-                    {"label": "Years of Experience", "candidate": "5 years", "required": "5+ years", "pct": 100},
-                    {"label": "Direct Project Impact", "candidate": "High", "required": "High", "pct": 95}
+                    {"label": "Experience Alignment", "candidate": "Found", "required": "High", "pct": 90 if score > 70 else 60},
+                    {"label": "Role Fit", "candidate": "Relevant", "required": "Optimal", "pct": score}
                 ]
 
                 results.append({
                     "resume_no": index + 1,
-                    "score": score,
+                    "score": ats_results.get("score", 0), # Primary score is now the AI analysis
+                    "similarity_score": score, # Keep TF-IDF as secondary insight
                     "ats_score": ats_results.get("score", 0),
                     "ats_summary": ats_results.get("summary", ""),
                     "ats_tips": ats_results.get("tips", []),
-                    "missing_skills": ats_results.get("missing_skills", []),
+                    "missing_skills": missing_skills,
                     "roadmap": ats_results.get("roadmap", []),
                     "role_focus": ats_results.get("role_focus", ""),
                     "risk_analysis": ats_results.get("risk_analysis", {"level": "Low", "findings": [], "skepticism_reason": ""}),
@@ -186,27 +233,68 @@ def index():
                     "areas_to_develop": areas_to_develop,
                     "detailed_skills": detailed_skills,
                     "experience_match": experience_match,
-                    "recommendation": f"This candidate shows strong potential with a {score}% match. Consider an interview to assess soft skills.",
-                    "content": raw_resumes[index][:200] + "..." # Optional preview
+                    "recommendation": ats_results.get("recommendation", "Consider an interview to assess soft skills and cultural fit."),
+                    "content": raw_resumes[index][:200] + "...",
+                    # NEW: Feedback Loop data
+                    "feedback_loop": ats_results.get("feedback_loop", {
+                        "current_percentile": 50,
+                        "gap_to_top_10": 40,
+                        "sections_to_improve": [],
+                        "quick_wins": [],
+                        "major_upgrades": []
+                    }),
+                    "improvement_priority": ats_results.get("improvement_priority", []),
+                    # NEW: Company Style Fit data
+                    "company_style_fit": {
+                        "best_fit": style_analysis.get("best_fit_culture", "Unknown"),
+                        "fit_score": style_analysis.get("fit_score", 0),
+                        "summary": style_analysis.get("style_summary", ""),
+                        "culture_breakdown": style_analysis.get("culture_match_breakdown", {}),
+                        "style_details": style_analysis.get("style_analysis", {}),
+                        "top_improvements": style_analysis.get("top_style_improvements", [])
+                    }
                 })
 
-            # Save to recent matches history in session
-            new_match_entry = {
-                "role": job_title if job_title else "Unnamed Role",
-                "candidate": f"Candidate {results[0]['resume_no']}" if results else "Unknown",
-                "score": results[0]['score'] if results else 0,
-                "date": "Just now"
-            }
-            recent_matches.insert(0, new_match_entry)
-            session["recent_matches"] = recent_matches[:5] # Keep last 5
-            session.permanent = True
+            # Save to PERSISTENT storage (not just session)
+            for r in results:
+                # Find previous match for this role to track evolution
+                previous_match = next((m for m in all_matches if m.get('role') == (job_title if job_title else "Unnamed Role")), None)
+                
+                evolution_data = None
+                if previous_match and 'full_analysis' in previous_match:
+                    evolution_data = track_evolution(previous_match['full_analysis'], r)
+
+                new_match_entry = {
+                    "role": job_title if job_title else "Unnamed Role",
+                    "candidate": f"Candidate {r['resume_no']}",
+                    "score": r['ats_score'], # Use AI score for persistent history
+                    "date": "Just now",
+                    "timestamp": datetime.now().isoformat(),
+                    "full_analysis": r, # Store full analysis for future comparisons
+                    "evolution": evolution_data # Store current evolution signal
+                }
+                all_matches.insert(0, new_match_entry)
+                
+                # Update the result object with evolution data for frontend display
+                r['evolution'] = evolution_data
+            
+            # Save to persistent file
+            save_matches(all_matches)
+            
+            # Update recent_matches for template
+            recent_matches = all_matches[:10]
 
             return render_template(
                 "index.html",
                 user=user,
                 results=results,
-                recent_matches=session["recent_matches"],
-                stats=stats,
+                recent_matches=recent_matches,
+                stats={
+                    "total": len(all_matches),
+                    "avg": f"{round(sum(m['score'] for m in all_matches) / len(all_matches), 1)}%",
+                    "roles": len(set(m['role'] for m in all_matches)),
+                    "week": stats['week'] + len(results)
+                },
                 expanded_jd=expanded_description if was_expanded else None
             )
 

@@ -33,27 +33,44 @@ def check_ats_friendliness(resume_text, job_description=None):
     Provide a deep-dive analysis covering:
     1. **ATS Friendliness Score (0-100)**: Formatting, keywords, and structural clarity.
     2. **Role Focus**: Identify the primary job role.
-    3. **Skill Gap Intelligence**: Comparison against JD. List exactly what is missing.
-    4. **Resume Risk Detector**: Identify elements that cause recruiter skepticism:
-        - Buzzword Stuffing (listing too many technical terms without context)
-        - Fake-looking Experience (template-driven or unrealistic descriptions)
-        - Unrealistic Timelines (implausible growth or overlapping dates)
-        - Suspicious Skill Density (advanced skills without corresponding work evidence)
+    3. **Skill Match Analysis**: Identify matched skills and missing skills based on the JD.
+    4. **Resume Risk Detector**: Identify elements that cause recruiter skepticism.
     5. **Resume Feedback Loop**: Actionable roadmap to reach the top 10%.
-    6. **Summary**: Brief overview of the resume's strength.
-
+    
+    CRITICAL: The "score" must be a weighted reflection of the "matched_skills" vs "missing_skills". 
+    If a candidate has only 3 matched skills and 13 missing skills, the score should NOT be high (e.g., 75 is too high).
+    
     Format your response as a valid JSON object with the following keys:
-    "score": (int),
+    "score": (int - carefully calculated),
     "role_focus": (string),
-    "missing_skills": [(string), (string), ...],
+    "recommendation": (string - a professional 1-2 sentence recommendation for the hiring manager),
+    "matched_skills": [
+        {{"name": (string), "score": (int 0-100), "level": "Expert/Advanced/Intermediate/Beginner"}}
+    ],
+    "missing_skills": [(string), ...],
     "risk_analysis": {{
         "level": "High/Medium/Low",
-        "findings": [(string), (string), ...],
+        "findings": [(string), ...],
         "skepticism_reason": (string)
     }},
     "roadmap": [(string), (string), (string)],
     "summary": (string),
-    "tips": [(string), (string), ...]
+    "tips": [(string), ...],
+    "feedback_loop": {{
+        "current_percentile": (int),
+        "gap_to_top_10": (int),
+        "sections_to_improve": [
+            {{
+                "section": (string),
+                "current_issue": (string),
+                "improvement": (string),
+                "impact": "High" | "Medium" | "Low"
+            }}
+        ],
+        "quick_wins": [(string), ...],
+        "major_upgrades": [(string), ...]
+    }},
+    "improvement_priority": [(string), ...]
 
     Resume Text:
     {resume_text}
@@ -73,5 +90,14 @@ def check_ats_friendliness(resume_text, job_description=None):
             "risk_analysis": {"level": "Unknown", "findings": ["Unable to analyze risks"], "skepticism_reason": "AI Error"},
             "roadmap": ["Review resume manually"],
             "summary": "AI error during analysis.",
-            "tips": ["Try again later."]
+            "recommendation": "Review resume manually due to analysis error.",
+            "tips": ["Try again later."],
+            "feedback_loop": {
+                "current_percentile": 0,
+                "gap_to_top_10": 100,
+                "sections_to_improve": [],
+                "quick_wins": ["Retry the analysis"],
+                "major_upgrades": []
+            },
+            "improvement_priority": ["Retry analysis"]
         }

@@ -65,6 +65,14 @@
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                 </button>
+                <!-- AI Assistant Button in Navbar -->
+                <button id="navChatBtn" class="nav-chat-btn" onclick="toggleChat()" title="AI Assistant">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <span>AI Assistant</span>
+                </button>
                 <div class="user-profile">
                     <div class="avatar">
                         {{ user.name[:2].upper() }}
@@ -194,7 +202,9 @@
                                     </span>
                                 </td>
                                 <td>{{ match.date }}</td>
-                                <td><a href="#" class="actions-btn">View ↗</a></td>
+                                <td><a href="#" class="actions-btn"
+                                        onclick="showDetailedAnalysis({{ loop.index0 }}, true); return false;">View
+                                        ↗</a></td>
                             </tr>
                             {% endfor %}
                             {% else %}
@@ -398,10 +408,79 @@
 
                             <p style="font-size: 0.8125rem; color: var(--text-muted); line-height: 1.4;">{{
                                 r.ats_summary[:150] }}...</p>
-                            <a href="#" onclick="showDetailedAnalysis({{ loop.index0 }}); return false;"
-                                style="display: block; margin-top: 1rem; font-size: 0.8125rem; font-weight: 600; color: var(--primary); text-decoration: none;">View
-                                Detail ↗</a>
                         </div>
+
+                        <!-- NEW: Feedback Loop Section -->
+                        {% if r.feedback_loop %}
+                        <div class="feedback-loop-section"
+                            style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1)); padding: 1rem; border-radius: 12px; margin-top: 1rem; border: 1px solid rgba(99, 102, 241, 0.2);">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                                <span style="font-size: 1rem;">🚀</span>
+                                <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary);">To Reach Top
+                                    10%</span>
+                                <span
+                                    style="margin-left: auto; font-size: 0.625rem; padding: 0.2rem 0.5rem; background: var(--primary); color: white; border-radius: 20px;">+{{
+                                    r.feedback_loop.gap_to_top_10 }} pts needed</span>
+                            </div>
+                            {% if r.feedback_loop.quick_wins %}
+                            <div style="font-size: 0.75rem; color: var(--text-main);">
+                                {% for win in r.feedback_loop.quick_wins[:2] %}
+                                <div
+                                    style="display: flex; align-items: flex-start; gap: 0.4rem; margin-bottom: 0.4rem;">
+                                    <span style="color: var(--success);">✓</span>
+                                    <span>{{ win }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        <!-- NEW: Company-Style Fit Badge -->
+                        {% if r.company_style_fit %}
+                        <div class="style-fit-section"
+                            style="background: var(--bg-main); padding: 1rem; border-radius: 12px; margin-top: 0.75rem;">
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="font-size: 1rem;">🏢</span>
+                                    <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted);">Style
+                                        Fit:</span>
+                                    <span
+                                        style="font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; background: {% if r.company_style_fit.best_fit == 'Microsoft' %}#0078D4{% elif r.company_style_fit.best_fit == 'Startup' %}#10B981{% else %}#8B5CF6{% endif %}; color: white; border-radius: 20px;">{{
+                                        r.company_style_fit.best_fit }}</span>
+                                </div>
+                                <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted);">{{
+                                    r.company_style_fit.fit_score }}%</span>
+                            </div>
+                            {% if r.company_style_fit.summary %}
+                            <p
+                                style="font-size: 0.6875rem; color: var(--text-muted); margin-top: 0.5rem; font-style: italic;">
+                                "{{ r.company_style_fit.summary[:100] }}{% if r.company_style_fit.summary|length > 100
+                                %}...{% endif %}"</p>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        <!-- NEW: Evolution Delta Section (Summary Card) -->
+                        {% if r.evolution %}
+                        <div class="evolution-summary-badge"
+                            style="background: {% if r.evolution.delta > 0 %}var(--success-light){% elif r.evolution.delta < 0 %}var(--danger-light){% else %}var(--bg-main){% endif %}; padding: 0.5rem 0.75rem; border-radius: 8px; margin-top: 0.75rem; border: 1px dashed {% if r.evolution.delta > 0 %}var(--success){% elif r.evolution.delta < 0 %}var(--danger){% else %}var(--border){% endif %};">
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div style="display: flex; align-items: center; gap: 0.4rem;">
+                                    <span style="font-size: 0.875rem;">📈</span>
+                                    <span
+                                        style="font-size: 0.75rem; font-weight: 700; color: {% if r.evolution.delta > 0 %}var(--success){% elif r.evolution.delta < 0 %}var(--danger){% else %}var(--text-muted){% endif %};">
+                                        {% if r.evolution.delta > 0 %}+{{ r.evolution.delta }}% Progression{% elif
+                                        r.evolution.delta < 0 %}{{ r.evolution.delta }}% Regression{% else %}Steady
+                                            State{% endif %} </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <a href="#" onclick="showDetailedAnalysis({{ loop.index0 }}); return false;"
+                            style="display: block; margin-top: 1rem; font-size: 0.8125rem; font-weight: 600; color: var(--primary); text-decoration: none;">View
+                            Detail ↗</a>
                     </div>
                 </div>
                 {% endfor %}
@@ -451,11 +530,6 @@
             <!-- Data will be populated by JS -->
         </div>
     </div>
-
-    <!-- Chatbot Widget -->
-    <button id="themeToggle" class="theme-toggle-btn" title="Toggle Theme">
-        🌙
-    </button>
 
     <!-- AI Assistant Side Drawer -->
     <div class="chat-window" id="chatWindow">
@@ -606,10 +680,12 @@
         chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
 
         const resultsData = {{ results | tojson | safe if results else '[]' }};
+        const recentMatchesData = {{ recent_matches | tojson | safe if recent_matches else '[]' }};
 
-        function showDetailedAnalysis(index) {
-            console.log("Showing detail for index:", index);
-            const res = resultsData[index];
+        function showDetailedAnalysis(index, isRecent = false) {
+            console.log("Showing detail for index:", index, "isRecent:", isRecent);
+            const res = isRecent ? (recentMatchesData[index] ? recentMatchesData[index].full_analysis : null) : resultsData[index];
+
             if (!res) {
                 console.error("No result data found for index:", index);
                 return;
@@ -630,6 +706,40 @@
                             <p>${res.role_focus || 'Software Professional'}</p>
                         </div>
                     </div>
+                    
+                    ${res.evolution ? `
+                    <div class="evolution-panel-card mb-4" style="background: linear-gradient(135deg, #10b98110, #3b82f610); border: 1px solid #10b98130; border-radius: 12px; padding: 1.25rem; margin-bottom: 2rem;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <div style="width: 40px; height: 40px; background: var(--success); color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">📊</div>
+                                <div>
+                                    <h4 style="font-size: 0.875rem; font-weight: 700; margin: 0;">Resume Evolution Tracker</h4>
+                                    <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0;">Comparing against previous version</p>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <span style="font-size: 1.25rem; font-weight: 800; color: ${res.evolution.delta >= 0 ? 'var(--success)' : 'var(--danger)'};">${res.evolution.delta >= 0 ? '+' : ''}${res.evolution.delta}%</span>
+                                <p style="font-size: 0.625rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin: 0;">Score Delta</p>
+                            </div>
+                        </div>
+                        
+                        <div class="evolution-signals" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                            ${res.evolution.signals.map(signal => `
+                                <div class="signal-item" style="background: var(--bg-card); padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border);">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                                        <span style="font-size: 0.75rem;">${signal.type === 'skill_filled' ? '✅' : signal.type === 'risk_reduced' ? '🛡️' : '✨'}</span>
+                                        <span style="font-size: 0.625rem; font-weight: 700; text-transform: uppercase; color: ${signal.impact === 'High' ? 'var(--success)' : 'var(--info)'};">${signal.impact} Impact</span>
+                                    </div>
+                                    <p style="font-size: 0.75rem; margin: 0; font-weight: 500;">${signal.message}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <p style="font-size: 0.8125rem; color: var(--text-main); font-style: italic; background: rgba(255,255,255,0.5); padding: 0.75rem; border-radius: 6px; border-left: 3px solid var(--success); margin: 0;">
+                            "${res.evolution.takeaway}"
+                        </p>
+                    </div>
+                    ` : ''}
                     
                     <div class="score-summary-grid">
                         <div class="overall-score-section">
