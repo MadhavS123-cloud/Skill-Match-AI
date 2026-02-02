@@ -60,34 +60,58 @@ def save_matches(matches):
 # =========================
 # Groq AI Setup
 # =========================
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+def get_groq_client():
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        print("WARNING: GROQ_API_KEY not found. Some features will be disabled.")
+        return None
+    try:
+        return Groq(api_key=api_key)
+    except Exception as e:
+        print(f"Error initializing Groq client: {e}")
+        return None
+
+client = get_groq_client()
 MODEL_NAME = "llama-3.3-70b-versatile"
 
 # =========================
 # Google OAuth Blueprint
 # =========================
-google_bp = make_google_blueprint(
-    client_id=os.getenv("GOOGLE_CLIENT_ID"),
-    client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
-    scope=[
-        "openid",
-        "https://www.googleapis.com/auth/userinfo.email",
-        "https://www.googleapis.com/auth/userinfo.profile",
-    ],
-    redirect_url="/google-callback",
-)
+google_client_id = os.getenv("GOOGLE_CLIENT_ID")
+google_client_secret = os.getenv("GOOGLE_CLIENT_SECRET")
 
-app.register_blueprint(google_bp, url_prefix="/login")
+if google_client_id and google_client_secret:
+    google_bp = make_google_blueprint(
+        client_id=google_client_id,
+        client_secret=google_client_secret,
+        scope=[
+            "openid",
+            "https://www.googleapis.com/auth/userinfo.email",
+            "https://www.googleapis.com/auth/userinfo.profile",
+        ],
+        redirect_url="/google-callback",
+    )
+    app.register_blueprint(google_bp, url_prefix="/login")
+else:
+    print("WARNING: Google OAuth credentials missing. Google Login disabled.")
+    google_bp = None
 
 # =========================
 # LinkedIn OAuth Blueprint
 # =========================
-linkedin_bp = make_linkedin_blueprint(
-    client_id=os.getenv("LINKEDIN_CLIENT_ID"),
-    client_secret=os.getenv("LINKEDIN_CLIENT_SECRET"),
-    scope=["r_emailaddress", "r_liteprofile"],
-)
-app.register_blueprint(linkedin_bp, url_prefix="/login")
+linkedin_client_id = os.getenv("LINKEDIN_CLIENT_ID")
+linkedin_client_secret = os.getenv("LINKEDIN_CLIENT_SECRET")
+
+if linkedin_client_id and linkedin_client_secret:
+    linkedin_bp = make_linkedin_blueprint(
+        client_id=linkedin_client_id,
+        client_secret=linkedin_client_secret,
+        scope=["r_emailaddress", "r_liteprofile"],
+    )
+    app.register_blueprint(linkedin_bp, url_prefix="/login")
+else:
+    print("WARNING: LinkedIn OAuth credentials missing. LinkedIn Login disabled.")
+    linkedin_bp = None
 
 # =========================
 # Routes
@@ -100,7 +124,7 @@ def index():
 
     user = {}
     
-    if google.authorized:
+    if google_bp and google.authorized:
         try:
             resp = google.get("/oauth2/v2/userinfo")
         except TokenExpiredError:
@@ -111,7 +135,7 @@ def index():
 
         user = resp.json()
     
-    elif linkedin.authorized:
+    elif linkedin_bp and linkedin.authorized:
         try:
             resp = linkedin.get("me")
         except TokenExpiredError:
@@ -372,6 +396,9 @@ def chat():
     user_message = request.json.get("message")
     if not user_message:
         return {"error": "No message provided"}, 400
+
+    if not client:
+        return {"error": "AI service is currently unavailable (missing API key)."}, 503
 
     try:
         # System instructions to keep the AI on-brand

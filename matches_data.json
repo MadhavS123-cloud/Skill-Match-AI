@@ -4,6 +4,235 @@
     "candidate": "Candidate 1",
     "score": 42,
     "date": "Just now",
+    "timestamp": "2026-02-02T15:49:35.710646",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 42,
+      "similarity_score": 69.7,
+      "ats_score": 42,
+      "ats_summary": "The candidate has a solid foundation in software engineering, but lacks experience in key areas such as cloud-based technologies and containerization. With a focused effort to develop these skills, the candidate can increase their competitiveness for the role at Google.",
+      "ats_tips": [
+        "Tailor the resume to the specific job description and requirements",
+        "Highlight relevant projects and experiences that demonstrate skills and achievements",
+        "Emphasize soft skills such as communication, collaboration, and problem-solving"
+      ],
+      "missing_skills": [
+        "C++",
+        "Cloud-based technologies",
+        "Containerization",
+        "Distributed Systems",
+        "Front-end development",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "NoSQL databases",
+        "Graph databases"
+      ],
+      "roadmap": [
+        "Gain experience in cloud-based technologies such as Google Cloud Platform, Amazon Web Services, or Microsoft Azure",
+        "Develop skills in containerization using tools such as Docker or Kubernetes",
+        "Improve front-end development skills, including HTML, CSS, and JavaScript"
+      ],
+      "role_focus": "Software Engineer",
+      "risk_analysis": {
+        "level": "Medium",
+        "findings": [
+          "Lack of experience in cloud-based technologies",
+          "Limited experience in front-end development",
+          "No mention of experience with containerization or distributed systems"
+        ],
+        "skepticism_reason": "The candidate's skills and experience may not be directly applicable to the role at Google, which may lead to skepticism about their ability to perform the job duties."
+      },
+      "is_top_tier": false,
+      "strengths": [
+        "Gain experience in cloud-based technologies such as Google Cloud Platform, Amazon Web Services, or Microsoft Azure",
+        "Develop skills in containerization using tools such as Docker or Kubernetes",
+        "Improve front-end development skills, including HTML, CSS, and JavaScript"
+      ],
+      "areas_to_develop": [
+        "Tailor the resume to the specific job description and requirements",
+        "Highlight relevant projects and experiences that demonstrate skills and achievements"
+      ],
+      "detailed_skills": [
+        {
+          "name": "Java",
+          "score": 80,
+          "level": "Intermediate"
+        },
+        {
+          "name": "Python",
+          "score": 70,
+          "level": "Intermediate"
+        },
+        {
+          "name": "Data Structures",
+          "score": 90,
+          "level": "Advanced"
+        },
+        {
+          "name": "Algorithms",
+          "score": 80,
+          "level": "Advanced"
+        },
+        {
+          "name": "REST APIs",
+          "score": 60,
+          "level": "Intermediate"
+        },
+        {
+          "name": "Linux",
+          "score": 50,
+          "level": "Beginner"
+        },
+        {
+          "name": "Git",
+          "score": 40,
+          "level": "Beginner"
+        },
+        {
+          "name": "SQL",
+          "score": 30,
+          "level": "Beginner"
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Experience Alignment",
+          "candidate": "Found",
+          "required": "High",
+          "pct": 60
+        },
+        {
+          "label": "Role Fit",
+          "candidate": "Relevant",
+          "required": "Optimal",
+          "pct": 69.7
+        }
+      ],
+      "recommendation": "The candidate has a solid foundation in software engineering, but lacks experience in cloud-based technologies and containerization, which are crucial for the role at Google. With additional training and experience, this candidate has the potential to excel in the position.",
+      "content": "IMPROVED RESUME \u2013 SOFTWARE ENGINEER (GOOGLE TARGETED)\nCore Skills\nJava, Python, C++\nData Structures, Algorithms, OS, Networks\nREST APIs, Distributed Systems\nLinux, Git, SQL\nProjects\nAI Resume\u2013Job Matc...",
+      "feedback_loop": {
+        "current_percentile": 50,
+        "gap_to_top_10": 30,
+        "sections_to_improve": [
+          {
+            "section": "Technical Skills",
+            "current_issue": "Limited experience in cloud-based technologies and containerization",
+            "improvement": "Gain experience in cloud-based technologies and containerization",
+            "impact": "High"
+          },
+          {
+            "section": "Projects",
+            "current_issue": "Limited number of projects showcased",
+            "improvement": "Develop and showcase more projects that demonstrate skills and achievements",
+            "impact": "Medium"
+          }
+        ],
+        "quick_wins": [
+          "Take online courses to gain experience in cloud-based technologies",
+          "Participate in coding challenges to improve coding skills"
+        ],
+        "major_upgrades": [
+          "Gain experience in containerization using tools such as Docker or Kubernetes",
+          "Develop a personal project that demonstrates skills in front-end development"
+        ]
+      },
+      "improvement_priority": [
+        "Gain experience in cloud-based technologies",
+        "Develop skills in containerization",
+        "Improve front-end development skills"
+      ],
+      "company_style_fit": {
+        "best_fit": "Microsoft",
+        "fit_score": 85,
+        "summary": "Your resume content fits Microsoft, but writing style matches Microsoft culture more due to the use of concise bullet points and impact-driven metrics.",
+        "culture_breakdown": {
+          "microsoft_fit": 85,
+          "startup_fit": 70,
+          "research_fit": 40
+        },
+        "style_details": {
+          "bullet_length": {
+            "assessment": "Concise",
+            "recommendation": "Consider adding a few more details to showcase technical depth, but avoid verbosity."
+          },
+          "quantification_style": {
+            "score": 80,
+            "examples_found": [
+              "10K+ users",
+              "Optimized performance"
+            ],
+            "recommendation": "Include more specific metrics (e.g., percentages, exact numbers) to demonstrate the impact of your work."
+          },
+          "ownership_language": {
+            "score": 90,
+            "strong_phrases": [
+              "Built ranking pipeline",
+              "Designed APIs",
+              "Optimized performance"
+            ],
+            "weak_phrases": [],
+            "recommendation": "Continue using action-oriented language to convey a sense of ownership and responsibility."
+          },
+          "engineering_maturity": {
+            "level": "Mid",
+            "signals_found": [
+              "Scalable Backend System",
+              "Distributed Systems",
+              " Optimized performance"
+            ],
+            "recommendation": "Highlight more senior-level thinking by discussing system architecture, trade-offs, and technical leadership experiences."
+          }
+        },
+        "top_improvements": [
+          "Include more specific metrics to demonstrate the impact of your work",
+          "Highlight senior-level thinking by discussing system architecture and technical leadership experiences",
+          "Consider adding a few more details to showcase technical depth without being verbose"
+        ]
+      },
+      "evolution": {
+        "delta": 0,
+        "old_score": 42,
+        "new_score": 42,
+        "signals": [
+          {
+            "type": "skill_filled",
+            "message": "Successfully added key skills: Software design patterns, Version control systems such as Git, Containerization using Docker",
+            "impact": "High"
+          },
+          {
+            "type": "risk_reduced",
+            "message": "Resume skepticism reduced from High to Medium",
+            "impact": "Medium"
+          }
+        ],
+        "takeaway": "Your resume is evolving! No major score change, but structural elements may have improved."
+      }
+    },
+    "evolution": {
+      "delta": 0,
+      "old_score": 42,
+      "new_score": 42,
+      "signals": [
+        {
+          "type": "skill_filled",
+          "message": "Successfully added key skills: Software design patterns, Version control systems such as Git, Containerization using Docker",
+          "impact": "High"
+        },
+        {
+          "type": "risk_reduced",
+          "message": "Resume skepticism reduced from High to Medium",
+          "impact": "Medium"
+        }
+      ],
+      "takeaway": "Your resume is evolving! No major score change, but structural elements may have improved."
+    }
+  },
+  {
+    "role": "software engineer at google",
+    "candidate": "Candidate 1",
+    "score": 42,
+    "date": "Just now",
     "timestamp": "2026-02-02T15:05:36.308485",
     "full_analysis": {
       "resume_no": 1,

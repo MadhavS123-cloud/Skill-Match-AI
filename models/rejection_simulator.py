@@ -4,13 +4,22 @@ import json
 from dotenv import load_dotenv
 
 load_dotenv()
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-MODEL_NAME = "llama-3.3-70b-versatile"
-
 def simulate_rejection(resume_text, company, role):
     """
     Simulates a hiring manager's rejection process for a specific company and role.
     """
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        print("ERROR: GROQ_API_KEY not found in rejection_simulator.")
+        return {"error": "AI Service unavailable"}
+
+    try:
+        client = Groq(api_key=api_key)
+    except Exception as e:
+        print(f"Error initializing Groq in rejection_simulator: {e}")
+        return {"error": "AI initialization failed"}
+
+    MODEL_NAME = "llama-3.3-70b-versatile"
     
     prompt = f"""
     You are a cynical, high-stakes Hiring Manager at {company} looking for a {role}.

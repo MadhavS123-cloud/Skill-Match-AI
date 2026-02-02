@@ -4,14 +4,23 @@ import json
 from dotenv import load_dotenv
 
 load_dotenv()
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-MODEL_NAME = "llama-3.3-70b-versatile"
-
 def expand_job_requirements(input_text):
     """
     Expands a short job title or brief description into a full, industry-standard JD.
     If the input is already a full JD, it returns it as is.
     """
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        print("ERROR: GROQ_API_KEY not found in job_expander.")
+        return input_text, False
+
+    try:
+        client = Groq(api_key=api_key)
+    except Exception as e:
+        print(f"Error initializing Groq in job_expander: {e}")
+        return input_text, False
+
+    MODEL_NAME = "llama-3.3-70b-versatile"
     # Heuristic: If it's more than 300 characters, consider it a full JD already
     if len(input_text.strip()) > 300:
         return input_text, False
