@@ -4,11 +4,19 @@ import json
 from dotenv import load_dotenv
 
 load_dotenv()
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-MODEL_NAME = "llama-3.3-70b-versatile"
-
-
 def analyze_company_style(resume_text, target_company_type=None):
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        print("ERROR: GROQ_API_KEY not found in style_analyzer.")
+        return {"error": "AI Service unavailable"}
+
+    try:
+        client = Groq(api_key=api_key)
+    except Exception as e:
+        print(f"Error initializing Groq in style_analyzer: {e}")
+        return {"error": "AI initialization failed"}
+
+    MODEL_NAME = "llama-3.3-70b-versatile"
     """
     Analyzes resume writing style and matches against company culture preferences.
     

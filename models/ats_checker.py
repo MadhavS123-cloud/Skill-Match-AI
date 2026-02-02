@@ -4,14 +4,28 @@ import json
 from dotenv import load_dotenv
 
 load_dotenv()
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-MODEL_NAME = "llama-3.3-70b-versatile"
-
 def check_ats_friendliness(resume_text, job_description=None):
     """
     Analyzes a resume for ATS friendliness, skill gaps, role-specific weighting, 
     and resume risks using Gemini AI.
     """
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        print("ERROR: GROQ_API_KEY not found in ats_checker.")
+        return {
+            "score": 0,
+            "role_focus": "Error",
+            "summary": "AI Service unavailable (Missing API Key)",
+            "recommendation": "Set GROQ_API_KEY in environment variables."
+        }
+    
+    try:
+        client = Groq(api_key=api_key)
+    except Exception as e:
+        print(f"Error initializing Groq in ats_checker: {e}")
+        return {"score": 0, "summary": "AI initialization failed."}
+
+    MODEL_NAME = "llama-3.3-70b-versatile"
     
     role_weighting_context = ""
     if job_description:
