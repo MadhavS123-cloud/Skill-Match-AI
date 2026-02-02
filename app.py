@@ -33,7 +33,11 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-key")
 # =========================
 # Persistent Storage (JSON file)
 # =========================
-MATCHES_FILE = os.path.join(os.path.dirname(__file__), 'matches_data.json')
+# Vercel has a read-only filesystem except for /tmp
+if os.environ.get("VERCEL"):
+    MATCHES_FILE = "/tmp/matches_data.json"
+else:
+    MATCHES_FILE = os.path.join(os.path.dirname(__file__), 'matches_data.json')
 
 def load_matches():
     """Load all matches from persistent storage"""
