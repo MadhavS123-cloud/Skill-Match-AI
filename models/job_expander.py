@@ -1,11 +1,11 @@
-import google.generativeai as genai
+from groq import Groq
 import os
 import json
 from dotenv import load_dotenv
 
 load_dotenv()
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-model = genai.GenerativeModel('gemini-flash-latest')
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+MODEL_NAME = "llama-3.3-70b-versatile"
 
 def expand_job_requirements(input_text):
     """
@@ -32,8 +32,14 @@ def expand_job_requirements(input_text):
     """
 
     try:
-        response = model.generate_content(prompt)
-        expanded_text = response.text.strip()
+        completion = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=[
+                {"role": "system", "content": "You are an expert technical recruiter."},
+                {"role": "user", "content": prompt},
+            ],
+        )
+        expanded_text = completion.choices[0].message.content.strip()
         return expanded_text, True
     except Exception as e:
         print(f"Error expanding job requirements: {e}")

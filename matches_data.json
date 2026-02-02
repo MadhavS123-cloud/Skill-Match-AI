@@ -2,6 +2,1175 @@
   {
     "role": "software engineer at google",
     "candidate": "Candidate 1",
+    "score": 42,
+    "date": "Just now",
+    "timestamp": "2026-02-02T15:05:36.308485",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 42,
+      "similarity_score": 81.5,
+      "ats_score": 42,
+      "ats_summary": "Bhavya Deora shows promise as a software engineer, but needs to address significant gaps in technical skills and experience to be a strong candidate.",
+      "ats_tips": [
+        "Focus on developing a strong foundation in computer science and software engineering",
+        "Gain practical experience with required technical skills",
+        "Highlight transferable skills and experiences in your resume and cover letter"
+      ],
+      "missing_skills": [
+        "Java",
+        "C++",
+        "JavaScript",
+        "Cloud-based technologies",
+        "Containerization using Docker",
+        "Orchestration using Kubernetes",
+        "Agile or Scrum methodologies",
+        "Data structures",
+        "Software design patterns",
+        "Version control systems such as Git"
+      ],
+      "roadmap": [
+        "Develop proficiency in programming languages such as Java, C++, and JavaScript",
+        "Gain experience with cloud-based technologies, containerization, and orchestration",
+        "Familiarize yourself with Agile or Scrum methodologies and software design patterns"
+      ],
+      "role_focus": "Software Engineer",
+      "risk_analysis": {
+        "level": "High",
+        "findings": [
+          "Lack of direct experience with required technical skills",
+          "Limited exposure to cloud-based technologies and containerization",
+          "Insufficient evidence of working with cross-functional teams"
+        ],
+        "skepticism_reason": "Candidate's skills and experience do not align closely with the job requirements, raising concerns about their ability to perform the role."
+      },
+      "is_top_tier": false,
+      "strengths": [
+        "Develop proficiency in programming languages such as Java, C++, and JavaScript",
+        "Gain experience with cloud-based technologies, containerization, and orchestration",
+        "Familiarize yourself with Agile or Scrum methodologies and software design patterns"
+      ],
+      "areas_to_develop": [
+        "Focus on developing a strong foundation in computer science and software engineering",
+        "Gain practical experience with required technical skills"
+      ],
+      "detailed_skills": [
+        {
+          "name": "Programming Languages",
+          "score": 60,
+          "level": "Intermediate"
+        },
+        {
+          "name": "Frontend Development",
+          "score": 50,
+          "level": "Beginner"
+        },
+        {
+          "name": "Backend Development",
+          "score": 40,
+          "level": "Beginner"
+        },
+        {
+          "name": "Database Systems",
+          "score": 40,
+          "level": "Beginner"
+        },
+        {
+          "name": "AI Integration",
+          "score": 50,
+          "level": "Intermediate"
+        },
+        {
+          "name": "System Design",
+          "score": 50,
+          "level": "Intermediate"
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Experience Alignment",
+          "candidate": "Found",
+          "required": "High",
+          "pct": 90
+        },
+        {
+          "label": "Role Fit",
+          "candidate": "Relevant",
+          "required": "Optimal",
+          "pct": 81.5
+        }
+      ],
+      "recommendation": "Bhavya Deora demonstrates potential as a software engineer with a strong passion for product-oriented system thinking, but requires further development in core technical skills and experience to be a competitive candidate.",
+      "content": "Bhavya Deora Software Engineering Student | Product-Oriented System Thinker\nPROFILE\nThoughtful software engineering student focused on designing systems that respect human cognition, learning\ncontinui...",
+      "feedback_loop": {
+        "current_percentile": 30,
+        "gap_to_top_10": 70,
+        "sections_to_improve": [
+          {
+            "section": "Technical Skills",
+            "current_issue": "Lack of alignment with job requirements",
+            "improvement": "Develop proficiency in required programming languages and technologies",
+            "impact": "High"
+          },
+          {
+            "section": "Experience",
+            "current_issue": "Limited exposure to relevant projects and technologies",
+            "improvement": "Participate in personal projects or internships to gain relevant experience",
+            "impact": "Medium"
+          }
+        ],
+        "quick_wins": [
+          "Develop a personal project showcasing proficiency in required technical skills",
+          "Create a portfolio highlighting relevant experiences and skills"
+        ],
+        "major_upgrades": [
+          "Pursue internships or co-op opportunities to gain industry experience",
+          "Take online courses or attend workshops to develop required technical skills"
+        ]
+      },
+      "improvement_priority": [
+        "Develop required technical skills",
+        "Gain relevant experience through projects or internships",
+        "Highlight transferable skills and experiences in your resume and cover letter"
+      ],
+      "company_style_fit": {
+        "best_fit": "Microsoft/Big Tech",
+        "fit_score": 85,
+        "summary": "Your resume content fits Microsoft, but writing style matches big tech culture more, with a moderate level of detail and some strong ownership language.",
+        "culture_breakdown": {
+          "microsoft_fit": 85,
+          "startup_fit": 60,
+          "research_fit": 40
+        },
+        "style_details": {
+          "bullet_length": {
+            "assessment": "Moderate",
+            "recommendation": "Consider condensing some bullet points to focus on key accomplishments and use action-oriented language to enhance impact."
+          },
+          "quantification_style": {
+            "score": 60,
+            "examples_found": [
+              "Designed mechanisms to retain user intent",
+              "Implemented exam-style quizzes"
+            ],
+            "recommendation": "Include specific metrics or statistics to demonstrate the impact of your projects, such as 'Improved user engagement by 25% through AI-powered learning system' or 'Increased algorithm understanding by 30% through interactive platform'."
+          },
+          "ownership_language": {
+            "score": 80,
+            "strong_phrases": [
+              "Designed a reasoning-first platform",
+              "Built a flow-based interface",
+              "Emphasized partial understanding"
+            ],
+            "weak_phrases": [
+              "Participated in team project"
+            ],
+            "recommendation": "Continue using strong ownership language and consider rephrasing weak phrases to emphasize your role and contributions, such as 'I led the development of the Study-Loop Platform' instead of 'Developing a web-based application'."
+          },
+          "engineering_maturity": {
+            "level": "Mid",
+            "signals_found": [
+              "System constraints to govern AI behavior",
+              "Context-aware interaction design",
+              "Component-driven UI architecture"
+            ],
+            "recommendation": "Highlight more senior-level thinking by discussing trade-offs, scalability, and architecture decisions, such as 'Designed a scalable system to handle increased user traffic' or 'Made trade-offs between performance and usability to optimize the user experience'."
+          }
+        },
+        "top_improvements": [
+          "Include specific metrics or statistics to demonstrate impact",
+          "Emphasize senior-level thinking by discussing trade-offs and architecture decisions",
+          "Condense some bullet points to focus on key accomplishments and use action-oriented language"
+        ]
+      },
+      "evolution": {
+        "delta": 0,
+        "old_score": 42,
+        "new_score": 42,
+        "signals": [
+          {
+            "type": "skill_filled",
+            "message": "Successfully added key skills: Operating System Concepts, Cloud Computing Platforms, Computer Science Fundamentals",
+            "impact": "High"
+          }
+        ],
+        "takeaway": "Your resume is evolving! No major score change, but structural elements may have improved."
+      }
+    },
+    "evolution": {
+      "delta": 0,
+      "old_score": 42,
+      "new_score": 42,
+      "signals": [
+        {
+          "type": "skill_filled",
+          "message": "Successfully added key skills: Operating System Concepts, Cloud Computing Platforms, Computer Science Fundamentals",
+          "impact": "High"
+        }
+      ],
+      "takeaway": "Your resume is evolving! No major score change, but structural elements may have improved."
+    }
+  },
+  {
+    "role": "software engineer at google",
+    "candidate": "Candidate 1",
+    "score": 42,
+    "date": "Just now",
+    "timestamp": "2026-02-02T15:03:04.414083",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 42,
+      "similarity_score": 79.4,
+      "ats_score": 42,
+      "ats_summary": "The candidate demonstrates promise with a strong foundation in software engineering, but requires additional skills and experience to be competitive for the Software Engineer role at Google.",
+      "ats_tips": [
+        "Highlight any relevant coursework or projects that demonstrate proficiency in required skills",
+        "Emphasize transferable skills from personal projects and team collaborations",
+        "Consider taking online courses or attending workshops to fill gaps in required skills"
+      ],
+      "missing_skills": [
+        "Java",
+        "C++",
+        "Go",
+        "Cloud Computing Platforms",
+        "Machine Learning",
+        "Artificial Intelligence",
+        "Operating System Concepts",
+        "Computer Science Fundamentals"
+      ],
+      "roadmap": [
+        "Gain hands-on experience with cloud computing platforms like Google Cloud or AWS",
+        "Develop skills in machine learning and artificial intelligence using TensorFlow or similar frameworks",
+        "Improve knowledge of computer science fundamentals, including data structures and algorithms"
+      ],
+      "role_focus": "Software Engineer",
+      "risk_analysis": {
+        "level": "Medium",
+        "findings": [
+          "Lack of direct experience with Google Cloud Platform or similar cloud computing platforms",
+          "Insufficient depth in computer science fundamentals and software design patterns"
+        ],
+        "skepticism_reason": "Limited exposure to a broad range of technologies and methodologies required for the role"
+      },
+      "is_top_tier": false,
+      "strengths": [
+        "Gain hands-on experience with cloud computing platforms like Google Cloud or AWS",
+        "Develop skills in machine learning and artificial intelligence using TensorFlow or similar frameworks",
+        "Improve knowledge of computer science fundamentals, including data structures and algorithms"
+      ],
+      "areas_to_develop": [
+        "Highlight any relevant coursework or projects that demonstrate proficiency in required skills",
+        "Emphasize transferable skills from personal projects and team collaborations"
+      ],
+      "detailed_skills": [
+        {
+          "name": "Programming Languages",
+          "score": 80,
+          "level": "Intermediate"
+        },
+        {
+          "name": "Software Development Methodologies",
+          "score": 60,
+          "level": "Beginner"
+        },
+        {
+          "name": "Database Systems",
+          "score": 70,
+          "level": "Intermediate"
+        },
+        {
+          "name": "AI Integration",
+          "score": 70,
+          "level": "Intermediate"
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Experience Alignment",
+          "candidate": "Found",
+          "required": "High",
+          "pct": 90
+        },
+        {
+          "label": "Role Fit",
+          "candidate": "Relevant",
+          "required": "Optimal",
+          "pct": 79.4
+        }
+      ],
+      "recommendation": "While the candidate demonstrates a strong foundation in software engineering, additional experience and skills in areas like cloud computing, machine learning, and operating system concepts would make them a more competitive fit for the role.",
+      "content": "Bhavya Deora Software Engineering Student | Product-Oriented System Thinker\nPROFILE\nThoughtful software engineering student focused on designing systems that respect human cognition, learning\ncontinui...",
+      "feedback_loop": {
+        "current_percentile": 40,
+        "gap_to_top_10": 60,
+        "sections_to_improve": [
+          {
+            "section": "Technical Skills",
+            "current_issue": "Limited breadth of technical skills",
+            "improvement": "Expand technical skills to include cloud computing, machine learning, and operating system concepts",
+            "impact": "High"
+          },
+          {
+            "section": "Project Experience",
+            "current_issue": "Lack of direct industry experience",
+            "improvement": "Participate in internships or hackathons to gain industry experience",
+            "impact": "Medium"
+          }
+        ],
+        "quick_wins": [
+          "Complete online courses in cloud computing and machine learning",
+          "Participate in coding challenges to improve proficiency in programming languages"
+        ],
+        "major_upgrades": [
+          "Gain direct experience with cloud computing platforms",
+          "Develop a deep understanding of computer science fundamentals and software design patterns"
+        ]
+      },
+      "improvement_priority": [
+        "Cloud Computing",
+        "Machine Learning and Artificial Intelligence",
+        "Computer Science Fundamentals and Software Design Patterns"
+      ],
+      "company_style_fit": {
+        "best_fit": "Microsoft",
+        "fit_score": 80,
+        "summary": "Your resume content fits Microsoft, but writing style matches Microsoft culture more due to its focus on system design and technical depth.",
+        "culture_breakdown": {
+          "microsoft_fit": 80,
+          "startup_fit": 60,
+          "research_fit": 40
+        },
+        "style_details": {
+          "bullet_length": {
+            "assessment": "Moderate",
+            "recommendation": "Consider shortening some bullet points to focus on key achievements, while maintaining technical depth."
+          },
+          "quantification_style": {
+            "score": 40,
+            "examples_found": [],
+            "recommendation": "Add specific metrics to quantify achievements, such as 'Improved algorithm understanding by 30% through structured hints' or 'Increased user engagement by 25% through context-aware interaction'."
+          },
+          "ownership_language": {
+            "score": 70,
+            "strong_phrases": [
+              "Designed a reasoning-first platform",
+              "Built a flow-based interface",
+              "Developing a web-based application"
+            ],
+            "weak_phrases": [
+              "Participated in team projects"
+            ],
+            "recommendation": "Continue using action-oriented language, but also emphasize personal ownership and impact, such as 'I designed' or 'I led the development of'."
+          },
+          "engineering_maturity": {
+            "level": "Mid",
+            "signals_found": [
+              "system constraints to govern AI behavior",
+              "context-aware interaction design",
+              "component-driven UI architecture"
+            ],
+            "recommendation": "Highlight more senior-level thinking, such as trade-offs, scalability, and technical debt management, to demonstrate a higher level of engineering maturity."
+          }
+        },
+        "top_improvements": [
+          "Add specific metrics to quantify achievements",
+          "Emphasize personal ownership and impact",
+          "Highlight senior-level thinking, such as trade-offs and scalability"
+        ]
+      },
+      "evolution": {
+        "delta": 0,
+        "old_score": 42,
+        "new_score": 42,
+        "signals": [
+          {
+            "type": "skill_filled",
+            "message": "Successfully added key skills: Cloud-based technologies, Agile development methodologies, Natural language processing",
+            "impact": "High"
+          }
+        ],
+        "takeaway": "Your resume is evolving! No major score change, but structural elements may have improved."
+      }
+    },
+    "evolution": {
+      "delta": 0,
+      "old_score": 42,
+      "new_score": 42,
+      "signals": [
+        {
+          "type": "skill_filled",
+          "message": "Successfully added key skills: Cloud-based technologies, Agile development methodologies, Natural language processing",
+          "impact": "High"
+        }
+      ],
+      "takeaway": "Your resume is evolving! No major score change, but structural elements may have improved."
+    }
+  },
+  {
+    "role": "software engineer at google",
+    "candidate": "Candidate 1",
+    "score": 42,
+    "date": "Just now",
+    "timestamp": "2026-02-02T14:59:18.916242",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 42,
+      "similarity_score": 78.7,
+      "ats_score": 42,
+      "ats_summary": "The candidate has a strong foundation in system design and AI integration, but lacks experience in core software engineering skills and cloud-based technologies. With additional training and experience, the candidate could become a strong fit for the role.",
+      "ats_tips": [
+        "Highlight transferable skills, such as system design and AI integration",
+        "Emphasize eagerness to learn and adapt to new technologies",
+        "Consider taking online courses or attending workshops to gain experience in core software engineering skills and cloud-based technologies"
+      ],
+      "missing_skills": [
+        "Java",
+        "C++",
+        "Go",
+        "Cloud-based technologies",
+        "Agile development methodologies",
+        "Version control systems",
+        "Large-scale system design",
+        "Machine learning",
+        "Natural language processing",
+        "Computer vision",
+        "Containerization using Docker and Kubernetes"
+      ],
+      "roadmap": [
+        "Gain experience in core software engineering skills, such as Java, C++, or Go",
+        "Familiarize yourself with cloud-based technologies, such as Google Cloud Platform, Amazon Web Services, or Microsoft Azure",
+        "Develop skills in large-scale system design, deployment, and maintenance"
+      ],
+      "role_focus": "Software Engineer",
+      "risk_analysis": {
+        "level": "Medium",
+        "findings": [
+          "Lack of direct experience in core software engineering skills",
+          "Limited exposure to cloud-based technologies",
+          "No mention of experience with large-scale system design or deployment"
+        ],
+        "skepticism_reason": "The candidate's lack of experience in core software engineering skills and cloud-based technologies may raise concerns about their ability to perform the job requirements."
+      },
+      "is_top_tier": false,
+      "strengths": [
+        "Gain experience in core software engineering skills, such as Java, C++, or Go",
+        "Familiarize yourself with cloud-based technologies, such as Google Cloud Platform, Amazon Web Services, or Microsoft Azure",
+        "Develop skills in large-scale system design, deployment, and maintenance"
+      ],
+      "areas_to_develop": [
+        "Highlight transferable skills, such as system design and AI integration",
+        "Emphasize eagerness to learn and adapt to new technologies"
+      ],
+      "detailed_skills": [
+        {
+          "name": "Programming Languages",
+          "score": 60,
+          "level": "Intermediate"
+        },
+        {
+          "name": "System Design",
+          "score": 80,
+          "level": "Advanced"
+        },
+        {
+          "name": "AI Integration",
+          "score": 70,
+          "level": "Intermediate"
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Experience Alignment",
+          "candidate": "Found",
+          "required": "High",
+          "pct": 90
+        },
+        {
+          "label": "Role Fit",
+          "candidate": "Relevant",
+          "required": "Optimal",
+          "pct": 78.7
+        }
+      ],
+      "recommendation": "The candidate shows potential with a focus on system design and AI integration, but lacks direct experience in core software engineering skills, such as proficiency in Java, C++, or Go, and cloud-based technologies. With additional training and experience, the candidate could become a strong fit for the role.",
+      "content": "Bhavya Deora Software Engineering Student | Product-Oriented System Thinker\nPROFILE\nThoughtful software engineering student focused on designing systems that respect human cognition, learning\ncontinui...",
+      "feedback_loop": {
+        "current_percentile": 40,
+        "gap_to_top_10": 60,
+        "sections_to_improve": [
+          {
+            "section": "Technical Skills",
+            "current_issue": "Lack of experience in core software engineering skills",
+            "improvement": "Gain experience in Java, C++, or Go, and familiarize yourself with cloud-based technologies",
+            "impact": "High"
+          },
+          {
+            "section": "Projects",
+            "current_issue": "Limited exposure to large-scale system design and deployment",
+            "improvement": "Participate in projects that involve large-scale system design and deployment",
+            "impact": "Medium"
+          }
+        ],
+        "quick_wins": [
+          "Take online courses to gain experience in core software engineering skills",
+          "Participate in hackathons or coding challenges to demonstrate skills"
+        ],
+        "major_upgrades": [
+          "Gain experience in cloud-based technologies",
+          "Develop skills in machine learning, natural language processing, or computer vision"
+        ]
+      },
+      "improvement_priority": [
+        "Gain experience in core software engineering skills",
+        "Familiarize yourself with cloud-based technologies",
+        "Develop skills in large-scale system design, deployment, and maintenance"
+      ],
+      "company_style_fit": {
+        "best_fit": "Microsoft",
+        "fit_score": 80,
+        "summary": "Your resume content fits Microsoft, but writing style matches a blend of Microsoft and startup cultures, with room for improvement in quantification and concise bullet points.",
+        "culture_breakdown": {
+          "microsoft_fit": 80,
+          "startup_fit": 60,
+          "research_fit": 40
+        },
+        "style_details": {
+          "bullet_length": {
+            "assessment": "Detailed",
+            "recommendation": "Consider condensing bullet points to focus on key achievements and impacts, especially for startup or fast-paced company applications."
+          },
+          "quantification_style": {
+            "score": 40,
+            "examples_found": [
+              "retention of user intent",
+              "improvement of recall"
+            ],
+            "recommendation": "Incorporate specific metrics or percentages to quantitatively demonstrate the impact of projects and skills, such as '25% increase in user engagement' or '30% reduction in study time'."
+          },
+          "ownership_language": {
+            "score": 60,
+            "strong_phrases": [
+              "Designed a reasoning-first platform",
+              "Built a flow-based interface",
+              "Emphasized partial understanding"
+            ],
+            "weak_phrases": [
+              "Developing a web-based application",
+              "Enabled context-aware interaction"
+            ],
+            "recommendation": "Balance the use of strong, action-oriented verbs with more descriptive phrases to convey a sense of ownership and agency in project work."
+          },
+          "engineering_maturity": {
+            "level": "Mid",
+            "signals_found": [
+              "system constraints to govern AI behavior",
+              "context-aware interaction design",
+              "component-driven UI architecture"
+            ],
+            "recommendation": "To demonstrate senior-level thinking, consider highlighting more complex system architectures, trade-offs, or scalability considerations in future projects."
+          }
+        },
+        "top_improvements": [
+          "Incorporate specific metrics or percentages to demonstrate impact",
+          "Condense bullet points for clearer, more concise achievements",
+          "Highlight complex system architectures or scalability considerations for senior-level thinking"
+        ]
+      },
+      "evolution": {
+        "delta": 7,
+        "old_score": 35,
+        "new_score": 42,
+        "signals": [
+          {
+            "type": "skill_filled",
+            "message": "Successfully added key skills: Fault Tolerance design, Mentorship experience, Deep expertise in algorithms complexity analysis",
+            "impact": "High"
+          },
+          {
+            "type": "risk_reduced",
+            "message": "Resume skepticism reduced from High to Medium",
+            "impact": "Medium"
+          },
+          {
+            "type": "ats_improved",
+            "message": "ATS optimization improved by 7%",
+            "impact": "Low"
+          }
+        ],
+        "takeaway": "Your resume is evolving! Score increased by +7 points due to better skill alignment."
+      }
+    },
+    "evolution": {
+      "delta": 7,
+      "old_score": 35,
+      "new_score": 42,
+      "signals": [
+        {
+          "type": "skill_filled",
+          "message": "Successfully added key skills: Fault Tolerance design, Mentorship experience, Deep expertise in algorithms complexity analysis",
+          "impact": "High"
+        },
+        {
+          "type": "risk_reduced",
+          "message": "Resume skepticism reduced from High to Medium",
+          "impact": "Medium"
+        },
+        {
+          "type": "ats_improved",
+          "message": "ATS optimization improved by 7%",
+          "impact": "Low"
+        }
+      ],
+      "takeaway": "Your resume is evolving! Score increased by +7 points due to better skill alignment."
+    }
+  },
+  {
+    "role": "python,flask,dsa,java",
+    "candidate": "Candidate 1",
+    "score": 0,
+    "date": "Just now",
+    "timestamp": "2026-01-30T23:11:07.826895",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 0,
+      "similarity_score": 95.1,
+      "ats_score": 0,
+      "ats_summary": "AI error during analysis.",
+      "ats_tips": [
+        "Try again later."
+      ],
+      "missing_skills": [
+        "Analysis failed"
+      ],
+      "roadmap": [
+        "Review resume manually"
+      ],
+      "role_focus": "Unknown",
+      "risk_analysis": {
+        "level": "Unknown",
+        "findings": [
+          "Unable to analyze risks"
+        ],
+        "skepticism_reason": "AI Error"
+      },
+      "is_top_tier": true,
+      "strengths": [
+        "Review resume manually"
+      ],
+      "areas_to_develop": [
+        "Try again later."
+      ],
+      "detailed_skills": [],
+      "experience_match": [
+        {
+          "label": "Experience Alignment",
+          "candidate": "Found",
+          "required": "High",
+          "pct": 90
+        },
+        {
+          "label": "Role Fit",
+          "candidate": "Relevant",
+          "required": "Optimal",
+          "pct": 95.1
+        }
+      ],
+      "recommendation": "Review resume manually due to analysis error.",
+      "content": "python,flask,dsa...",
+      "feedback_loop": {
+        "current_percentile": 0,
+        "gap_to_top_10": 100,
+        "sections_to_improve": [],
+        "quick_wins": [
+          "Retry the analysis"
+        ],
+        "major_upgrades": []
+      },
+      "improvement_priority": [
+        "Retry analysis"
+      ],
+      "company_style_fit": {
+        "best_fit": "Unknown",
+        "fit_score": 0,
+        "summary": "Style analysis failed. Please try again.",
+        "culture_breakdown": {
+          "microsoft_fit": 0,
+          "startup_fit": 0,
+          "research_fit": 0
+        },
+        "style_details": {
+          "bullet_length": {
+            "assessment": "Unknown",
+            "recommendation": "Unable to analyze"
+          },
+          "quantification_style": {
+            "score": 0,
+            "examples_found": [],
+            "recommendation": "Unable to analyze"
+          },
+          "ownership_language": {
+            "score": 0,
+            "strong_phrases": [],
+            "weak_phrases": [],
+            "recommendation": "Unable to analyze"
+          },
+          "engineering_maturity": {
+            "level": "Unknown",
+            "signals_found": [],
+            "recommendation": "Unable to analyze"
+          }
+        },
+        "top_improvements": [
+          "Retry analysis"
+        ]
+      },
+      "evolution": null
+    },
+    "evolution": null
+  },
+  {
+    "role": "Product Engineer at Saas startups",
+    "candidate": "Candidate 1",
+    "score": 0,
+    "date": "Just now",
+    "timestamp": "2026-01-30T22:53:53.657714",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 0,
+      "similarity_score": 100.0,
+      "ats_score": 0,
+      "ats_summary": "AI error during analysis.",
+      "ats_tips": [
+        "Try again later."
+      ],
+      "missing_skills": [
+        "Analysis failed"
+      ],
+      "roadmap": [
+        "Review resume manually"
+      ],
+      "role_focus": "Unknown",
+      "risk_analysis": {
+        "level": "Unknown",
+        "findings": [
+          "Unable to analyze risks"
+        ],
+        "skepticism_reason": "AI Error"
+      },
+      "is_top_tier": true,
+      "strengths": [
+        "Review resume manually"
+      ],
+      "areas_to_develop": [
+        "Try again later."
+      ],
+      "detailed_skills": [],
+      "experience_match": [
+        {
+          "label": "Experience Alignment",
+          "candidate": "Found",
+          "required": "High",
+          "pct": 90
+        },
+        {
+          "label": "Role Fit",
+          "candidate": "Relevant",
+          "required": "Optimal",
+          "pct": 100.0
+        }
+      ],
+      "recommendation": "Review resume manually due to analysis error.",
+      "content": "Bhavya Deora Software Engineering Student | Product-Oriented System Thinker\nPROFILE\nThoughtful software engineering student focused on designing systems that respect human cognition, learning\ncontinui...",
+      "feedback_loop": {
+        "current_percentile": 0,
+        "gap_to_top_10": 100,
+        "sections_to_improve": [],
+        "quick_wins": [
+          "Retry the analysis"
+        ],
+        "major_upgrades": []
+      },
+      "improvement_priority": [
+        "Retry analysis"
+      ],
+      "company_style_fit": {
+        "best_fit": "Unknown",
+        "fit_score": 0,
+        "summary": "Style analysis failed. Please try again.",
+        "culture_breakdown": {
+          "microsoft_fit": 0,
+          "startup_fit": 0,
+          "research_fit": 0
+        },
+        "style_details": {
+          "bullet_length": {
+            "assessment": "Unknown",
+            "recommendation": "Unable to analyze"
+          },
+          "quantification_style": {
+            "score": 0,
+            "examples_found": [],
+            "recommendation": "Unable to analyze"
+          },
+          "ownership_language": {
+            "score": 0,
+            "strong_phrases": [],
+            "weak_phrases": [],
+            "recommendation": "Unable to analyze"
+          },
+          "engineering_maturity": {
+            "level": "Unknown",
+            "signals_found": [],
+            "recommendation": "Unable to analyze"
+          }
+        },
+        "top_improvements": [
+          "Retry analysis"
+        ]
+      },
+      "evolution": {
+        "delta": 0,
+        "old_score": 0,
+        "new_score": 0,
+        "signals": [],
+        "takeaway": "Your resume is evolving! No major score change, but structural elements may have improved."
+      }
+    },
+    "evolution": {
+      "delta": 0,
+      "old_score": 0,
+      "new_score": 0,
+      "signals": [],
+      "takeaway": "Your resume is evolving! No major score change, but structural elements may have improved."
+    }
+  },
+  {
+    "role": "Product Engineer at Saas startups",
+    "candidate": "Candidate 1",
+    "score": 0,
+    "date": "Just now",
+    "timestamp": "2026-01-30T22:53:18.562532",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 0,
+      "similarity_score": 82.0,
+      "ats_score": 0,
+      "ats_summary": "AI error during analysis.",
+      "ats_tips": [
+        "Try again later."
+      ],
+      "missing_skills": [
+        "Analysis failed"
+      ],
+      "roadmap": [
+        "Review resume manually"
+      ],
+      "role_focus": "Unknown",
+      "risk_analysis": {
+        "level": "Unknown",
+        "findings": [
+          "Unable to analyze risks"
+        ],
+        "skepticism_reason": "AI Error"
+      },
+      "is_top_tier": false,
+      "strengths": [
+        "Review resume manually"
+      ],
+      "areas_to_develop": [
+        "Try again later."
+      ],
+      "detailed_skills": [],
+      "experience_match": [
+        {
+          "label": "Experience Alignment",
+          "candidate": "Found",
+          "required": "High",
+          "pct": 90
+        },
+        {
+          "label": "Role Fit",
+          "candidate": "Relevant",
+          "required": "Optimal",
+          "pct": 82.0
+        }
+      ],
+      "recommendation": "Review resume manually due to analysis error.",
+      "content": "Bhavya Deora Software Engineering Student | Product-Oriented System Thinker\nPROFILE\nThoughtful software engineering student focused on designing systems that respect human cognition, learning\ncontinui...",
+      "feedback_loop": {
+        "current_percentile": 0,
+        "gap_to_top_10": 100,
+        "sections_to_improve": [],
+        "quick_wins": [
+          "Retry the analysis"
+        ],
+        "major_upgrades": []
+      },
+      "improvement_priority": [
+        "Retry analysis"
+      ],
+      "company_style_fit": {
+        "best_fit": "Unknown",
+        "fit_score": 0,
+        "summary": "Style analysis failed. Please try again.",
+        "culture_breakdown": {
+          "microsoft_fit": 0,
+          "startup_fit": 0,
+          "research_fit": 0
+        },
+        "style_details": {
+          "bullet_length": {
+            "assessment": "Unknown",
+            "recommendation": "Unable to analyze"
+          },
+          "quantification_style": {
+            "score": 0,
+            "examples_found": [],
+            "recommendation": "Unable to analyze"
+          },
+          "ownership_language": {
+            "score": 0,
+            "strong_phrases": [],
+            "weak_phrases": [],
+            "recommendation": "Unable to analyze"
+          },
+          "engineering_maturity": {
+            "level": "Unknown",
+            "signals_found": [],
+            "recommendation": "Unable to analyze"
+          }
+        },
+        "top_improvements": [
+          "Retry analysis"
+        ]
+      },
+      "evolution": null
+    },
+    "evolution": null
+  },
+  {
+    "role": "software engineer at google",
+    "candidate": "Candidate 1",
+    "score": 35,
+    "date": "Just now",
+    "timestamp": "2026-01-30T22:40:38.211582",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 35,
+      "similarity_score": 82.3,
+      "ats_score": 35,
+      "ats_summary": "Bhavya is a highly motivated student with strong system-thinking and product orientation, but the current profile is misaligned with the technical depth and focus areas (distributed core infrastructure, C++/Go, OS/Networking fundamentals) mandated by this senior-level Google SWE role.",
+      "ats_tips": [
+        "Replace 'Product-Oriented System Thinker' with language emphasizing reliability, scale, and performance optimization.",
+        "Quantify technical achievements using scale, latency improvements, or throughput metrics, even in personal projects.",
+        "If using C++, Java, or Go in any capacity, feature them above TypeScript.",
+        "Structure projects to explicitly highlight any work related to fault tolerance, resource management, or high-availability patterns."
+      ],
+      "missing_skills": [
+        "Designing, implementing, and operating large-scale, high-availability distributed systems (Cloud/Infrastructure focus)",
+        "C++ or Go (preferred Google languages)",
+        "Operating Systems fundamentals",
+        "Network Protocols (TCP/IP, HTTP)",
+        "Concurrency and Parallel Processing expertise",
+        "Performance Tuning in large, data-intensive environments",
+        "Fault Tolerance design",
+        "CI/CD pipelines experience",
+        "Monitoring tools experience",
+        "Rigorous Code Reviews participation",
+        "Experience with massive scale (billions of users)",
+        "Deep expertise in algorithms complexity analysis",
+        "Experience with NoSQL solutions (beyond basic MongoDB mention)",
+        "Mentorship experience"
+      ],
+      "roadmap": [
+        "Focus academic and project work exclusively on challenging Distributed Systems coursework, emphasizing correctness, latency, and failure handling.",
+        "Intensively study and implement complex concurrency primitives and OS concepts (e.g., threads, memory models, networking stacks) using C++ or Go.",
+        "Seek internships specifically targeting infrastructure, site reliability, or core platform engineering teams to gain exposure to high-scale production environments."
+      ],
+      "role_focus": "Software Engineer, Distributed Systems and Core Infrastructure (Google)",
+      "risk_analysis": {
+        "level": "High",
+        "findings": [
+          "Candidate is a First-Year student, which is significantly junior for a role demanding 'exceptional command' and 'deep expertise' in core infrastructure.",
+          "Project focus is heavily on AI, Learning Platforms, and User Experience (UX), rather than low-level, high-throughput, fault-tolerant backend infrastructure.",
+          "Missing critical core CS knowledge areas explicitly listed: Operating Systems, Network Protocols (TCP/IP, HTTP), and Concurrency mastery.",
+          "Missing required industry experience in large-scale production systems (e.g., Cloud services infrastructure).",
+          "The listed programming languages (TypeScript, Python) are less prioritized than C++ or Go for deep infrastructure work at Google."
+        ],
+        "skepticism_reason": "The resume strongly profiles a front-end/AI-centric developer interested in human cognition, contrasting sharply with the core requirements for managing global, massive-scale distributed backend infrastructure, compounded by the candidate's early stage of academic progression."
+      },
+      "is_top_tier": false,
+      "strengths": [
+        "Focus academic and project work exclusively on challenging Distributed Systems coursework, emphasizing correctness, latency, and failure handling.",
+        "Intensively study and implement complex concurrency primitives and OS concepts (e.g., threads, memory models, networking stacks) using C++ or Go.",
+        "Seek internships specifically targeting infrastructure, site reliability, or core platform engineering teams to gain exposure to high-scale production environments."
+      ],
+      "areas_to_develop": [
+        "Replace 'Product-Oriented System Thinker' with language emphasizing reliability, scale, and performance optimization.",
+        "Quantify technical achievements using scale, latency improvements, or throughput metrics, even in personal projects."
+      ],
+      "detailed_skills": [
+        {
+          "name": "System design principles",
+          "score": 85,
+          "level": "Advanced"
+        },
+        {
+          "name": "Python",
+          "score": 70,
+          "level": "Intermediate"
+        },
+        {
+          "name": "SQL",
+          "score": 65,
+          "level": "Intermediate"
+        },
+        {
+          "name": "Problem-solving abilities",
+          "score": 75,
+          "level": "Advanced"
+        },
+        {
+          "name": "Collaboration/Teamwork",
+          "score": 70,
+          "level": "Intermediate"
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Experience Alignment",
+          "candidate": "Found",
+          "required": "High",
+          "pct": 90
+        },
+        {
+          "label": "Role Fit",
+          "candidate": "Relevant",
+          "required": "Optimal",
+          "pct": 82.3
+        }
+      ],
+      "recommendation": "This candidate demonstrates strong foundational concepts in system thinking and modern development practices, but currently lacks the explicit, large-scale distributed systems and deep CS expertise required for this specialized Google infrastructure role.",
+      "content": "Bhavya Deora Software Engineering Student | Product-Oriented System Thinker\nPROFILE\nThoughtful software engineering student focused on designing systems that respect human cognition, learning\ncontinui...",
+      "feedback_loop": {
+        "current_percentile": 20,
+        "gap_to_top_10": 70,
+        "sections_to_improve": [
+          {
+            "section": "TECHNICAL SKILLS / Concepts",
+            "current_issue": "Skills are skewed toward modern web stacks (React, Next.js, TypeScript) and AI integration, neglecting required core infrastructure competencies.",
+            "improvement": "Add and emphasize deep knowledge of Operating Systems, TCP/IP, Concurrency models (e.g., locks, atomics, Paxos/Raft principles if applicable), and C++/Go proficiency.",
+            "impact": "High"
+          },
+          {
+            "section": "PROJECTS",
+            "current_issue": "Projects focus on interaction clarity and reasoning paths, which is valuable for UX but not core infrastructure scaling challenges.",
+            "improvement": "Reframe 'AlgoDhara' and 'Study-Loop' to emphasize architectural decisions related to high availability, data partitioning (Vector Databases utilization), and performance bottlenecks solved.",
+            "impact": "High"
+          },
+          {
+            "section": "Experience Level (Implicit)",
+            "current_issue": "As a first-year student, the perceived lack of practical experience in operating systems or production distributed environments is a major hurdle.",
+            "improvement": "Secure a highly relevant, infrastructure-focused internship immediately to bridge the gap in production system exposure.",
+            "impact": "High"
+          }
+        ],
+        "quick_wins": [
+          "Explicitly list foundational CS courses completed and scores if strong (e.g., 'Data Structures & Algorithms - A+').",
+          "If MongoDB is used, specify its role in a high-throughput context if possible, otherwise rename to align better with desired NoSQL experience."
+        ],
+        "major_upgrades": [
+          "A complete shift in project focus towards low-level systems programming, database internals, or cloud infrastructure simulation.",
+          "Mastery demonstration of at least one primary infrastructure language (C++ or Go)."
+        ]
+      },
+      "improvement_priority": [
+        "Acquire deep, demonstrable knowledge in OS and Networking fundamentals.",
+        "Pivot project scope toward large-scale backend challenges (scale, reliability, performance).",
+        "Gain production experience via internships in relevant infrastructure roles."
+      ],
+      "company_style_fit": {
+        "best_fit": "Startup",
+        "fit_score": 75,
+        "summary": "The writing style is highly ownership-driven and conceptual, strongly aligning with fast-paced, product-focused startup expectations, despite lacking quantitative metrics.",
+        "culture_breakdown": {
+          "microsoft_fit": 50,
+          "startup_fit": 85,
+          "research_fit": 30
+        },
+        "style_details": {
+          "bullet_length": {
+            "assessment": "Moderate",
+            "recommendation": "Bullets are descriptive but could be tightened slightly. Aim for 1-2 lines maximum for maximum impact, especially in the 'Projects' section."
+          },
+          "quantification_style": {
+            "score": 20,
+            "examples_found": [],
+            "recommendation": "Quantification is almost entirely missing. For a stronger resume, convert descriptive impact statements into measurable metrics (e.g., 'Reduced time-to-understanding by X%' or 'Platform used by Y beta testers')."
+          },
+          "ownership_language": {
+            "score": 90,
+            "strong_phrases": [
+              "Designed a reasoning-first platform",
+              "Built a flow-based interface",
+              "Applied strict system constraints",
+              "Developing a web-based application",
+              "Designed mechanisms",
+              "Enabled context-aware interaction"
+            ],
+            "weak_phrases": [
+              "Focused on calm, non-intrusive interaction design"
+            ],
+            "recommendation": "The use of strong action verbs (Designed, Built, Developed) is excellent and signals strong ownership, which is highly favored in startup environments."
+          },
+          "engineering_maturity": {
+            "level": "Mid",
+            "signals_found": [
+              "Product-Oriented System Thinker",
+              "flow-based interface",
+              "system constraints to govern AI behavior",
+              "Component-driven UI architecture",
+              "System design"
+            ],
+            "recommendation": "The candidate shows strong conceptual maturity regarding product design and system thinking (e.g., 'respect human cognition'), which signals potential for senior roles, even if the experience listed is early-stage."
+          }
+        },
+        "top_improvements": [
+          "Integrate quantified results (%, scale, user numbers) into the project descriptions to boost credibility.",
+          "Shorten descriptive phrases into punchier action statements (e.g., replace 'Focused on calm, non-intrusive interaction design' with a shorter outcome statement).",
+          "Ensure the 'Concepts' listed under Technical Skills are translated into measurable achievements in the project bullets."
+        ]
+      },
+      "evolution": {
+        "delta": -30,
+        "old_score": 65,
+        "new_score": 35,
+        "signals": [
+          {
+            "type": "skill_filled",
+            "message": "Successfully added key skills: Code/Design Review Participation, Site Reliability Engineering (SRE) Mindset/Ownership of Critical Infrastructure, Formal Documentation of Complex Designs",
+            "impact": "High"
+          }
+        ],
+        "takeaway": "Your resume is evolving! Score slightly decreased. Ensure the new changes didn't remove critical keywords."
+      }
+    },
+    "evolution": {
+      "delta": -30,
+      "old_score": 65,
+      "new_score": 35,
+      "signals": [
+        {
+          "type": "skill_filled",
+          "message": "Successfully added key skills: Code/Design Review Participation, Site Reliability Engineering (SRE) Mindset/Ownership of Critical Infrastructure, Formal Documentation of Complex Designs",
+          "impact": "High"
+        }
+      ],
+      "takeaway": "Your resume is evolving! Score slightly decreased. Ensure the new changes didn't remove critical keywords."
+    }
+  },
+  {
+    "role": "software engineer at google",
+    "candidate": "Candidate 1",
     "score": 65,
     "date": "Just now",
     "timestamp": "2026-01-30T16:59:30.699871",
