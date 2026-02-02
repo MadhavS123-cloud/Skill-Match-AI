@@ -1,3 +1,4 @@
+from groq import Groq
 import os
 import json
 from datetime import datetime
@@ -12,7 +13,7 @@ from models.job_expander import expand_job_requirements
 from models.file_parser import extract_text_from_file
 from models.style_analyzer import analyze_company_style
 from models.evolution_tracker import track_evolution
-import google.generativeai as genai
+from models.rejection_simulator import simulate_rejection
 
 # =========================
 # Load environment variables
@@ -53,10 +54,10 @@ def save_matches(matches):
         print(f"Error saving matches: {e}")
 
 # =========================
-# Gemini AI Setup
+# Groq AI Setup
 # =========================
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-model = genai.GenerativeModel('gemini-flash-lite-latest')
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+MODEL_NAME = "llama-3.3-70b-versatile"
 
 # =========================
 # Google OAuth Blueprint
@@ -378,12 +379,39 @@ def chat():
         
         User: {user_message}
         """
-        response = model.generate_content(prompt)
-        return {"response": response.text}
+        completion = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=[
+                {"role": "system", "content": "You are a career coach assistant."},
+                {"role": "user", "content": prompt},
+            ],
+        )
+        return {"response": completion.choices[0].message.content}
     except Exception as e:
         error_msg = str(e)
-        print(f"Error calling Gemini: {error_msg}")
+        print(f"Error calling Groq: {error_msg}")
         return {"error": error_msg}, 500
+
+
+@app.route("/rejection-simulator", methods=["POST"])
+def rejection_simulator():
+    if not google.authorized and not linkedin.authorized:
+        return {"error": "Unauthorized"}, 401
+    
+    data = request.json
+    company = data.get("company", "").strip()
+    role = data.get("role", "").strip()
+    resume_text = data.get("resume", "").strip()
+
+    if not all([company, role, resume_text]):
+        return {"error": "Missing required fields: company, role, or resume"}, 400
+
+    try:
+        result = simulate_rejection(resume_text, company, role)
+        return {"status": "success", "data": result}
+    except Exception as e:
+        print(f"Error in rejection simulator route: {e}")
+        return {"error": str(e)}, 500
 
 
 # =========================

@@ -1,11 +1,11 @@
-import google.generativeai as genai
+from groq import Groq
 import os
 import json
 from dotenv import load_dotenv
 
 load_dotenv()
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-model = genai.GenerativeModel('gemini-flash-lite-latest')
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+MODEL_NAME = "llama-3.3-70b-versatile"
 
 
 def analyze_company_style(resume_text, target_company_type=None):
@@ -83,10 +83,20 @@ def analyze_company_style(resume_text, target_company_type=None):
     """
     
     try:
-        response = model.generate_content(prompt)
-        text_response = response.text.replace('```json', '').replace('```', '').strip()
-        result = json.loads(text_response)
-        return result
+        completion = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=[
+                {"role": "system", "content": "You are a resume style expert that outputs JSON."},
+                {"role": "user", "content": prompt},
+            ],
+            response_format={"type": "json_object"},
+        )
+        response_text = completion.choices[0].message.content
+        from models.utils import extract_json
+        result = extract_json(response_text)
+        if result:
+            return result
+        raise ValueError("Failed to extract valid JSON from AI response")
     except Exception as e:
         print(f"Error in style analysis: {e}")
         return {
