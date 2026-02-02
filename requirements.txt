@@ -6,3 +6,5 @@ google-generativeai
 gunicorn
 PyPDF2
 python-docx
+groq
+blinker
