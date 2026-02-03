@@ -7,6 +7,11 @@ from flask_dance.contrib.google import make_google_blueprint, google
 from flask_dance.contrib.linkedin import make_linkedin_blueprint, linkedin
 from oauthlib.oauth2 import TokenExpiredError
 from dotenv import load_dotenv
+import sys
+
+# Add parent directory to path to import models
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
 from models.resume_ranker import rank_resumes
 from models.ats_checker import check_ats_friendliness
 from models.job_expander import expand_job_requirements
@@ -27,7 +32,9 @@ if os.getenv("FLASK_ENV") == "development" or os.getenv("FLASK_DEBUG") == "1":
 # =========================
 # Flask App Setup
 # =========================
-app = Flask(__name__)
+app = Flask(__name__, 
+            template_folder=os.path.join(os.path.dirname(__file__), '..', 'templates'),
+            static_folder=os.path.join(os.path.dirname(__file__), '..', 'static'))
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-key")
 
 # =========================
@@ -39,11 +46,11 @@ def get_matches_file():
         tmp_path = "/tmp/matches_data.json"
         # If tmp eye doesn't exist, check if we have a bundled version to seed from
         if not os.path.exists(tmp_path):
-            bundled_path = os.path.join(os.path.dirname(__file__), 'matches_data.json')
+            bundled_path = os.path.join(os.path.dirname(__file__), '..', 'matches_data.json')
             return bundled_path if os.path.exists(bundled_path) else tmp_path
         return tmp_path
     else:
-        return os.path.join(os.path.dirname(__file__), 'matches_data.json')
+        return os.path.join(os.path.dirname(__file__), '..', 'matches_data.json')
 
 def load_matches():
     """Load all matches from persistent storage"""
@@ -129,12 +136,16 @@ else:
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    if not google.authorized and not linkedin.authorized:
+    # Fix: Check if blueprints exist before checking authorization
+    is_google_authorized = google_bp is not None and google.authorized
+    is_linkedin_authorized = linkedin_bp is not None and linkedin.authorized
+    
+    if not is_google_authorized and not is_linkedin_authorized:
         return redirect(url_for("login"))
 
     user = {}
     
-    if google_bp and google.authorized:
+    if is_google_authorized:
         try:
             resp = google.get("/oauth2/v2/userinfo")
         except TokenExpiredError:
@@ -145,7 +156,7 @@ def index():
 
         user = resp.json()
     
-    elif linkedin_bp and linkedin.authorized:
+    elif is_linkedin_authorized:
         try:
             resp = linkedin.get("me")
         except TokenExpiredError:
@@ -374,6 +385,8 @@ def signup():
 
 @app.route("/google-login")
 def google_login():
+    if google_bp is None:
+        return "Google OAuth is not configured", 503
     if not google.authorized:
         return redirect(url_for("google.login"))
     return redirect(url_for("index"))
@@ -381,6 +394,8 @@ def google_login():
 
 @app.route("/google-callback")
 def google_callback():
+    if google_bp is None:
+        return "Google OAuth is not configured", 503
     if not google.authorized:
         return redirect(url_for("login"))
 
@@ -400,6 +415,8 @@ def google_callback():
 
 @app.route("/linkedin-callback")
 def linkedin_callback():
+    if linkedin_bp is None:
+        return "LinkedIn OAuth is not configured", 503
     if not linkedin.authorized:
         return redirect(url_for("login"))
     
@@ -415,7 +432,11 @@ def logout():
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    if not google.authorized and not linkedin.authorized:
+    # Fix: Check if blueprints exist before checking authorization
+    is_google_authorized = google_bp is not None and google.authorized
+    is_linkedin_authorized = linkedin_bp is not None and linkedin.authorized
+    
+    if not is_google_authorized and not is_linkedin_authorized:
         return {"error": "Unauthorized"}, 401
     
     user_message = request.json.get("message")
@@ -451,7 +472,11 @@ def chat():
 
 @app.route("/rejection-simulator", methods=["POST"])
 def rejection_simulator():
-    if not google.authorized and not linkedin.authorized:
+    # Fix: Check if blueprints exist before checking authorization
+    is_google_authorized = google_bp is not None and google.authorized
+    is_linkedin_authorized = linkedin_bp is not None and linkedin.authorized
+    
+    if not is_google_authorized and not is_linkedin_authorized:
         return {"error": "Unauthorized"}, 401
     
     data = request.json
@@ -471,7 +496,7 @@ def rejection_simulator():
 
 
 # =========================
-# Run App
+# Vercel Handler
 # =========================
-if __name__ == "__main__":
-    app.run(debug=True)
+# This is the entry point for Vercel
+handler = app
