@@ -7,6 +7,7 @@ from flask_dance.contrib.google import make_google_blueprint, google
 from flask_dance.contrib.linkedin import make_linkedin_blueprint, linkedin
 from oauthlib.oauth2 import TokenExpiredError
 from dotenv import load_dotenv
+import traceback
 
 from models.resume_ranker import rank_resumes
 from models.ats_checker import check_ats_friendliness
@@ -127,6 +128,10 @@ else:
 # =========================
 # Routes
 # =========================
+
+@app.errorhandler(500)
+def handle_500(e):
+    return f"<h1>Internal Server Error</h1><pre>{traceback.format_exc()}</pre>", 500
 
 @app.route("/health")
 def health():
