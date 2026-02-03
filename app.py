@@ -129,12 +129,16 @@ else:
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    if not google.authorized and not linkedin.authorized:
+    # Fix: Check if blueprints exist before checking authorization
+    is_google_authorized = google_bp is not None and google.authorized
+    is_linkedin_authorized = linkedin_bp is not None and linkedin.authorized
+    
+    if not is_google_authorized and not is_linkedin_authorized:
         return redirect(url_for("login"))
 
     user = {}
     
-    if google_bp and google.authorized:
+    if is_google_authorized:
         try:
             resp = google.get("/oauth2/v2/userinfo")
         except TokenExpiredError:
@@ -145,7 +149,7 @@ def index():
 
         user = resp.json()
     
-    elif linkedin_bp and linkedin.authorized:
+    elif is_linkedin_authorized:
         try:
             resp = linkedin.get("me")
         except TokenExpiredError:
@@ -374,6 +378,8 @@ def signup():
 
 @app.route("/google-login")
 def google_login():
+    if google_bp is None:
+        return "Google OAuth is not configured", 503
     if not google.authorized:
         return redirect(url_for("google.login"))
     return redirect(url_for("index"))
@@ -381,6 +387,8 @@ def google_login():
 
 @app.route("/google-callback")
 def google_callback():
+    if google_bp is None:
+        return "Google OAuth is not configured", 503
     if not google.authorized:
         return redirect(url_for("login"))
 
@@ -400,6 +408,8 @@ def google_callback():
 
 @app.route("/linkedin-callback")
 def linkedin_callback():
+    if linkedin_bp is None:
+        return "LinkedIn OAuth is not configured", 503
     if not linkedin.authorized:
         return redirect(url_for("login"))
     
@@ -415,7 +425,11 @@ def logout():
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    if not google.authorized and not linkedin.authorized:
+    # Fix: Check if blueprints exist before checking authorization
+    is_google_authorized = google_bp is not None and google.authorized
+    is_linkedin_authorized = linkedin_bp is not None and linkedin.authorized
+    
+    if not is_google_authorized and not is_linkedin_authorized:
         return {"error": "Unauthorized"}, 401
     
     user_message = request.json.get("message")
@@ -451,7 +465,11 @@ def chat():
 
 @app.route("/rejection-simulator", methods=["POST"])
 def rejection_simulator():
-    if not google.authorized and not linkedin.authorized:
+    # Fix: Check if blueprints exist before checking authorization
+    is_google_authorized = google_bp is not None and google.authorized
+    is_linkedin_authorized = linkedin_bp is not None and linkedin.authorized
+    
+    if not is_google_authorized and not is_linkedin_authorized:
         return {"error": "Unauthorized"}, 401
     
     data = request.json
