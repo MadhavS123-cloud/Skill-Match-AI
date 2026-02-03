@@ -11,4 +11,3 @@ groq
 blinker
 cryptography
 httpx
-scikit-learn
