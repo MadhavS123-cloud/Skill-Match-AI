@@ -1,1 +1,10 @@
 flask
+flask-dance
+python-dotenv
+oauthlib
+PyPDF2
+python-docx
+groq
+blinker
+cryptography
+httpx

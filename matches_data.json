@@ -2,6 +2,56 @@
   {
     "role": "Product Engineer at Saas startups",
     "candidate": "Candidate 1",
+    "score": 70,
+    "timestamp": "2026-02-03T10:53:15.816620",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 70,
+      "similarity_score": 86.3,
+      "ats_score": 70,
+      "ats_summary": "The candidate has a strong foundation in frontend development and AI integration, but lacks experience in software development and industry-specific technologies.",
+      "missing_skills": [
+        "Java",
+        "JavaScript",
+        "Cloud-based technologies (AWS or Azure)",
+        "Agile development methodologies (Scrum or Kanban)"
+      ],
+      "roadmap": [
+        "Gain experience in software development through internships or personal projects",
+        "Develop skills in cloud-based technologies and Agile development methodologies",
+        "Participate in teamwork and collaboration to improve communication and problem-solving skills"
+      ],
+      "risk_analysis": {
+        "level": "moderate",
+        "findings": [
+          "Lack of direct experience in software development",
+          "Insufficient information on collaboration and teamwork",
+          "Limited exposure to industry-specific technologies"
+        ]
+      },
+      "content": "Bhavya Deora Software Engineering Student | Product-Oriented System Thinker\nPROFILE\nThoughtful software engineering student focused on designing systems that respect human cognition, learning\ncontinuity, and interaction clarity. Interested in product engineering, AI-assisted systems, and building tools that\nmake reasoning and recall persistent rather than fragmented.\nPROJECTS\nAlgoDhara \u2014 Interactive Algorithm Understanding Platform (Personal Project)\n- Designed a reasoning-first platform that helps users understand algorithms through structured hints instead of direct\nsolutions.\n- Built a flow-based interface where ideas emerge as connected nodes, allowing selective depth exploration.\n- Emphasized partial understanding, enabling users to stop once clarity is achieved rather than forcing completion.\n- Applied strict system constraints to govern AI behavior, ensuring stability and meaningful reasoning paths.\n- Focused on calm, non-intrusive interaction design to support exploration over instruction.\nStudy-Loop Platform (Working Title) \u2014 Persistent AI-Powered Learning System (Team Project, OJT)\n- Developing a web-based application to address learning fragmentation by preserving the complete study loop: Plan \u2192 Learn\n\u2192 Doubt \u2192 Test \u2192 Revise.\n- Designed mechanisms to retain user intent, structured learning paths, and progress across sessions.\n- Enabled context-aware interaction with PDFs and lecture/meeting recordings through text and voice interfaces.\n- Implemented exam-style quizzes and flashcards derived from the same learning context to improve recall.\n- Focused on time efficiency, continuity, and realistic assessment rather than one-time content consumption.\nTECHNICAL SKILLS\nFrontend: React.js, Next.js, TypeScript, Component-driven UI architecture\nBackend & Data: SQL, MongoDB, Vector Databases, Firebase, Server-side application design\nAI Integration: LLM APIs, context management, Speech-to-Text, Text-to-Speech\nProgramming Languages: TypeScript, Python\nConcepts: System design, learning workflows, constraint-based AI systems, product thinking\nEDUCATION\nPolaris School of Technology\nBachelor\u2019s Program (First Year)",
+      "style_fit": {
+        "best_fit_culture": "Research",
+        "fit_score": 0.82,
+        "style_summary": "The resume showcases a strong focus on system thinking, product-oriented design, and AI-assisted systems, indicating a strong fit for research-oriented environments.",
+        "top_style_improvements": [
+          "Highlight specific research papers or academic projects to demonstrate expertise in the field",
+          "Emphasize collaboration and teamwork experiences to demonstrate ability to work with others in a research setting",
+          "Consider adding a section on relevant research skills, such as data analysis or statistical modeling",
+          "Use more technical vocabulary and jargon specific to the research field to demonstrate expertise"
+        ]
+      },
+      "suggested_template": {
+        "name": "High-Velocity Builder",
+        "description": "Highlights rapid shipping, breadth of skills, and zero-to-one ownership.",
+        "style": "Fast-paced, versatile",
+        "structure": "Name -> Contact -> Key Accomplishments -> Technical Stack -> Rapid Growth Experience"
+      }
+    }
+  },
+  {
+    "role": "Product Engineer at Saas startups",
+    "candidate": "Candidate 1",
     "score": 42,
     "date": "Just now",
     "timestamp": "2026-02-03T10:30:55.719034",

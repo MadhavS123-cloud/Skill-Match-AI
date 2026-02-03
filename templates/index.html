@@ -485,9 +485,14 @@
                         </div>
                         {% endif %}
 
-                        <a href="#" onclick="showDetailedAnalysis({{ loop.index0 }}); return false;"
-                            style="display: block; margin-top: 1rem; font-size: 0.8125rem; font-weight: 600; color: var(--primary); text-decoration: none;">View
-                            Detail ↗</a>
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-top: 1.5rem;">
+                            <a href="#" onclick="showDetailedAnalysis({{ loop.index0 }}); return false;"
+                                style="font-size: 0.8125rem; font-weight: 600; color: var(--primary); text-decoration: none;">View
+                                Detail ↗</a>
+                            <a href="/modify-resume?content={{ r.content | urlencode }}&jd={{ (job_description + '\n' + (job_title or '')) | urlencode }}"
+                                class="btn-secondary" style="font-size: 0.75rem; padding: 0.5rem 0.75rem;">Improve with
+                                AI ✨</a>
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
@@ -1040,6 +1045,13 @@
                 <div class="full-width-section recommendation-box">
                     <div class="rec-icon">📜 Recommendation</div>
                     <p>${res.recommendation}</p>
+                </div>
+
+                <div style="grid-column: 1 / -1; margin-top: 2rem; text-align: center;">
+                    <a href="/modify-resume?content=${encodeURIComponent(res.content)}&jd=${encodeURIComponent(resultsData[index] ? resultsData[index].role_focus : '')}" 
+                       class="btn-primary" style="padding: 1.25rem 3rem; font-size: 1.1rem; box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);">
+                        Optimize this Resume with AI Templates ✨
+                    </a>
                 </div>
             `;
 

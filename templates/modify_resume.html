@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Resume - Skill Match AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .modifier-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 20px;
+            height: calc(100vh - 80px);
+        }
+
+        .editor-section,
+        .analysis-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        textarea {
+            flex-grow: 1;
+            background: transparent;
+            color: white;
+            border: none;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: none;
+        }
+
+        .template-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            background: #6366f1;
+            color: white;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        .score-card {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid #6366f1;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .score-val {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #6366f1;
+        }
+
+        .progression-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progression-fill {
+            height: 100%;
+            background: #6366f1;
+            transition: width 0.3s ease;
+        }
+
+        .live-status {
+            font-size: 0.8rem;
+            color: #10b981;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dot {
+            height: 8px;
+            width: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body class="dark-mode">
+    <nav class="glass-nav">
+        <div class="nav-content">
+            <h1 class="logo">Skill Match <span>AI</span></h1>
+            <a href="/" class="btn-secondary">Back to Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="modifier-container">
+        <!-- Live Editor -->
+        <div class="editor-section">
+            <div class="section-header">
+                <h2>Resume Editor</h2>
+                <div class="live-status"><span class="dot"></span> Live Syncing</div>
+            </div>
+            <textarea id="resume-editor"
+                placeholder="Start typing or paste your resume here...">{{ content }}</textarea>
+        </div>
+
+        <!-- Live Analysis -->
+        <div class="analysis-section">
+            <div class="score-card">
+                <h3>Current ATS Score</h3>
+                <div class="score-val" id="score-display">--%</div>
+                <div class="progression-bar">
+                    <div class="progression-fill" id="score-bar" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="suggestions">
+                <h3>AI Recommendations</h3>
+                <ul id="tips-list">
+                    <li>Analyze your resume to see suggestions.</li>
+                </ul>
+            </div>
+
+            <div class="template-box" style="margin-top: 20px;">
+                <h3>Company Template Guide</h3>
+                <div id="active-template">
+                    <span class="template-badge">Google Style</span>
+                    <p>Focus on data-backed impact. Use numbers for every bullet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const editor = document.getElementById('resume-editor');
+        const scoreDisplay = document.getElementById('score-display');
+        const scoreBar = document.getElementById('score-bar');
+        const tipsList = document.getElementById('tips-list');
+        const jd = "{{ jd }}";
+
+        let timeout = null;
+
+        editor.addEventListener('input', () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(updateAnalysis, 1000);
+        });
+
+        async function updateAnalysis() {
+            const content = editor.value;
+            if (content.length < 50) return;
+
+            try {
+                const response = await fetch('/modify-resume', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content, jd })
+                });
+                const data = await response.json();
+
+                // Update UI
+                scoreDisplay.innerText = `${data.score}%`;
+                scoreBar.style.width = `${data.score}%`;
+
+                tipsList.innerHTML = '';
+                (data.tips || []).forEach(tip => {
+                    const li = document.createElement('li');
+                    li.innerText = tip;
+                    tipsList.appendChild(li);
+                });
+            } catch (err) {
+                console.error("Live analysis failed", err);
+            }
+        }
+
+        // Initial analysis
+        updateAnalysis();
+    </script>
+</body>
+
+</html>
