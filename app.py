@@ -7,6 +7,7 @@ from flask_dance.contrib.google import make_google_blueprint, google
 from flask_dance.contrib.linkedin import make_linkedin_blueprint, linkedin
 from oauthlib.oauth2 import TokenExpiredError
 from dotenv import load_dotenv
+
 from models.resume_ranker import rank_resumes
 from models.ats_checker import check_ats_friendliness
 from models.job_expander import expand_job_requirements
@@ -126,6 +127,10 @@ else:
 # =========================
 # Routes
 # =========================
+
+@app.route("/health")
+def health():
+    return {"status": "ok", "message": "Vercel deployment is active"}, 200
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -488,8 +493,5 @@ def rejection_simulator():
         return {"error": str(e)}, 500
 
 
-# =========================
-# Run App
-# =========================
 if __name__ == "__main__":
     app.run(debug=True)
