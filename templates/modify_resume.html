@@ -4,190 +4,417 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modify Resume - Skill Match AI</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Optimize Resume - Skill Match AI</title>
+    <!-- Use the same premium stylesheet as the dashboard -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
-        .modifier-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            padding: 20px;
-            height: calc(100vh - 80px);
+        :root {
+            --editor-bg: #ffffff;
+            --editor-text: #0f172a;
         }
 
-        .editor-section,
-        .analysis-section {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 20px;
+        .dark-theme :root {
+            --editor-bg: #1e293b;
+            --editor-text: #f1f5f9;
+        }
+
+        body {
+            background: var(--bg-main);
+            color: var(--text-main);
+            overflow: hidden;
+            /* Prevent body scroll, use panel scroll */
+        }
+
+        .editor-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            height: calc(100vh - 70px);
+            gap: 0;
+            background: var(--border);
+        }
+
+        .editor-pane {
+            background: var(--bg-card);
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            overflow: hidden;
+            position: relative;
+            border-right: 1px solid var(--border);
         }
 
-        textarea {
-            flex-grow: 1;
-            background: transparent;
-            color: white;
+        .analysis-pane {
+            background: var(--bg-main);
+            padding: 2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .pane-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+        }
+
+        .pane-header h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--success);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        #resume-editor {
+            flex: 1;
+            width: 100%;
+            padding: 2rem;
             border: none;
             outline: none;
+            background: var(--input-bg);
+            color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            line-height: 1.6;
+            font-size: 1.1rem;
+            line-height: 1.7;
             resize: none;
         }
 
-        .template-badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            background: #6366f1;
-            color: white;
-            font-size: 0.8rem;
-            margin-bottom: 15px;
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
         }
 
-        .score-card {
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid #6366f1;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+        .score-large {
             text-align: center;
+            padding: 1rem 0;
         }
 
-        .score-val {
-            font-size: 3rem;
+        .score-large .val {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            display: block;
+        }
+
+        .score-large .label {
+            font-size: 0.75rem;
             font-weight: 700;
-            color: #6366f1;
-        }
-
-        .progression-bar {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-
-        .progression-fill {
-            height: 100%;
-            background: #6366f1;
-            transition: width 0.3s ease;
-        }
-
-        .live-status {
-            font-size: 0.8rem;
-            color: #10b981;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .progress-container {
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .suggestion-item {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .suggestion-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
         }
 
-        .dot {
-            height: 8px;
-            width: 8px;
-            background: #10b981;
-            border-radius: 50%;
-            display: inline-block;
+        .template-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .tpl-card {
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--bg-card);
+        }
+
+        .tpl-card:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .tpl-card.active {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .tpl-card h4 {
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .tpl-card p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Dark Mode Support for Editor Pane */
+        .dark-theme .editor-pane {
+            background: #0f172a;
+        }
+
+        .dark-theme #resume-editor {
+            background: #0f172a;
         }
     </style>
 </head>
 
-<body class="dark-mode">
-    <nav class="glass-nav">
-        <div class="nav-content">
-            <h1 class="logo">Skill Match <span>AI</span></h1>
-            <a href="/" class="btn-secondary">Back to Dashboard</a>
-        </div>
-    </nav>
-
-    <div class="modifier-container">
-        <!-- Live Editor -->
-        <div class="editor-section">
-            <div class="section-header">
-                <h2>Resume Editor</h2>
-                <div class="live-status"><span class="dot"></span> Live Syncing</div>
+<body class="dark-theme"> <!-- Default to dark for premium feel -->
+    <header class="header">
+        <div class="header-content">
+            <div class="nav-left">
+                <a href="/" class="logo">
+                    <div class="logo-icon">✨</div>
+                    <h1>Resume Optimizer</h1>
+                </a>
             </div>
-            <textarea id="resume-editor"
-                placeholder="Start typing or paste your resume here...">{{ content }}</textarea>
+            <div class="nav-right">
+                <a href="/" class="btn-secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    Exit Editor
+                </a>
+                <button class="btn-primary" onclick="exportEditedResume()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Export Final
+                </button>
+            </div>
         </div>
+    </header>
 
-        <!-- Live Analysis -->
-        <div class="analysis-section">
-            <div class="score-card">
-                <h3>Current ATS Score</h3>
-                <div class="score-val" id="score-display">--%</div>
-                <div class="progression-bar">
-                    <div class="progression-fill" id="score-bar" style="width: 0%"></div>
+    <main class="editor-layout">
+        <!-- Main Editor Pane -->
+        <section class="editor-pane">
+            <div class="pane-header">
+                <h2>🖋️ Interactive Workspace</h2>
+                <div class="live-indicator">
+                    <span class="pulse"></span>
+                    AI Syncing Active
+                </div>
+            </div>
+            <textarea id="resume-editor" spellcheck="false">{{ content }}</textarea>
+        </section>
+
+        <!-- Dynamic Analysis Pane -->
+        <aside class="analysis-pane">
+            <!-- Score Card -->
+            <div class="stat-card score-large">
+                <div class="val" id="score-val">--</div>
+                <div class="label">ATS Match Score</div>
+                <div class="progress-container">
+                    <div class="progress-fill" id="score-bar"></div>
+                </div>
+                <p id="match-status" style="font-size: 0.8125rem; font-weight: 600;"></p>
+            </div>
+
+            <!-- Templates Section -->
+            <div class="stat-card">
+                <h3 style="font-size: 0.9375rem; margin-bottom: 1rem;">Target AI Templates</h3>
+                <div class="template-selector">
+                    <div class="tpl-card active" onclick="selectTemplate('Google')">
+                        <h4>Google Style</h4>
+                        <p>Metric-heavy, impactful, concise.</p>
+                    </div>
+                    <div class="tpl-card" onclick="selectTemplate('Amazon')">
+                        <h4>Amazon Style</h4>
+                        <p>Leadership Principles & ownership focus.</p>
+                    </div>
+                    <div class="tpl-card" onclick="selectTemplate('Startup')">
+                        <h4>Y-Combinator Style</h4>
+                        <p>Brutal honesty, traction-focused, technical.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="suggestions">
-                <h3>AI Recommendations</h3>
-                <ul id="tips-list">
-                    <li>Analyze your resume to see suggestions.</li>
-                </ul>
-            </div>
-
-            <div class="template-box" style="margin-top: 20px;">
-                <h3>Company Template Guide</h3>
-                <div id="active-template">
-                    <span class="template-badge">Google Style</span>
-                    <p>Focus on data-backed impact. Use numbers for every bullet.</p>
+            <!-- AI Insights -->
+            <div class="stat-card">
+                <h3 style="font-size: 0.9375rem; margin-bottom: 1rem;">Live AI Suggestions</h3>
+                <div id="suggestions-list">
+                    <div style="color: var(--text-muted); font-size: 0.875rem;">Start editing to see live
+                        improvements...</div>
                 </div>
             </div>
-        </div>
-    </div>
+        </aside>
+    </main>
 
     <script>
         const editor = document.getElementById('resume-editor');
-        const scoreDisplay = document.getElementById('score-display');
+        const scoreVal = document.getElementById('score-val');
         const scoreBar = document.getElementById('score-bar');
-        const tipsList = document.getElementById('tips-list');
-        const jd = "{{ jd }}";
+        const statusText = document.getElementById('match-status');
+        const suggestionsList = document.getElementById('suggestions-list');
+        const jdContext = "{{ jd }}";
+        let currentTemplate = 'Google'; // Default
 
-        let timeout = null;
+        let debounceTimer;
 
         editor.addEventListener('input', () => {
-            clearTimeout(timeout);
-            timeout = setTimeout(updateAnalysis, 1000);
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(performLiveAnalysis, 800);
         });
 
-        async function updateAnalysis() {
-            const content = editor.value;
-            if (content.length < 50) return;
+        async function performLiveAnalysis() {
+            const content = editor.value.trim();
+            if (content.length < 30) return;
 
             try {
                 const response = await fetch('/modify-resume', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ content, jd })
+                    body: JSON.stringify({ content, jd: jdContext, template: currentTemplate })
                 });
+
                 const data = await response.json();
-
-                // Update UI
-                scoreDisplay.innerText = `${data.score}%`;
-                scoreBar.style.width = `${data.score}%`;
-
-                tipsList.innerHTML = '';
-                (data.tips || []).forEach(tip => {
-                    const li = document.createElement('li');
-                    li.innerText = tip;
-                    tipsList.appendChild(li);
-                });
+                updateUI(data);
             } catch (err) {
-                console.error("Live analysis failed", err);
+                console.error("Sync failed:", err);
             }
         }
 
-        // Initial analysis
-        updateAnalysis();
+        function updateUI(data) {
+            // Update Score
+            const score = data.score || 0;
+            scoreVal.innerText = score + '%';
+            scoreBar.style.width = score + '%';
+
+            // Color feedback
+            if (score >= 80) {
+                scoreBar.style.background = 'var(--success)';
+                statusText.innerText = 'Excellent Alignment';
+                statusText.style.color = 'var(--success)';
+            } else if (score >= 50) {
+                scoreBar.style.background = 'var(--warning)';
+                statusText.innerText = 'Moderate Alignment';
+                statusText.style.color = 'var(--warning)';
+            } else {
+                scoreBar.style.background = 'var(--danger)';
+                statusText.innerText = 'Weak Alignment';
+                statusText.style.color = 'var(--danger)';
+            }
+
+            // Update Suggestions
+            suggestionsList.innerHTML = '';
+            const tips = data.tips || data.roadmap || [];
+
+            if (tips.length === 0) {
+                suggestionsList.innerHTML = '<div style="color: var(--text-muted); font-size: 0.875rem;">Resume looks solid! Keep refining.</div>';
+            }
+
+            tips.slice(0, 5).forEach(tip => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item fade-in';
+                div.innerHTML = `
+                    <div class="suggestion-icon">✨</div>
+                    <div>${tip}</div>
+                `;
+                suggestionsList.appendChild(div);
+            });
+
+            // GSAP Animation for new items
+            gsap.from('.fade-in', { opacity: 0, y: 10, duration: 0.4, stagger: 0.1 });
+        }
+
+        function selectTemplate(name) {
+            currentTemplate = name;
+            document.querySelectorAll('.tpl-card').forEach(c => c.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            // Re-trigger analysis immediately with the new template
+            performLiveAnalysis();
+        }
+
+        function exportEditedResume() {
+            const blob = new Blob([editor.value], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Optimized_Resume.txt';
+            a.click();
+        }
+
+        // Initial Analysis
+        performLiveAnalysis();
     </script>
 </body>
 

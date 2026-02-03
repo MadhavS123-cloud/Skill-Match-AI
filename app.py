@@ -92,7 +92,7 @@ if google_client_id and google_client_secret:
         client_id=google_client_id,
         client_secret=google_client_secret,
         scope=["openid", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"],
-        redirect_url="/google-callback",
+        redirect_url="/",
     )
     app.register_blueprint(google_bp, url_prefix="/login")
 
@@ -115,88 +115,140 @@ if linkedin_client_id and linkedin_client_secret:
 def health():
     return {"status": "ok", "message": "Vercel deployment is active"}, 200
 
+@app.route("/bypass-login")
+def bypass_login():
+    session["guest_user"] = True
+    return redirect(url_for("index"))
+
 @app.route("/", methods=["GET", "POST"])
 def index():
+    is_guest = session.get("guest_user", False)
     is_google_authorized = google_bp is not None and google.authorized
     is_linkedin_authorized = linkedin_bp is not None and linkedin.authorized
     
-    if not is_google_authorized and not is_linkedin_authorized:
+    if not is_google_authorized and not is_linkedin_authorized and not is_guest:
         return redirect(url_for("login"))
 
-    user = {}
+    user = {"name": "Guest Candidate", "email": "guest@example.com"}
     if is_google_authorized:
         try:
             resp = google.get("/oauth2/v2/userinfo")
-            if resp.ok: user = resp.json()
-        except: pass
+            if resp.ok: 
+                user_data = resp.json()
+                user["name"] = user_data.get("name", "Guest")
+                user["email"] = user_data.get("email", "")
+        except Exception as e:
+            print(f"Google OAuth info failed: {e}")
     elif is_linkedin_authorized:
         try:
             resp = linkedin.get("me")
             if resp.ok:
                 data = resp.json()
-                user = {"name": f"{data.get('localizedFirstName', '')} {data.get('localizedLastName', '')}".strip()}
-        except: pass
+                user["name"] = f"{data.get('localizedFirstName', '')} {data.get('localizedLastName', '')}".strip() or "Guest"
+        except Exception as e:
+            print(f"LinkedIn OAuth info failed: {e}")
 
     all_matches = load_matches()
     recent_matches = all_matches[:10]
     
     results = None
+    error_message = None
     if request.method == "POST":
+        print(f"DEBUG: POST request received. Guest Mode: {is_guest}")
         job_title = request.form.get("job_title", "").strip()
-        job_description = request.form["job_description"]
-        full_job_context = f"{job_title}\n{job_description}" if job_title else job_description
+        job_description = request.form.get("job_description", "").strip()
         
-        raw_resumes = [r.strip() for r in request.form["resumes"].split("\n\n") if r.strip()]
-        uploaded_files = request.files.getlist("resume_files")
-        for f in uploaded_files:
-            if f.filename:
-                text = extract_text_from_file(f, f.filename)
-                if text: raw_resumes.append(text)
-
-        if raw_resumes:
-            expanded_description, was_expanded = expand_job_requirements(full_job_context)
-            process_description = expanded_description
-            ranked_results = rank_resumes(raw_resumes, process_description)
+        if not job_description:
+            error_message = "Job description is required."
+        else:
+            full_job_context = f"{job_title}\n{job_description}" if job_title else job_description
             
-            results = []
-            for rank, (index, score_vec) in enumerate(ranked_results):
-                score = round(float(score_vec[0]) * 100, 1)
-                ats_results = check_ats_friendliness(raw_resumes[index], process_description)
-                style_analysis = analyze_company_style(raw_resumes[index])
-                
-                analysis_result = {
-                    "resume_no": index + 1,
-                    "score": ats_results.get("score", 0),
-                    "similarity_score": score,
-                    "ats_score": ats_results.get("score", 0),
-                    "ats_summary": ats_results.get("summary", ""),
-                    "missing_skills": ats_results.get("missing_skills", []),
-                    "roadmap": ats_results.get("roadmap", []),
-                    "risk_analysis": ats_results.get("risk_analysis", {"level": "Low", "findings": []}),
-                    "content": raw_resumes[index],
-                    "style_fit": style_analysis
-                }
-                
-                # Suggest Template
-                suggested_tpl = suggest_template(style_analysis)
-                analysis_result["suggested_template"] = suggested_tpl
-                
-                results.append(analysis_result)
-                
-                # Save to history
-                new_match_entry = {
-                    "role": job_title or "Unnamed Role",
-                    "candidate": f"Candidate {index + 1}",
-                    "score": analysis_result['ats_score'],
-                    "timestamp": datetime.now().isoformat(),
-                    "full_analysis": analysis_result
-                }
-                all_matches.insert(0, new_match_entry)
+            raw_resumes = [r.strip() for r in request.form.get("resumes", "").split("\n\n") if r.strip()]
+            uploaded_files = request.files.getlist("resume_files")
+            for f in uploaded_files:
+                if f.filename:
+                    text = extract_text_from_file(f, f.filename)
+                    if text: raw_resumes.append(text)
             
-            save_matches(all_matches)
-            return render_template("index.html", user=user, results=results, recent_matches=recent_matches, stats={"total": len(all_matches), "avg": "0%", "roles": 0, "week": 0})
+            print(f"DEBUG: Found {len(raw_resumes)} resumes to process.")
+            
+            if not raw_resumes:
+                error_message = "Please paste a resume or upload a file."
+            
+            if raw_resumes:
+                expanded_description, was_expanded = expand_job_requirements(full_job_context)
+                process_description = expanded_description
+                ranked_results = rank_resumes(raw_resumes, process_description)
+                
+                results = []
+                for rank, (index, score_vec) in enumerate(ranked_results):
+                    score = round(float(score_vec[0]) * 100, 1)
+                    ats_results = check_ats_friendliness(raw_resumes[index], process_description)
+                    style_analysis = analyze_company_style(raw_resumes[index])
+                    
+                    analysis_result = {
+                        "resume_no": index + 1,
+                        "score": ats_results.get("score", 0),
+                        "similarity_score": score,
+                        "ats_score": ats_results.get("score", 0),
+                        "ats_summary": ats_results.get("summary", ""),
+                        "role_focus": ats_results.get("role_focus", "Professional"),
+                        "missing_skills": ats_results.get("missing_skills", []),
+                        "detailed_skills": ats_results.get("detailed_skills", []),
+                        "experience_match": ats_results.get("experience_match", []),
+                        "strengths": ats_results.get("strengths", []),
+                        "areas_to_develop": ats_results.get("areas_to_develop", []),
+                        "recommendation": ats_results.get("recommendation", ""),
+                        "roadmap": ats_results.get("roadmap", []),
+                        "risk_analysis": ats_results.get("risk_analysis", {"level": "Low", "findings": []}),
+                        "feedback_loop": ats_results.get("feedback_loop", {}),
+                        "content": raw_resumes[index],
+                        "style_fit": style_analysis
+                    }
+                    
+                    # Suggest Template
+                    suggested_tpl = suggest_template(style_analysis)
+                    analysis_result["suggested_template"] = suggested_tpl
+                    
+                    results.append(analysis_result)
+                    
+                    # Save to history
+                    new_match_entry = {
+                        "role": job_title or "Unnamed Role",
+                        "candidate": f"Candidate {index + 1}",
+                        "score": analysis_result['ats_score'],
+                        "timestamp": datetime.now().isoformat(),
+                        "full_analysis": analysis_result
+                    }
+                    all_matches.insert(0, new_match_entry)
+                
+                save_matches(all_matches)
+                
+                # Simple stats calculation
+                total_score = sum(m['score'] for m in all_matches if 'score' in m)
+                avg_score = f"{round(total_score / len(all_matches), 1)}%" if all_matches else "0%"
+                unique_roles = len(set(m['role'] for m in all_matches if 'role' in m))
+                
+                return render_template("index.html", 
+                                     user=user, 
+                                     results=results, 
+                                     recent_matches=recent_matches, 
+                                     stats={"total": len(all_matches), "avg": avg_score, "roles": unique_roles, "week": len(all_matches)},
+                                     job_title=job_title,
+                                     job_description=job_description,
+                                     expanded_jd=was_expanded,
+                                     error_message=error_message)
 
-    return render_template("index.html", user=user, recent_matches=recent_matches, stats={"total": len(all_matches), "avg": "0%", "roles": 0, "week": 0})
+    # Initial stats for Get request
+    total_score = sum(m['score'] for m in all_matches if 'score' in m)
+    avg_score = f"{round(total_score / len(all_matches), 1)}%" if all_matches else "0%"
+    unique_roles = len(set(m['role'] for m in all_matches if 'role' in m))
+    
+    return render_template("index.html", 
+                           user=user, 
+                           recent_matches=recent_matches, 
+                           stats={"total": len(all_matches), "avg": avg_score, "roles": unique_roles, "week": len(all_matches)},
+                           error_message=error_message)
 
 @app.route("/modify-resume", methods=["GET", "POST"])
 def modify_resume():
@@ -207,9 +259,10 @@ def modify_resume():
     if request.method == "POST":
         resume_content = request.json.get("content")
         job_desc = request.json.get("jd")
+        template = request.json.get("template")
         
-        # Re-analyze live
-        ats_results = check_ats_friendliness(resume_content, job_desc)
+        # Re-analyze live with template context
+        ats_results = check_ats_friendliness(resume_content, job_desc, template=template)
         return jsonify(ats_results)
 
     templates = get_company_templates()
