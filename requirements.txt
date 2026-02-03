@@ -1,14 +1,1 @@
 flask
-flask-dance
-python-dotenv
-oauthlib
-google-generativeai
-gunicorn
-PyPDF2
-pypdf
-python-docx
-groq
-blinker
-cryptography
-httpx
-scikit-learn

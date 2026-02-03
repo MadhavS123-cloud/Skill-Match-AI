@@ -1,5 +1,224 @@
 [
   {
+    "role": "Product Engineer at Saas startups",
+    "candidate": "Candidate 1",
+    "score": 42,
+    "date": "Just now",
+    "timestamp": "2026-02-03T10:30:55.719034",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 42,
+      "similarity_score": 80.3,
+      "ats_score": 42,
+      "ats_summary": "The candidate has a strong foundation in software engineering, but requires additional experience and skills to fit the role of a Product Engineer at a SaaS startup.",
+      "ats_tips": [
+        "Highlight relevant projects and experiences",
+        "Emphasize transferable skills",
+        "Develop a strong understanding of the company's products and services"
+      ],
+      "missing_skills": [
+        "Java",
+        "Python",
+        "JavaScript",
+        "C++",
+        "AWS",
+        "Azure",
+        "Google Cloud",
+        "Docker",
+        "Kubernetes",
+        "API Design Principles",
+        "RESTful APIs",
+        "API Security",
+        "JUnit",
+        "PyUnit",
+        "Jest"
+      ],
+      "roadmap": [
+        "Gain experience in SaaS product development",
+        "Develop skills in cloud-based technologies",
+        "Learn DevOps and deployment methodologies"
+      ],
+      "role_focus": "Product Engineer",
+      "risk_analysis": {
+        "level": "Medium",
+        "findings": [
+          "Lack of direct experience in SaaS product development",
+          "Limited exposure to cloud-based technologies",
+          "Insufficient knowledge of DevOps and deployment"
+        ],
+        "skepticism_reason": "The candidate's skills and experience do not fully align with the requirements of the Product Engineer role, which may raise concerns about their ability to perform the job duties."
+      },
+      "is_top_tier": false,
+      "strengths": [
+        "Gain experience in SaaS product development",
+        "Develop skills in cloud-based technologies",
+        "Learn DevOps and deployment methodologies"
+      ],
+      "areas_to_develop": [
+        "Highlight relevant projects and experiences",
+        "Emphasize transferable skills"
+      ],
+      "detailed_skills": [
+        {
+          "name": "Frontend Development",
+          "score": 80,
+          "level": "Intermediate"
+        },
+        {
+          "name": "Backend Development",
+          "score": 60,
+          "level": "Beginner"
+        },
+        {
+          "name": "Database Management",
+          "score": 40,
+          "level": "Beginner"
+        },
+        {
+          "name": "Cloud-based Technologies",
+          "score": 20,
+          "level": "Beginner"
+        },
+        {
+          "name": "Agile Development Methodologies",
+          "score": 20,
+          "level": "Beginner"
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Experience Alignment",
+          "candidate": "Found",
+          "required": "High",
+          "pct": 90
+        },
+        {
+          "label": "Role Fit",
+          "candidate": "Relevant",
+          "required": "Optimal",
+          "pct": 80.3
+        }
+      ],
+      "recommendation": "The candidate has a strong foundation in software engineering and product development, but requires additional experience and skills to fit the role of a Product Engineer at a SaaS startup. With further training and development, the candidate has the potential to excel in this position.",
+      "content": "Bhavya Deora Software Engineering Student | Product-Oriented System Thinker\nPROFILE\nThoughtful software engineering student focused on designing systems that respect human cognition, learning\ncontinui...",
+      "feedback_loop": {
+        "current_percentile": 30,
+        "gap_to_top_10": 70,
+        "sections_to_improve": [
+          {
+            "section": "Technical Skills",
+            "current_issue": "Lack of relevant technical skills",
+            "improvement": "Develop skills in cloud-based technologies and DevOps",
+            "impact": "High"
+          },
+          {
+            "section": "Experience",
+            "current_issue": "Limited experience in SaaS product development",
+            "improvement": "Gain experience in SaaS product development",
+            "impact": "Medium"
+          }
+        ],
+        "quick_wins": [
+          "Develop a personal project using cloud-based technologies",
+          "Participate in online communities related to SaaS product development"
+        ],
+        "major_upgrades": [
+          "Pursue a degree in computer science or a related field",
+          "Gain experience in a related field, such as software development or DevOps"
+        ]
+      },
+      "improvement_priority": [
+        "Develop skills in cloud-based technologies",
+        "Gain experience in SaaS product development",
+        "Learn DevOps and deployment methodologies"
+      ],
+      "company_style_fit": {
+        "best_fit": "Microsoft",
+        "fit_score": 80,
+        "summary": "Your resume content fits Microsoft, but writing style matches Microsoft culture more due to its structured approach and product-oriented system thinking.",
+        "culture_breakdown": {
+          "microsoft_fit": 80,
+          "startup_fit": 60,
+          "research_fit": 40
+        },
+        "style_details": {
+          "bullet_length": {
+            "assessment": "Moderate",
+            "recommendation": "To improve clarity, consider breaking up longer bullet points into shorter, more concise ones, focusing on one key achievement or skill per point."
+          },
+          "quantification_style": {
+            "score": 40,
+            "examples_found": [],
+            "recommendation": "To strengthen the resume, incorporate specific metrics and statistics that demonstrate the impact of projects, such as 'Improved user engagement by 25% through interactive algorithm understanding platform' or 'Increased learning retention by 30% with AI-powered learning system'."
+          },
+          "ownership_language": {
+            "score": 60,
+            "strong_phrases": [
+              "Designed",
+              "Built",
+              "Developing"
+            ],
+            "weak_phrases": [
+              "Participated",
+              "Helped"
+            ],
+            "recommendation": "Enhance ownership language by using more direct action verbs like 'I designed', 'I led', and 'I developed' to assert clear responsibility and leadership in projects."
+          },
+          "engineering_maturity": {
+            "level": "Mid",
+            "signals_found": [
+              "System design",
+              "Constraint-based AI systems",
+              "Product thinking"
+            ],
+            "recommendation": "To signal senior-level thinking, focus on describing architectural decisions, scalability, and trade-offs made in projects, such as 'Architected a scalable frontend using React.js and Next.js to support a 50% increase in user base'."
+          }
+        },
+        "top_improvements": [
+          "Incorporate specific metrics and statistics to demonstrate project impact.",
+          "Use more direct action verbs to assert clear ownership and leadership.",
+          "Break up longer bullet points into concise, one-achievement-per-point descriptions."
+        ]
+      },
+      "evolution": {
+        "delta": 42,
+        "old_score": 0,
+        "new_score": 42,
+        "signals": [
+          {
+            "type": "skill_filled",
+            "message": "Successfully added key skills: Analysis failed",
+            "impact": "High"
+          },
+          {
+            "type": "ats_improved",
+            "message": "ATS optimization improved by 42%",
+            "impact": "Low"
+          }
+        ],
+        "takeaway": "Your resume is evolving! Score increased by +42 points due to better skill alignment."
+      }
+    },
+    "evolution": {
+      "delta": 42,
+      "old_score": 0,
+      "new_score": 42,
+      "signals": [
+        {
+          "type": "skill_filled",
+          "message": "Successfully added key skills: Analysis failed",
+          "impact": "High"
+        },
+        {
+          "type": "ats_improved",
+          "message": "ATS optimization improved by 42%",
+          "impact": "Low"
+        }
+      ],
+      "takeaway": "Your resume is evolving! Score increased by +42 points due to better skill alignment."
+    }
+  },
+  {
     "role": "software engineer at google",
     "candidate": "Candidate 1",
     "score": 42,
