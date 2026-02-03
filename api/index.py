@@ -134,6 +134,10 @@ else:
 # Routes
 # =========================
 
+@app.route("/health")
+def health():
+    return {"status": "ok", "message": "Vercel deployment is active"}, 200
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     # Fix: Check if blueprints exist before checking authorization
