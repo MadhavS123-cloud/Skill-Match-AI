@@ -9,6 +9,20 @@
     <!-- GSAP for Professional Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .status-badge[data-score] {
+            background: var(--bg-hover);
+        }
+    </style>
 </head>
 
 <body>
@@ -82,11 +96,11 @@
                 </button>
                 <div class="user-profile">
                     <div class="avatar">
-                        {{ user.name[:2].upper() }}
+                        {{ (user.name | default('Guest'))[:2].upper() }}
                     </div>
                     <div class="user-text">
-                        <span class="user-display-name">{{ user.name }}</span>
-                        <span class="user-display-email">{{ user.email }}</span>
+                        <span class="user-display-name">{{ user.name | default('Guest') }}</span>
+                        <span class="user-display-email">{{ user.email | default('') }}</span>
                     </div>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -236,6 +250,13 @@
                 </div>
             </div>
 
+            {% if error_message %}
+            <div class="error-banner"
+                style="background: rgba(239, 68, 68, 0.1); color: #EF4444; padding: 1rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid rgba(239, 68, 68, 0.2); font-weight: 600; text-align: center;">
+                ⚠️ {{ error_message }}
+            </div>
+            {% endif %}
+
             <form method="POST" class="form-grid" enctype="multipart/form-data">
                 <!-- Job Description Card -->
                 <div class="form-section fade-in">
@@ -370,8 +391,7 @@
 
                         <div class="score-container">
                             <div class="score-bar">
-                                <div class="score-fill" data-score="{{ r.score }}"
-                                    style="width: 0%; background: {% if r.score >= 80 %}var(--success){% elif r.score >= 50 %}var(--warning){% else %}var(--danger){% endif %};">
+                                <div class="score-fill" data-score="{{ r.score }}">
                                 </div>
                             </div>
                         </div>
@@ -381,10 +401,12 @@
                             <span class="status-badge status-strong">Excellent Match</span>
                             {% elif r.score >= 50 %}
                             <span class="status-badge"
-                                style="background: var(--warning-light); color: var(--warning);">Good Match</span>
+                                style="background: var(--warning-light); color: var(--warning);">Good
+                                Match</span>
                             {% else %}
                             <span class="status-badge"
-                                style="background: var(--danger-light); color: var(--danger);">Needs Review</span>
+                                style="background: var(--danger-light); color: var(--danger);">Needs
+                                Review</span>
                             {% endif %}
                         </div>
 
@@ -456,7 +478,7 @@
                                         style="font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; background: {% if r.company_style_fit.best_fit == 'Microsoft' %}#0078D4{% elif r.company_style_fit.best_fit == 'Startup' %}#10B981{% else %}#8B5CF6{% endif %}; color: white; border-radius: 20px;">{{
                                         r.company_style_fit.best_fit }}</span>
                                 </div>
-                                <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted);">{{
+                                <span class="status-badge" data-score="{{ r.company_style_fit.fit_score }}">{{
                                     r.company_style_fit.fit_score }}%</span>
                             </div>
                             {% if r.company_style_fit.summary %}
@@ -485,9 +507,14 @@
                         </div>
                         {% endif %}
 
-                        <a href="#" onclick="showDetailedAnalysis({{ loop.index0 }}); return false;"
-                            style="display: block; margin-top: 1rem; font-size: 0.8125rem; font-weight: 600; color: var(--primary); text-decoration: none;">View
-                            Detail ↗</a>
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-top: 1.5rem;">
+                            <a href="#" onclick="showDetailedAnalysis({{ loop.index0 }}); return false;"
+                                style="font-size: 0.8125rem; font-weight: 600; color: var(--primary); text-decoration: none;">View
+                                Detail ↗</a>
+                            <a href="/modify-resume?content={{ r.content | urlencode }}&jd={{ (job_description + '\n' + (job_title or '')) | urlencode }}"
+                                class="btn-secondary" style="font-size: 0.75rem; padding: 0.5rem 0.75rem;">Improve with
+                                AI ✨</a>
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
@@ -1041,6 +1068,13 @@
                     <div class="rec-icon">📜 Recommendation</div>
                     <p>${res.recommendation}</p>
                 </div>
+
+                <div style="grid-column: 1 / -1; margin-top: 2rem; text-align: center;">
+                    <a href="/modify-resume?content=${encodeURIComponent(res.content)}&jd=${encodeURIComponent(resultsData[index] ? resultsData[index].role_focus : '')}" 
+                       class="btn-primary" style="padding: 1.25rem 3rem; font-size: 1.1rem; box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);">
+                        Optimize this Resume with AI Templates ✨
+                    </a>
+                </div>
             `;
 
             switchView('analysis');
@@ -1150,7 +1184,27 @@
 
             setTimeout(() => {
                 document.querySelectorAll('.score-fill').forEach(fill => {
-                    gsap.to(fill, { width: fill.dataset.score + '%', duration: 1.5, ease: "power2.out" });
+                    const score = parseInt(fill.dataset.score);
+                    let color = 'var(--danger)';
+                    if (score >= 80) color = 'var(--success)';
+                    else if (score >= 50) color = 'var(--warning)';
+
+                    fill.style.background = color;
+                    gsap.to(fill, { width: score + '%', duration: 1.5, ease: "power2.out" });
+                });
+
+                document.querySelectorAll('.status-badge[data-score]').forEach(badge => {
+                    const score = parseInt(badge.dataset.score);
+                    if (score >= 80) {
+                        badge.style.background = 'var(--success-light)';
+                        badge.style.color = 'var(--success)';
+                    } else if (score >= 50) {
+                        badge.style.background = 'var(--warning-light)';
+                        badge.style.color = 'var(--warning)';
+                    } else {
+                        badge.style.background = 'var(--danger-light)';
+                        badge.style.color = 'var(--danger)';
+                    }
                 });
             }, 500);
 

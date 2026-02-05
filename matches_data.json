@@ -2,6 +2,596 @@
   {
     "role": "Product Engineer at Saas startups",
     "candidate": "Candidate 1",
+    "score": 70,
+    "timestamp": "2026-02-03T17:25:11.702014",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 70,
+      "similarity_score": 84.3,
+      "ats_score": 70,
+      "ats_summary": "The candidate has a strong foundation in frontend development and AI integration, but lacks experience in software development and necessary technical skills for the role of Product Engineer",
+      "role_focus": "Product Engineer",
+      "missing_skills": [
+        "Cloud Platforms",
+        "Database Management",
+        "API Design",
+        "Agile Methodologies",
+        "Testing and Validation"
+      ],
+      "detailed_skills": [
+        {
+          "name": "React.js",
+          "level": "Beginner",
+          "score": 60
+        },
+        {
+          "name": "TypeScript",
+          "level": "Intermediate",
+          "score": 80
+        },
+        {
+          "name": "SQL",
+          "level": "Beginner",
+          "score": 40
+        },
+        {
+          "name": "MongoDB",
+          "level": "Beginner",
+          "score": 40
+        },
+        {
+          "name": "System Design",
+          "level": "Beginner",
+          "score": 50
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Software Development",
+          "candidate": "1 year",
+          "required": "5+ years",
+          "pct": 20
+        },
+        {
+          "label": "Product Engineering",
+          "candidate": "None",
+          "required": "5+ years",
+          "pct": 0
+        }
+      ],
+      "strengths": [
+        "Product-Oriented System Thinking",
+        "AI-Assisted Systems",
+        "Frontend Development"
+      ],
+      "areas_to_develop": [
+        "Backend Development",
+        "Database Management",
+        "Cloud Platforms"
+      ],
+      "recommendation": "Gain more experience in software development, focus on developing backend and database management skills, and learn about cloud platforms and agile methodologies",
+      "roadmap": [
+        "Complete education and gain a degree in Computer Science or related field",
+        "Participate in internships or entry-level positions to gain experience in software development",
+        "Develop necessary technical skills, including backend development, database management, and cloud platforms"
+      ],
+      "risk_analysis": {
+        "level": "High",
+        "findings": [
+          "Lack of experience in software development",
+          "Missing necessary technical skills"
+        ]
+      },
+      "feedback_loop": {
+        "current_percentile": 30,
+        "gap_to_top_10": 40,
+        "sections_to_improve": [
+          "Technical Skills",
+          "Experience"
+        ]
+      },
+      "content": "Bhavya Deora Software Engineering Student | Product-Oriented System Thinker\nPROFILE\nThoughtful software engineering student focused on designing systems that respect human cognition, learning\ncontinuity, and interaction clarity. Interested in product engineering, AI-assisted systems, and building tools that\nmake reasoning and recall persistent rather than fragmented.\nPROJECTS\nAlgoDhara \u2014 Interactive Algorithm Understanding Platform (Personal Project)\n- Designed a reasoning-first platform that helps users understand algorithms through structured hints instead of direct\nsolutions.\n- Built a flow-based interface where ideas emerge as connected nodes, allowing selective depth exploration.\n- Emphasized partial understanding, enabling users to stop once clarity is achieved rather than forcing completion.\n- Applied strict system constraints to govern AI behavior, ensuring stability and meaningful reasoning paths.\n- Focused on calm, non-intrusive interaction design to support exploration over instruction.\nStudy-Loop Platform (Working Title) \u2014 Persistent AI-Powered Learning System (Team Project, OJT)\n- Developing a web-based application to address learning fragmentation by preserving the complete study loop: Plan \u2192 Learn\n\u2192 Doubt \u2192 Test \u2192 Revise.\n- Designed mechanisms to retain user intent, structured learning paths, and progress across sessions.\n- Enabled context-aware interaction with PDFs and lecture/meeting recordings through text and voice interfaces.\n- Implemented exam-style quizzes and flashcards derived from the same learning context to improve recall.\n- Focused on time efficiency, continuity, and realistic assessment rather than one-time content consumption.\nTECHNICAL SKILLS\nFrontend: React.js, Next.js, TypeScript, Component-driven UI architecture\nBackend & Data: SQL, MongoDB, Vector Databases, Firebase, Server-side application design\nAI Integration: LLM APIs, context management, Speech-to-Text, Text-to-Speech\nProgramming Languages: TypeScript, Python\nConcepts: System design, learning workflows, constraint-based AI systems, product thinking\nEDUCATION\nPolaris School of Technology\nBachelor\u2019s Program (First Year)",
+      "style_fit": {
+        "best_fit_culture": "Big Tech",
+        "fit_score": 0.85,
+        "style_summary": "The resume showcases a strong product-oriented approach, highlighting system design and AI-assisted systems experience. It demonstrates a clear passion for creating meaningful and interactive user experiences, with a focus on human-centered design principles.",
+        "top_style_improvements": [
+          "Quantify project impact with specific metrics or statistics",
+          "Emphasize transferable skills and experiences relevant to the target industry",
+          "Include relevant certifications, hackathons, or open-source contributions to demonstrate expertise"
+        ]
+      },
+      "suggested_template": {
+        "name": "Data-Driven Engineer",
+        "description": "Focuses on scale, metrics, and quantitative achievements.",
+        "style": "Structured, result-oriented",
+        "structure": "Name -> Contact -> Summary -> Experience (Scale focused) -> Projects -> Education"
+      }
+    }
+  },
+  {
+    "role": "Product Engineer at Saas startups",
+    "candidate": "Candidate 1",
+    "score": 87,
+    "timestamp": "2026-02-03T16:59:28.552665",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 87,
+      "similarity_score": 57.6,
+      "ats_score": 87,
+      "ats_summary": "The candidate has strong programming skills in Java and Python, but lacks experience with cloud-based technologies and agile development methodologies.",
+      "role_focus": "Software Engineer",
+      "missing_skills": [
+        "Cloud-based technologies",
+        "Agile development methodologies",
+        "Version control systems",
+        "Cloud security"
+      ],
+      "detailed_skills": [
+        {
+          "name": "Java",
+          "level": "Intermediate",
+          "score": 80
+        },
+        {
+          "name": "Python",
+          "level": "Intermediate",
+          "score": 85
+        },
+        {
+          "name": "C++",
+          "level": "Basic",
+          "score": 60
+        },
+        {
+          "name": "Data Structures",
+          "level": "Intermediate",
+          "score": 80
+        },
+        {
+          "name": "Algorithms",
+          "level": "Intermediate",
+          "score": 85
+        },
+        {
+          "name": "REST APIs",
+          "level": "Basic",
+          "score": 40
+        },
+        {
+          "name": "Distributed Systems",
+          "level": "Basic",
+          "score": 40
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Software Development Experience",
+          "candidate": "2+ years",
+          "required": "3+ years",
+          "pct": 67
+        }
+      ],
+      "strengths": [
+        "Strong programming skills in Java and Python",
+        "Experience with data structures and algorithms",
+        "Project experience with AI Resume-Job Matcher and Scalable Backend System"
+      ],
+      "areas_to_develop": [
+        "Cloud-based technologies",
+        "Agile development methodologies",
+        "Cloud security"
+      ],
+      "recommendation": "Add relevant sections to the resume to showcase experience with cloud-based technologies, agile development methodologies, and cloud security.",
+      "roadmap": [
+        "Gain experience with cloud-based technologies",
+        "Learn agile development methodologies",
+        "Improve skills in cloud security"
+      ],
+      "risk_analysis": {
+        "level": "Moderate",
+        "findings": [
+          "Lack of experience with cloud-based technologies",
+          "Limited experience with agile development methodologies"
+        ]
+      },
+      "feedback_loop": {
+        "current_percentile": 70,
+        "gap_to_top_10": 30,
+        "sections_to_improve": [
+          "Cloud-based technologies",
+          "Agile development methodologies",
+          "Cloud security"
+        ]
+      },
+      "content": "IMPROVED RESUME \u2013 SOFTWARE ENGINEER (GOOGLE TARGETED)\nCore Skills\nJava, Python, C++\nData Structures, Algorithms, OS, Networks\nREST APIs, Distributed Systems\nLinux, Git, SQL\nProjects\nAI Resume\u2013Job Matcher\nBuilt ranking pipeline using TF-IDF + cosine similarity.\nOptimized performance and evaluated ranking accuracy.\nScalable Backend System\nDesigned APIs handling 10K+ users.\nReduced latency and improved reliability.\nEducation\nB.Tech in Computer Science",
+      "style_fit": {
+        "best_fit_culture": "Big Tech",
+        "fit_score": 0.85,
+        "style_summary": "The resume is well-structured, concise, and highlights relevant technical skills and projects. It demonstrates a strong foundation in software engineering principles and experience with scalable systems.",
+        "top_style_improvements": [
+          "Include specific metrics or data to quantify the impact of project accomplishments",
+          "Add relevant certifications, awards, or publications to enhance credibility",
+          "Consider adding a brief summary or objective statement to provide context for the resume"
+        ]
+      },
+      "suggested_template": {
+        "name": "Data-Driven Engineer",
+        "description": "Focuses on scale, metrics, and quantitative achievements.",
+        "style": "Structured, result-oriented",
+        "structure": "Name -> Contact -> Summary -> Experience (Scale focused) -> Projects -> Education"
+      }
+    }
+  },
+  {
+    "role": "Product Engineer at Saas startups",
+    "candidate": "Candidate 1",
+    "score": 85,
+    "timestamp": "2026-02-03T16:29:45.794944",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 85,
+      "similarity_score": 58.1,
+      "ats_score": 85,
+      "ats_summary": "This candidate has strong programming skills and experience with data structures and algorithms, but lacks experience in cloud-based technologies, SaaS-specific technologies, and DevOps tools.",
+      "role_focus": "Software Engineer",
+      "missing_skills": [
+        "Cloud-based technologies",
+        "SaaS-specific technologies",
+        "DevOps tools",
+        "Agile development methodologies"
+      ],
+      "detailed_skills": [
+        {
+          "name": "Java",
+          "level": "Advanced",
+          "score": 90
+        },
+        {
+          "name": "Python",
+          "level": "Intermediate",
+          "score": 70
+        },
+        {
+          "name": "Data Structures",
+          "level": "Advanced",
+          "score": 95
+        },
+        {
+          "name": "Algorithms",
+          "level": "Advanced",
+          "score": 92
+        },
+        {
+          "name": "Cloud-based technologies",
+          "level": "Basic",
+          "score": 20
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Product Development Experience",
+          "candidate": "3+ years (inferred from projects)",
+          "required": "3+ years",
+          "pct": 80
+        },
+        {
+          "label": "Communication and Collaboration",
+          "candidate": "Inferred from project descriptions",
+          "required": "Excellent communication and interpersonal skills",
+          "pct": 60
+        }
+      ],
+      "strengths": [
+        "Strong programming skills",
+        "Experience with data structures and algorithms",
+        "Ability to design and optimize systems"
+      ],
+      "areas_to_develop": [
+        "Cloud-based technologies",
+        "SaaS-specific technologies",
+        "DevOps tools"
+      ],
+      "recommendation": "With additional experience and skills in cloud-based technologies, SaaS-specific technologies, and DevOps tools, this candidate could be a strong fit for a Product Engineer role at a SaaS startup.",
+      "roadmap": [
+        "Take online courses or attend workshops to learn cloud-based technologies",
+        "Gain experience with SaaS-specific technologies through personal projects or internships",
+        "Develop skills in DevOps tools and agile development methodologies"
+      ],
+      "risk_analysis": {
+        "level": "Moderate",
+        "findings": [
+          "Limited experience with cloud-based technologies",
+          "No direct experience with SaaS-specific technologies"
+        ]
+      },
+      "feedback_loop": {
+        "current_percentile": 60,
+        "gap_to_top_10": 25,
+        "sections_to_improve": [
+          "Technical Skills",
+          "Experience"
+        ]
+      },
+      "content": "IMPROVED RESUME \u2013 SOFTWARE ENGINEER (GOOGLE TARGETED)\nCore Skills\nJava, Python, C++\nData Structures, Algorithms, OS, Networks\nREST APIs, Distributed Systems\nLinux, Git, SQL\nProjects\nAI Resume\u2013Job Matcher\nBuilt ranking pipeline using TF-IDF + cosine similarity.\nOptimized performance and evaluated ranking accuracy.\nScalable Backend System\nDesigned APIs handling 10K+ users.\nReduced latency and improved reliability.\nEducation\nB.Tech in Computer Science",
+      "style_fit": {
+        "best_fit_culture": "Big Tech",
+        "fit_score": 0.85,
+        "style_summary": "The resume showcases a strong foundation in software engineering principles, data structures, and algorithms, making it a good fit for Big Tech companies like Google. The inclusion of projects demonstrates hands-on experience and problem-solving skills.",
+        "top_style_improvements": [
+          "Quantify achievements with specific numbers and metrics where possible",
+          "Consider adding relevant certifications or online courses to enhance credibility",
+          "Emphasize soft skills, such as teamwork, communication, and leadership, to demonstrate well-roundedness"
+        ]
+      },
+      "suggested_template": {
+        "name": "Data-Driven Engineer",
+        "description": "Focuses on scale, metrics, and quantitative achievements.",
+        "style": "Structured, result-oriented",
+        "structure": "Name -> Contact -> Summary -> Experience (Scale focused) -> Projects -> Education"
+      }
+    }
+  },
+  {
+    "role": "Product Engineer at Saas startups",
+    "candidate": "Candidate 1",
+    "score": 72,
+    "timestamp": "2026-02-03T10:57:50.058813",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 72,
+      "similarity_score": 81.8,
+      "ats_score": 72,
+      "ats_summary": "The candidate demonstrates some relevant technical skills, but lacks professional experience and breadth in certain areas. With additional training and experience, they may become a strong candidate for a Product Engineer role.",
+      "missing_skills": [
+        "Cloud Experience",
+        "Agile Methodologies",
+        "DevOps",
+        "Security Knowledge",
+        "Machine Learning"
+      ],
+      "roadmap": [
+        "Gain professional experience through internships or entry-level positions",
+        "Develop skills in cloud computing and agile methodologies",
+        "Expand technical expertise to include machine learning and data analytics"
+      ],
+      "risk_analysis": {
+        "level": "Moderate",
+        "findings": [
+          "Lack of professional experience",
+          "Limited technical breadth",
+          "No direct experience with cloud-based technologies"
+        ]
+      },
+      "content": "Bhavya Deora Software Engineering Student | Product-Oriented System Thinker\nPROFILE\nThoughtful software engineering student focused on designing systems that respect human cognition, learning\ncontinuity, and interaction clarity. Interested in product engineering, AI-assisted systems, and building tools that\nmake reasoning and recall persistent rather than fragmented.\nPROJECTS\nAlgoDhara \u2014 Interactive Algorithm Understanding Platform (Personal Project)\n- Designed a reasoning-first platform that helps users understand algorithms through structured hints instead of direct\nsolutions.\n- Built a flow-based interface where ideas emerge as connected nodes, allowing selective depth exploration.\n- Emphasized partial understanding, enabling users to stop once clarity is achieved rather than forcing completion.\n- Applied strict system constraints to govern AI behavior, ensuring stability and meaningful reasoning paths.\n- Focused on calm, non-intrusive interaction design to support exploration over instruction.\nStudy-Loop Platform (Working Title) \u2014 Persistent AI-Powered Learning System (Team Project, OJT)\n- Developing a web-based application to address learning fragmentation by preserving the complete study loop: Plan \u2192 Learn\n\u2192 Doubt \u2192 Test \u2192 Revise.\n- Designed mechanisms to retain user intent, structured learning paths, and progress across sessions.\n- Enabled context-aware interaction with PDFs and lecture/meeting recordings through text and voice interfaces.\n- Implemented exam-style quizzes and flashcards derived from the same learning context to improve recall.\n- Focused on time efficiency, continuity, and realistic assessment rather than one-time content consumption.\nTECHNICAL SKILLS\nFrontend: React.js, Next.js, TypeScript, Component-driven UI architecture\nBackend & Data: SQL, MongoDB, Vector Databases, Firebase, Server-side application design\nAI Integration: LLM APIs, context management, Speech-to-Text, Text-to-Speech\nProgramming Languages: TypeScript, Python\nConcepts: System design, learning workflows, constraint-based AI systems, product thinking\nEDUCATION\nPolaris School of Technology\nBachelor\u2019s Program (First Year)",
+      "style_fit": {
+        "best_fit_culture": "Big Tech",
+        "fit_score": 0.8,
+        "style_summary": "The resume demonstrates a product-oriented approach with a focus on system design, AI integration, and user-centered thinking, which are highly valued in Big Tech.",
+        "top_style_improvements": [
+          "Quantify project achievements with metrics or statistics to demonstrate impact",
+          "Emphasize collaboration and teamwork experiences, particularly in large-scale projects",
+          "Consider adding relevant certifications, courses, or boot camps to enhance credibility",
+          "Use action verbs and concise bullet points to improve readability and scanability"
+        ]
+      },
+      "suggested_template": {
+        "name": "Data-Driven Engineer",
+        "description": "Focuses on scale, metrics, and quantitative achievements.",
+        "style": "Structured, result-oriented",
+        "structure": "Name -> Contact -> Summary -> Experience (Scale focused) -> Projects -> Education"
+      }
+    }
+  },
+  {
+    "role": "software engineer at google",
+    "candidate": "Candidate 1",
+    "score": 72,
+    "timestamp": "2026-02-03T10:56:24.865997",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 72,
+      "similarity_score": 74.7,
+      "ats_score": 72,
+      "ats_summary": "The resume demonstrates a strong focus on product-oriented system thinking and AI-assisted systems, but lacks direct experience in software engineering and cloud-based technologies.",
+      "missing_skills": [
+        "Cloud-based technologies",
+        "Containerization",
+        "Orchestration",
+        "Machine Learning",
+        "Natural Language Processing",
+        "Computer Vision"
+      ],
+      "roadmap": [
+        "Gain more experience in software development",
+        "Improve proficiency in programming languages",
+        "Learn cloud-based technologies and containerization"
+      ],
+      "risk_analysis": {
+        "level": "Moderate",
+        "findings": [
+          "Lack of experience in software development",
+          "Limited proficiency in programming languages",
+          "No experience with cloud-based technologies"
+        ]
+      },
+      "content": "Bhavya Deora Software Engineering Student | Product-Oriented System Thinker\nPROFILE\nThoughtful software engineering student focused on designing systems that respect human cognition, learning\ncontinuity, and interaction clarity. Interested in product engineering, AI-assisted systems, and building tools that\nmake reasoning and recall persistent rather than fragmented.\nPROJECTS\nAlgoDhara \u2014 Interactive Algorithm Understanding Platform (Personal Project)\n- Designed a reasoning-first platform that helps users understand algorithms through structured hints instead of direct\nsolutions.\n- Built a flow-based interface where ideas emerge as connected nodes, allowing selective depth exploration.\n- Emphasized partial understanding, enabling users to stop once clarity is achieved rather than forcing completion.\n- Applied strict system constraints to govern AI behavior, ensuring stability and meaningful reasoning paths.\n- Focused on calm, non-intrusive interaction design to support exploration over instruction.\nStudy-Loop Platform (Working Title) \u2014 Persistent AI-Powered Learning System (Team Project, OJT)\n- Developing a web-based application to address learning fragmentation by preserving the complete study loop: Plan \u2192 Learn\n\u2192 Doubt \u2192 Test \u2192 Revise.\n- Designed mechanisms to retain user intent, structured learning paths, and progress across sessions.\n- Enabled context-aware interaction with PDFs and lecture/meeting recordings through text and voice interfaces.\n- Implemented exam-style quizzes and flashcards derived from the same learning context to improve recall.\n- Focused on time efficiency, continuity, and realistic assessment rather than one-time content consumption.\nTECHNICAL SKILLS\nFrontend: React.js, Next.js, TypeScript, Component-driven UI architecture\nBackend & Data: SQL, MongoDB, Vector Databases, Firebase, Server-side application design\nAI Integration: LLM APIs, context management, Speech-to-Text, Text-to-Speech\nProgramming Languages: TypeScript, Python\nConcepts: System design, learning workflows, constraint-based AI systems, product thinking\nEDUCATION\nPolaris School of Technology\nBachelor\u2019s Program (First Year)",
+      "style_fit": {
+        "best_fit_culture": "Big Tech",
+        "fit_score": 0.85,
+        "style_summary": "The resume showcases a product-oriented mindset with a strong focus on system design, AI integration, and user experience. The projects demonstrate a thoughtful approach to problem-solving, emphasizing interaction clarity, and continuity of learning.",
+        "top_style_improvements": [
+          "Quantify project impact with metrics or statistics",
+          "Highlight transferable skills and accomplishments in team projects",
+          "Emphasize relevance of technical skills to specific industries or applications",
+          "Consider adding relevant coursework, academic achievements, or research experience"
+        ]
+      },
+      "suggested_template": {
+        "name": "Data-Driven Engineer",
+        "description": "Focuses on scale, metrics, and quantitative achievements.",
+        "style": "Structured, result-oriented",
+        "structure": "Name -> Contact -> Summary -> Experience (Scale focused) -> Projects -> Education"
+      }
+    }
+  },
+  {
+    "role": "software engineer at google",
+    "candidate": "Candidate 1",
+    "score": 72,
+    "timestamp": "2026-02-03T10:55:04.396056",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 72,
+      "similarity_score": 74.2,
+      "ats_score": 72,
+      "ats_summary": "The candidate demonstrates strong potential as a software engineer, with a solid foundation in system design, programming languages, and frontend development. However, there are gaps in experience with cloud computing, machine learning, and technical leadership.",
+      "missing_skills": [
+        "Cloud Computing",
+        "Machine Learning",
+        "Leadership",
+        "Java",
+        "C++",
+        "Go",
+        "JavaScript"
+      ],
+      "roadmap": [
+        "Develop a personal project using Google Cloud Platform or other cloud services",
+        "Participate in coding competitions or hackathons to demonstrate technical skills",
+        "Pursue coursework or online training in machine learning, leadership, and system design"
+      ],
+      "risk_analysis": {
+        "level": "Moderate",
+        "findings": [
+          "Lack of direct experience with Google-relevant technologies",
+          "Limited exposure to large-scale software systems",
+          "Unclear demonstration of technical leadership skills"
+        ]
+      },
+      "content": "Bhavya Deora Software Engineering Student | Product-Oriented System Thinker\nPROFILE\nThoughtful software engineering student focused on designing systems that respect human cognition, learning\ncontinuity, and interaction clarity. Interested in product engineering, AI-assisted systems, and building tools that\nmake reasoning and recall persistent rather than fragmented.\nPROJECTS\nAlgoDhara \u2014 Interactive Algorithm Understanding Platform (Personal Project)\n- Designed a reasoning-first platform that helps users understand algorithms through structured hints instead of direct\nsolutions.\n- Built a flow-based interface where ideas emerge as connected nodes, allowing selective depth exploration.\n- Emphasized partial understanding, enabling users to stop once clarity is achieved rather than forcing completion.\n- Applied strict system constraints to govern AI behavior, ensuring stability and meaningful reasoning paths.\n- Focused on calm, non-intrusive interaction design to support exploration over instruction.\nStudy-Loop Platform (Working Title) \u2014 Persistent AI-Powered Learning System (Team Project, OJT)\n- Developing a web-based application to address learning fragmentation by preserving the complete study loop: Plan \u2192 Learn\n\u2192 Doubt \u2192 Test \u2192 Revise.\n- Designed mechanisms to retain user intent, structured learning paths, and progress across sessions.\n- Enabled context-aware interaction with PDFs and lecture/meeting recordings through text and voice interfaces.\n- Implemented exam-style quizzes and flashcards derived from the same learning context to improve recall.\n- Focused on time efficiency, continuity, and realistic assessment rather than one-time content consumption.\nTECHNICAL SKILLS\nFrontend: React.js, Next.js, TypeScript, Component-driven UI architecture\nBackend & Data: SQL, MongoDB, Vector Databases, Firebase, Server-side application design\nAI Integration: LLM APIs, context management, Speech-to-Text, Text-to-Speech\nProgramming Languages: TypeScript, Python\nConcepts: System design, learning workflows, constraint-based AI systems, product thinking\nEDUCATION\nPolaris School of Technology\nBachelor\u2019s Program (First Year)",
+      "style_fit": {
+        "best_fit_culture": "Big Tech",
+        "fit_score": 0.85,
+        "style_summary": "The resume showcases a strong focus on product-oriented system thinking, AI-assisted systems, and thoughtful software engineering. The candidate highlights their ability to design systems respecting human cognition and interaction clarity.",
+        "top_style_improvements": [
+          "Quantify project accomplishments with metrics and statistics",
+          "Emphasize transferable skills and experiences relevant to the target industry",
+          "Consider adding relevant certifications, online courses, or personal projects to demonstrate continuous learning"
+        ]
+      },
+      "suggested_template": {
+        "name": "Data-Driven Engineer",
+        "description": "Focuses on scale, metrics, and quantitative achievements.",
+        "style": "Structured, result-oriented",
+        "structure": "Name -> Contact -> Summary -> Experience (Scale focused) -> Projects -> Education"
+      }
+    }
+  },
+  {
+    "role": "Product Engineer at Saas startups",
+    "candidate": "Candidate 1",
+    "score": 80,
+    "timestamp": "2026-02-03T10:54:43.768455",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 80,
+      "similarity_score": 80.6,
+      "ats_score": 80,
+      "ats_summary": "The resume showcases a strong foundation in programming languages, frontend development, and AI integration. However, it lacks direct experience with cloud platforms, DevOps practices, and security knowledge.",
+      "missing_skills": [
+        "Cloud Platforms",
+        "DevOps Experience",
+        "Security Knowledge",
+        "Data Analytics",
+        "Machine Learning"
+      ],
+      "roadmap": [
+        "Gain experience with cloud platforms (AWS, Google Cloud, Azure)",
+        "Develop skills in DevOps practices (CI/CD, continuous monitoring)",
+        "Explore security best practices and apply them to projects",
+        "Consider taking courses or attending workshops on data analytics and machine learning"
+      ],
+      "risk_analysis": {
+        "level": "Moderate",
+        "findings": [
+          "Lack of direct experience with cloud platforms",
+          "Limited exposure to DevOps practices",
+          "Insufficient information on security knowledge and practices"
+        ]
+      },
+      "content": "Bhavya Deora Software Engineering Student | Product-Oriented System Thinker\nPROFILE\nThoughtful software engineering student focused on designing systems that respect human cognition, learning\ncontinuity, and interaction clarity. Interested in product engineering, AI-assisted systems, and building tools that\nmake reasoning and recall persistent rather than fragmented.\nPROJECTS\nAlgoDhara \u2014 Interactive Algorithm Understanding Platform (Personal Project)\n- Designed a reasoning-first platform that helps users understand algorithms through structured hints instead of direct\nsolutions.\n- Built a flow-based interface where ideas emerge as connected nodes, allowing selective depth exploration.\n- Emphasized partial understanding, enabling users to stop once clarity is achieved rather than forcing completion.\n- Applied strict system constraints to govern AI behavior, ensuring stability and meaningful reasoning paths.\n- Focused on calm, non-intrusive interaction design to support exploration over instruction.\nStudy-Loop Platform (Working Title) \u2014 Persistent AI-Powered Learning System (Team Project, OJT)\n- Developing a web-based application to address learning fragmentation by preserving the complete study loop: Plan \u2192 Learn\n\u2192 Doubt \u2192 Test \u2192 Revise.\n- Designed mechanisms to retain user intent, structured learning paths, and progress across sessions.\n- Enabled context-aware interaction with PDFs and lecture/meeting recordings through text and voice interfaces.\n- Implemented exam-style quizzes and flashcards derived from the same learning context to improve recall.\n- Focused on time efficiency, continuity, and realistic assessment rather than one-time content consumption.\nTECHNICAL SKILLS\nFrontend: React.js, Next.js, TypeScript, Component-driven UI architecture\nBackend & Data: SQL, MongoDB, Vector Databases, Firebase, Server-side application design\nAI Integration: LLM APIs, context management, Speech-to-Text, Text-to-Speech\nProgramming Languages: TypeScript, Python\nConcepts: System design, learning workflows, constraint-based AI systems, product thinking\nEDUCATION\nPolaris School of Technology\nBachelor\u2019s Program (First Year)",
+      "style_fit": {
+        "best_fit_culture": "Startup",
+        "fit_score": 0.85,
+        "style_summary": "The resume showcases a product-oriented and system-thinking approach, with a strong focus on designing interactive and intuitive systems. The projects demonstrate a passion for AI-assisted systems, learning continuity, and user-centered design.",
+        "top_style_improvements": [
+          "Quantify achievements by including metrics or statistics in project descriptions",
+          "Emphasize transferable skills and experience relevant to the desired role or industry",
+          "Consider adding relevant coursework, academic projects, or research experience to demonstrate expertise",
+          "Use a more formal and concise tone in the profile and project descriptions"
+        ]
+      },
+      "suggested_template": {
+        "name": "High-Velocity Builder",
+        "description": "Highlights rapid shipping, breadth of skills, and zero-to-one ownership.",
+        "style": "Fast-paced, versatile",
+        "structure": "Name -> Contact -> Key Accomplishments -> Technical Stack -> Rapid Growth Experience"
+      }
+    }
+  },
+  {
+    "role": "Product Engineer at Saas startups",
+    "candidate": "Candidate 1",
+    "score": 70,
+    "timestamp": "2026-02-03T10:53:15.816620",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 70,
+      "similarity_score": 86.3,
+      "ats_score": 70,
+      "ats_summary": "The candidate has a strong foundation in frontend development and AI integration, but lacks experience in software development and industry-specific technologies.",
+      "missing_skills": [
+        "Java",
+        "JavaScript",
+        "Cloud-based technologies (AWS or Azure)",
+        "Agile development methodologies (Scrum or Kanban)"
+      ],
+      "roadmap": [
+        "Gain experience in software development through internships or personal projects",
+        "Develop skills in cloud-based technologies and Agile development methodologies",
+        "Participate in teamwork and collaboration to improve communication and problem-solving skills"
+      ],
+      "risk_analysis": {
+        "level": "moderate",
+        "findings": [
+          "Lack of direct experience in software development",
+          "Insufficient information on collaboration and teamwork",
+          "Limited exposure to industry-specific technologies"
+        ]
+      },
+      "content": "Bhavya Deora Software Engineering Student | Product-Oriented System Thinker\nPROFILE\nThoughtful software engineering student focused on designing systems that respect human cognition, learning\ncontinuity, and interaction clarity. Interested in product engineering, AI-assisted systems, and building tools that\nmake reasoning and recall persistent rather than fragmented.\nPROJECTS\nAlgoDhara \u2014 Interactive Algorithm Understanding Platform (Personal Project)\n- Designed a reasoning-first platform that helps users understand algorithms through structured hints instead of direct\nsolutions.\n- Built a flow-based interface where ideas emerge as connected nodes, allowing selective depth exploration.\n- Emphasized partial understanding, enabling users to stop once clarity is achieved rather than forcing completion.\n- Applied strict system constraints to govern AI behavior, ensuring stability and meaningful reasoning paths.\n- Focused on calm, non-intrusive interaction design to support exploration over instruction.\nStudy-Loop Platform (Working Title) \u2014 Persistent AI-Powered Learning System (Team Project, OJT)\n- Developing a web-based application to address learning fragmentation by preserving the complete study loop: Plan \u2192 Learn\n\u2192 Doubt \u2192 Test \u2192 Revise.\n- Designed mechanisms to retain user intent, structured learning paths, and progress across sessions.\n- Enabled context-aware interaction with PDFs and lecture/meeting recordings through text and voice interfaces.\n- Implemented exam-style quizzes and flashcards derived from the same learning context to improve recall.\n- Focused on time efficiency, continuity, and realistic assessment rather than one-time content consumption.\nTECHNICAL SKILLS\nFrontend: React.js, Next.js, TypeScript, Component-driven UI architecture\nBackend & Data: SQL, MongoDB, Vector Databases, Firebase, Server-side application design\nAI Integration: LLM APIs, context management, Speech-to-Text, Text-to-Speech\nProgramming Languages: TypeScript, Python\nConcepts: System design, learning workflows, constraint-based AI systems, product thinking\nEDUCATION\nPolaris School of Technology\nBachelor\u2019s Program (First Year)",
+      "style_fit": {
+        "best_fit_culture": "Research",
+        "fit_score": 0.82,
+        "style_summary": "The resume showcases a strong focus on system thinking, product-oriented design, and AI-assisted systems, indicating a strong fit for research-oriented environments.",
+        "top_style_improvements": [
+          "Highlight specific research papers or academic projects to demonstrate expertise in the field",
+          "Emphasize collaboration and teamwork experiences to demonstrate ability to work with others in a research setting",
+          "Consider adding a section on relevant research skills, such as data analysis or statistical modeling",
+          "Use more technical vocabulary and jargon specific to the research field to demonstrate expertise"
+        ]
+      },
+      "suggested_template": {
+        "name": "High-Velocity Builder",
+        "description": "Highlights rapid shipping, breadth of skills, and zero-to-one ownership.",
+        "style": "Fast-paced, versatile",
+        "structure": "Name -> Contact -> Key Accomplishments -> Technical Stack -> Rapid Growth Experience"
+      }
+    }
+  },
+  {
+    "role": "Product Engineer at Saas startups",
+    "candidate": "Candidate 1",
     "score": 42,
     "date": "Just now",
     "timestamp": "2026-02-03T10:30:55.719034",
