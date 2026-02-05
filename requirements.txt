@@ -8,3 +8,4 @@ groq
 blinker
 cryptography
 httpx
+gunicorn
