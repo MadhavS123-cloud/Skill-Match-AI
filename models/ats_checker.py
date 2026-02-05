@@ -29,7 +29,15 @@ def check_ats_friendliness(resume_text, job_description=None, template=None):
         template_instruction = "IMPORTANT: Use Google-style recruitment criteria. Prioritize metric-heavy achievements, data-driven results (e.g., 'increased X by Y%'), and clear impact summaries."
     elif template == 'Amazon':
         template_instruction = "IMPORTANT: Use Amazon-style recruitment criteria. Focus on Leadership Principles like 'Ownership', 'Deliver Results', and 'Bias for Action'. Ensure accomplishments follow the STAR (Situation, Task, Action, Result) method."
-    elif template == 'Startup':
+    elif template == 'Meta':
+        template_instruction = "IMPORTANT: Use Meta-style recruitment criteria. Focus on product impact, moving fast, and end-to-end ownership of features. Highlight how your work improved user experience or business metrics."
+    elif template == 'Microsoft':
+        template_instruction = "IMPORTANT: Use Microsoft-style recruitment criteria. Emphasize technical depth, collaboration across teams, and long-term codebase health. Focus on architectural decisions and problem-solving."
+    elif template == 'Apple':
+        template_instruction = "IMPORTANT: Use Apple-style recruitment criteria. Focus on incredible attention to detail, simplicity, and the intersection of technology and liberal arts. Highlight perfection in craft."
+    elif template == 'Netflix':
+        template_instruction = "IMPORTANT: Use Netflix-style recruitment criteria. Focus on high-performance 'stunning colleagues', context over control, and radical candor in technical decisions. Highlight individual contribution to large-scale systems."
+    elif template == 'Startups':
         template_instruction = "IMPORTANT: Use Startup/YC-style criteria. Focus on technical speed, traction, building things from scratch, and being a generalist who can wear multiple hats."
 
     prompt = f"""

@@ -292,18 +292,12 @@
             <div class="stat-card">
                 <h3 style="font-size: 0.9375rem; margin-bottom: 1rem;">Target AI Templates</h3>
                 <div class="template-selector">
-                    <div class="tpl-card active" onclick="selectTemplate('Google')">
-                        <h4>Google Style</h4>
-                        <p>Metric-heavy, impactful, concise.</p>
+                    {% for key, tpl in templates.items() %}
+                    <div class="tpl-card {% if loop.first %}active{% endif %}" onclick="selectTemplate('{{ key }}')">
+                        <h4>{{ key }} Style</h4>
+                        <p>{{ tpl.description }}</p>
                     </div>
-                    <div class="tpl-card" onclick="selectTemplate('Amazon')">
-                        <h4>Amazon Style</h4>
-                        <p>Leadership Principles & ownership focus.</p>
-                    </div>
-                    <div class="tpl-card" onclick="selectTemplate('Startup')">
-                        <h4>Y-Combinator Style</h4>
-                        <p>Brutal honesty, traction-focused, technical.</p>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
 

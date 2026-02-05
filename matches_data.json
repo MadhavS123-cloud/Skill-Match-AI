@@ -2,6 +2,116 @@
   {
     "role": "Product Engineer at Saas startups",
     "candidate": "Candidate 1",
+    "score": 70,
+    "timestamp": "2026-02-03T17:25:11.702014",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 70,
+      "similarity_score": 84.3,
+      "ats_score": 70,
+      "ats_summary": "The candidate has a strong foundation in frontend development and AI integration, but lacks experience in software development and necessary technical skills for the role of Product Engineer",
+      "role_focus": "Product Engineer",
+      "missing_skills": [
+        "Cloud Platforms",
+        "Database Management",
+        "API Design",
+        "Agile Methodologies",
+        "Testing and Validation"
+      ],
+      "detailed_skills": [
+        {
+          "name": "React.js",
+          "level": "Beginner",
+          "score": 60
+        },
+        {
+          "name": "TypeScript",
+          "level": "Intermediate",
+          "score": 80
+        },
+        {
+          "name": "SQL",
+          "level": "Beginner",
+          "score": 40
+        },
+        {
+          "name": "MongoDB",
+          "level": "Beginner",
+          "score": 40
+        },
+        {
+          "name": "System Design",
+          "level": "Beginner",
+          "score": 50
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Software Development",
+          "candidate": "1 year",
+          "required": "5+ years",
+          "pct": 20
+        },
+        {
+          "label": "Product Engineering",
+          "candidate": "None",
+          "required": "5+ years",
+          "pct": 0
+        }
+      ],
+      "strengths": [
+        "Product-Oriented System Thinking",
+        "AI-Assisted Systems",
+        "Frontend Development"
+      ],
+      "areas_to_develop": [
+        "Backend Development",
+        "Database Management",
+        "Cloud Platforms"
+      ],
+      "recommendation": "Gain more experience in software development, focus on developing backend and database management skills, and learn about cloud platforms and agile methodologies",
+      "roadmap": [
+        "Complete education and gain a degree in Computer Science or related field",
+        "Participate in internships or entry-level positions to gain experience in software development",
+        "Develop necessary technical skills, including backend development, database management, and cloud platforms"
+      ],
+      "risk_analysis": {
+        "level": "High",
+        "findings": [
+          "Lack of experience in software development",
+          "Missing necessary technical skills"
+        ]
+      },
+      "feedback_loop": {
+        "current_percentile": 30,
+        "gap_to_top_10": 40,
+        "sections_to_improve": [
+          "Technical Skills",
+          "Experience"
+        ]
+      },
+      "content": "Bhavya Deora Software Engineering Student | Product-Oriented System Thinker\nPROFILE\nThoughtful software engineering student focused on designing systems that respect human cognition, learning\ncontinuity, and interaction clarity. Interested in product engineering, AI-assisted systems, and building tools that\nmake reasoning and recall persistent rather than fragmented.\nPROJECTS\nAlgoDhara \u2014 Interactive Algorithm Understanding Platform (Personal Project)\n- Designed a reasoning-first platform that helps users understand algorithms through structured hints instead of direct\nsolutions.\n- Built a flow-based interface where ideas emerge as connected nodes, allowing selective depth exploration.\n- Emphasized partial understanding, enabling users to stop once clarity is achieved rather than forcing completion.\n- Applied strict system constraints to govern AI behavior, ensuring stability and meaningful reasoning paths.\n- Focused on calm, non-intrusive interaction design to support exploration over instruction.\nStudy-Loop Platform (Working Title) \u2014 Persistent AI-Powered Learning System (Team Project, OJT)\n- Developing a web-based application to address learning fragmentation by preserving the complete study loop: Plan \u2192 Learn\n\u2192 Doubt \u2192 Test \u2192 Revise.\n- Designed mechanisms to retain user intent, structured learning paths, and progress across sessions.\n- Enabled context-aware interaction with PDFs and lecture/meeting recordings through text and voice interfaces.\n- Implemented exam-style quizzes and flashcards derived from the same learning context to improve recall.\n- Focused on time efficiency, continuity, and realistic assessment rather than one-time content consumption.\nTECHNICAL SKILLS\nFrontend: React.js, Next.js, TypeScript, Component-driven UI architecture\nBackend & Data: SQL, MongoDB, Vector Databases, Firebase, Server-side application design\nAI Integration: LLM APIs, context management, Speech-to-Text, Text-to-Speech\nProgramming Languages: TypeScript, Python\nConcepts: System design, learning workflows, constraint-based AI systems, product thinking\nEDUCATION\nPolaris School of Technology\nBachelor\u2019s Program (First Year)",
+      "style_fit": {
+        "best_fit_culture": "Big Tech",
+        "fit_score": 0.85,
+        "style_summary": "The resume showcases a strong product-oriented approach, highlighting system design and AI-assisted systems experience. It demonstrates a clear passion for creating meaningful and interactive user experiences, with a focus on human-centered design principles.",
+        "top_style_improvements": [
+          "Quantify project impact with specific metrics or statistics",
+          "Emphasize transferable skills and experiences relevant to the target industry",
+          "Include relevant certifications, hackathons, or open-source contributions to demonstrate expertise"
+        ]
+      },
+      "suggested_template": {
+        "name": "Data-Driven Engineer",
+        "description": "Focuses on scale, metrics, and quantitative achievements.",
+        "style": "Structured, result-oriented",
+        "structure": "Name -> Contact -> Summary -> Experience (Scale focused) -> Projects -> Education"
+      }
+    }
+  },
+  {
+    "role": "Product Engineer at Saas startups",
+    "candidate": "Candidate 1",
     "score": 87,
     "timestamp": "2026-02-03T16:59:28.552665",
     "full_analysis": {
