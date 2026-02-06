@@ -5,9 +5,11 @@ from datetime import datetime
 from flask import Flask, redirect, url_for, render_template, request, session, jsonify
 from flask_dance.contrib.google import make_google_blueprint, google
 from flask_dance.contrib.linkedin import make_linkedin_blueprint, linkedin
+from flask_dance.contrib.github import make_github_blueprint, github
 from oauthlib.oauth2 import TokenExpiredError
 from dotenv import load_dotenv
 import traceback
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 # Import models
 from models.resume_ranker import rank_resumes
@@ -27,12 +29,27 @@ load_dotenv()
 # Allow OAuth over HTTP (ONLY for local development)
 if os.getenv("FLASK_ENV") == "development" or os.getenv("FLASK_DEBUG") == "1":
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+else:
+    # On Render, we should ensure HTTPS for OAuth
+    os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"
 
 # =========================
 # Flask App Setup
 # =========================
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-key")
+
+# Enable ProxyFix for deployment (Render/Heroku/Vercel)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1)
+app.config["PREFERRED_URL_SCHEME"] = "https"
+
+# Force HTTPS for cookies if not in development
+if os.getenv("FLASK_ENV") != "development":
+    app.config.update(
+        SESSION_COOKIE_SECURE=True,
+        SESSION_COOKIE_HTTPONLY=True,
+        SESSION_COOKIE_SAMESITE="Lax",
+    )
 
 # =========================
 # Persistent Storage (JSON file)
@@ -92,7 +109,8 @@ if google_client_id and google_client_secret:
         client_id=google_client_id,
         client_secret=google_client_secret,
         scope=["openid", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"],
-        redirect_url="/",
+        offline=True,
+        repropose_consent=True
     )
     app.register_blueprint(google_bp, url_prefix="/login")
 
@@ -107,13 +125,23 @@ if linkedin_client_id and linkedin_client_secret:
     )
     app.register_blueprint(linkedin_bp, url_prefix="/login")
 
+github_client_id = os.getenv("GITHUB_CLIENT_ID")
+github_client_secret = os.getenv("GITHUB_CLIENT_SECRET")
+github_bp = None
+if github_client_id and github_client_secret:
+    github_bp = make_github_blueprint(
+        client_id=github_client_id,
+        client_secret=github_client_secret,
+    )
+    app.register_blueprint(github_bp, url_prefix="/login")
+
 # =========================
 # Routes
 # =========================
 
 @app.route("/health")
 def health():
-    return {"status": "ok", "message": "Vercel deployment is active"}, 200
+    return {"status": "ok", "message": "Skill Match AI service is active"}, 200
 
 @app.route("/bypass-login")
 def bypass_login():
@@ -125,8 +153,9 @@ def index():
     is_guest = session.get("guest_user", False)
     is_google_authorized = google_bp is not None and google.authorized
     is_linkedin_authorized = linkedin_bp is not None and linkedin.authorized
+    is_github_authorized = github_bp is not None and github.authorized
     
-    if not is_google_authorized and not is_linkedin_authorized and not is_guest:
+    if not any([is_google_authorized, is_linkedin_authorized, is_github_authorized, is_guest]):
         return redirect(url_for("login"))
 
     user = {"name": "Guest Candidate", "email": "guest@example.com"}
@@ -147,6 +176,15 @@ def index():
                 user["name"] = f"{data.get('localizedFirstName', '')} {data.get('localizedLastName', '')}".strip() or "Guest"
         except Exception as e:
             print(f"LinkedIn OAuth info failed: {e}")
+    elif is_github_authorized:
+        try:
+            resp = github.get("/user")
+            if resp.ok:
+                user_data = resp.json()
+                user["name"] = user_data.get("name") or user_data.get("login", "Guest")
+                user["email"] = user_data.get("email", "")
+        except Exception as e:
+            print(f"GitHub OAuth info failed: {e}")
 
     all_matches = load_matches()
     recent_matches = all_matches[:10]
