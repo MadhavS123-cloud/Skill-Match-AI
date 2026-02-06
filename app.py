@@ -112,7 +112,7 @@ if google_client_id and google_client_secret:
         offline=True,
         repropose_consent=True
     )
-    app.register_blueprint(google_bp, url_prefix="/login/google")
+    app.register_blueprint(google_bp, url_prefix="/login")
 
 linkedin_client_id = os.getenv("LINKEDIN_CLIENT_ID")
 linkedin_client_secret = os.getenv("LINKEDIN_CLIENT_SECRET")
@@ -123,7 +123,7 @@ if linkedin_client_id and linkedin_client_secret:
         client_secret=linkedin_client_secret,
         scope=["r_emailaddress", "r_liteprofile"],
     )
-    app.register_blueprint(linkedin_bp, url_prefix="/login/linkedin")
+    app.register_blueprint(linkedin_bp, url_prefix="/login")
 
 github_client_id = os.getenv("GITHUB_CLIENT_ID")
 github_client_secret = os.getenv("GITHUB_CLIENT_SECRET")
@@ -133,7 +133,7 @@ if github_client_id and github_client_secret:
         client_id=github_client_id,
         client_secret=github_client_secret,
     )
-    app.register_blueprint(github_bp, url_prefix="/login/github")
+    app.register_blueprint(github_bp, url_prefix="/login")
 
 # =========================
 # Routes
