@@ -1164,13 +1164,23 @@ textarea.input-field {
     border-radius: 12px;
     margin-top: 0.5rem;
     box-shadow: var(--shadow-lg);
-    display: none;
     z-index: 1000;
     overflow: hidden;
+    /* Hover Intent Transitions */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.5s;
 }
 
 .user-profile:hover .profile-dropdown {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear;
+    transition-delay: 0.3s; /* Delay before showing */
 }
 
 .dropdown-item {
