@@ -45,6 +45,11 @@ def check_ats_friendliness(resume_text, job_description=None, template=None):
     {role_weighting_context}
     {template_instruction}
     
+    SCORING LOGIC:
+    - If a resume explicitly includes and quantifies practically all skills/requirements from the JD, the score should be 95-100.
+    - If there are minor gaps, score 80-90.
+    - Do not be overly pedantic; if the skill is mentioned in a relevant context, count it as a match.
+    
     Format response as JSON:
     "score": (0-100),
     "role_focus": (string),
@@ -59,7 +64,7 @@ def check_ats_friendliness(resume_text, job_description=None, template=None):
     "roadmap": [(str)],
     "summary": (str),
     "tips": [(str)],
-    "sample_ideal_resume": (CRITICAL: Provide a full, multi-section markdown resume optimized to 100% for this role using high-impact metrics and specific technical keywords from the JD),
+    "sample_ideal_resume": (CRITICAL: Generate a multi-section markdown resume that is a PERFECT 100% MATCH for this JD. It MUST explicitly include every single skill and requirement listed in the Job Description, using quantitative metrics like "Improved X by 30%". This sample is what the user will copy to get a 100 score.),
     "feedback_loop": {{ "current_percentile": (int), "gap_to_top_10": (int), "sections_to_improve": [] }}
     
     Resume:
