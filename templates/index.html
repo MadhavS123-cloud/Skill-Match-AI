@@ -1074,6 +1074,24 @@
                     </div>
                 </div>
 
+                ${res.sample_ideal_resume ? `
+                <div class="full-width-section sample-resume-box" style="margin-top: 2rem;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div style="width: 40px; height: 40px; background: var(--primary); color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">📄</div>
+                            <div>
+                                <h3 style="margin: 0;">Perfect Resume Reference</h3>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0;">AI-generated sample based on target job description</p>
+                            </div>
+                        </div>
+                        <button onclick="copySampleResume()" class="btn-secondary" style="font-size: 0.75rem; padding: 0.4rem 0.8rem;">Copy Text</button>
+                    </div>
+                    <div class="sample-resume-content" id="sampleResumeText" style="background: var(--bg-main); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; font-family: 'Courier New', Courier, monospace; font-size: 0.875rem; white-space: pre-wrap; line-height: 1.6; max-height: 400px; overflow-y: auto; color: var(--text-main); position: relative;">
+                        ${res.sample_ideal_resume}
+                    </div>
+                </div>
+                ` : ''}
+
                 <div class="full-width-section recommendation-box">
                     <div class="rec-icon">📜 Recommendation</div>
                     <p>${res.recommendation}</p>
@@ -1095,6 +1113,22 @@
                     gsap.to(fill, { width: fill.dataset.score + '%', duration: 1, ease: "power2.out" });
                 });
             }, 500);
+        }
+
+        function copySampleResume() {
+            const text = document.getElementById('sampleResumeText').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                btn.style.background = 'var(--success)';
+                btn.style.color = 'white';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = '';
+                    btn.style.color = '';
+                }, 2000);
+            });
         }
 
         function exportToPDF() {

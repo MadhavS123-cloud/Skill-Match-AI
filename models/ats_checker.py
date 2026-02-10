@@ -59,7 +59,8 @@ def check_ats_friendliness(resume_text, job_description=None, template=None):
     "roadmap": [(str)],
     "summary": (str),
     "tips": [(str)],
-    "feedback_loop": {{ "current_percentile": (int), "gap_to_top_10": (int), "sections_to_improve": [] }}
+    "sample_ideal_resume": (str - markdown formatted perfect resume for this role),
+    "feedback_loop": { "current_percentile": (int), "gap_to_top_10": (int), "sections_to_improve": [] }
     
     Resume:
     {resume_text}
