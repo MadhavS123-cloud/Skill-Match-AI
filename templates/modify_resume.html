@@ -31,96 +31,139 @@
             display: grid;
             grid-template-columns: 1fr 400px;
             height: calc(100vh - 70px);
-            gap: 0;
-            background: var(--border);
+            background: var(--bg-main);
+            overflow: hidden;
         }
 
         .editor-pane {
-            background: var(--bg-card);
+            background: #f8fafc;
             display: flex;
             flex-direction: column;
             position: relative;
-            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            align-items: center;
+            padding: 3rem 0;
+        }
+
+        .editor-container {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            padding: 50px 60px;
+            position: relative;
+            margin-bottom: 2rem;
         }
 
         .analysis-pane {
-            background: var(--bg-main);
+            background: var(--bg-card);
             padding: 2rem;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-        }
-
-        .pane-header {
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg-card);
-        }
-
-        .pane-header h2 {
-            font-size: 1rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .live-indicator {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--success);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .pulse {
-            width: 8px;
-            height: 8px;
-            background: var(--success);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-            }
-
-            70% {
-                transform: scale(1);
-                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
-            }
-
-            100% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-            }
+            border-left: 1px solid var(--border);
         }
 
         #resume-editor {
-            flex: 1;
             width: 100%;
-            padding: 2rem;
+            height: auto;
+            min-height: 250mm;
             border: none;
             outline: none;
-            background: var(--input-bg);
-            color: var(--text-main);
+            background: transparent;
+            color: #1e293b;
             font-family: 'Inter', sans-serif;
-            font-size: 1.1rem;
-            line-height: 1.7;
+            font-size: 1rem;
+            line-height: 1.6;
             resize: none;
+            padding: 0;
+            white-space: pre-wrap;
+            overflow: hidden;
+        }
+
+        .dark-theme .editor-pane {
+            background: #0f172a;
+        }
+
+        .dark-theme .editor-container {
+            background: #1e293b;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark-theme #resume-editor {
+            color: #f1f5f9;
+        }
+
+        /* Visual Templates */
+        .editor-container.template-classic {
+            font-family: 'Georgia', serif;
+            color: #1a1a1a;
+            border-top: 8px solid #334155;
+        }
+
+        .editor-container.template-modern {
+            font-family: 'Inter', sans-serif;
+            border-left: 12px solid var(--primary);
+        }
+
+        .editor-container.template-minimal {
+            font-family: 'Inter', sans-serif;
+            padding: 80px;
+            background: #fafafa;
+        }
+
+        .editor-container.template-minimal #resume-editor {
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+        .visual-tpl-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .visual-tpl-card {
+            background: var(--bg-main);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .visual-tpl-card:hover {
+            border-color: var(--primary-light);
+        }
+
+        .visual-tpl-card.active {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .visual-tpl-card .thumb {
+            height: 60px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .visual-tpl-card span {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-main);
         }
 
         .stat-card {
-            background: var(--bg-card);
+            background: var(--bg-main);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 1.5rem;
@@ -229,6 +272,128 @@
         .dark-theme #resume-editor {
             background: #0f172a;
         }
+
+        /* Print Styles for PDF Export */
+        @media print {
+            body {
+                background: white !important;
+                overflow: visible !important;
+            }
+
+            .nav-container,
+            .analysis-pane,
+            .btn-primary,
+            .btn-secondary,
+            .share-btn,
+            .nav-right,
+            header {
+                display: none !important;
+            }
+
+            .editor-layout {
+                display: block !important;
+                background: white !important;
+                height: auto !important;
+            }
+
+            .editor-pane {
+                background: white !important;
+                padding: 0 !important;
+                display: block !important;
+                overflow: visible !important;
+            }
+
+            .editor-container {
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+            }
+
+            #resume-editor {
+                font-size: 11pt !important;
+                color: black !important;
+                background: transparent !important;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .sample-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .sample-card {
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--bg-main);
+        }
+
+        .sample-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .sample-card h4 {
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .sample-card p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .sample-tag {
+            display: inline-block;
+            font-size: 0.625rem;
+            padding: 0.2rem 0.6rem;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 20px;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
     </style>
 </head>
 
@@ -257,43 +422,118 @@
                     <h1>Resume Optimizer</h1>
                 </a>
             </div>
-            <div class="nav-right">
-                <a href="/" class="btn-secondary">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                    </svg>
-                    Exit Editor
-                </a>
-                <button class="btn-primary" onclick="exportEditedResume()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    Export Final
-                </button>
-            </div>
+            <button class="btn-secondary" onclick="togglePreview()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                Preview Mode
+            </button>
+            <a href="/" class="btn-secondary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                Exit Editor
+            </a>
+            <button class="btn-primary" onclick="exportEditedResume()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Export Final
+            </button>
+        </div>
         </div>
     </header>
 
     <main class="editor-layout">
         <!-- Main Editor Pane -->
         <section class="editor-pane">
-            <div class="pane-header">
-                <h2>🖋️ Interactive Workspace</h2>
-                <div class="live-indicator">
-                    <span class="pulse"></span>
-                    AI Syncing Active
+            <div class="editor-container">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <div class="live-indicator">
+                        <span class="pulse"></span>
+                        AI Optimizer Active
+                    </div>
+                    <div
+                        style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                        Interactive Document
+                    </div>
+                </div>
+                <textarea id="resume-editor" spellcheck="false"
+                    placeholder="Paste your resume content here...">{{ content }}</textarea>
+            </div>
+
+            <div style="position: sticky; bottom: 2rem; display: flex; gap: 1rem; z-index: 100;">
+                <button class="btn-primary" onclick="useGoldenSample()"
+                    style="border-radius: 30px; padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 0.5rem; box-shadow: var(--shadow-lg); background: #059669;">
+                    <span>✨ Use Golden Sample</span>
+                </button>
+                <button class="btn-secondary" onclick="openGallery()"
+                    style="border-radius: 30px; padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 0.5rem; box-shadow: var(--shadow-lg); background: white; color: #1e293b; border: 1px solid #e2e8f0;">
+                    <span>📂 Select from Gallery</span>
+                </button>
+                <button class="btn-primary share-btn"
+                    style="border-radius: 30px; padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 0.5rem; box-shadow: var(--shadow-lg);">
+                    <span>📤 Share Link</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Template Gallery Modal -->
+        <div id="gallery-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeGallery()">&times;</span>
+                <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main);">Select a Sample Template</h2>
+                <p style="color: var(--text-muted); font-size: 0.875rem;">Choose a pre-written resume that matches your
+                    role to get started.</p>
+
+                <div class="sample-grid">
+                    <div class="sample-card" onclick="loadSample('SDE')">
+                        <h4>Software Engineer</h4>
+                        <p>Focuses on full-stack development, cloud infra, and algorithms.</p>
+                        <span class="sample-tag">100 Match</span>
+                    </div>
+                    <div class="sample-card" onclick="loadSample('DevOps')">
+                        <h4>DevOps Professional</h4>
+                        <p>Focuses on CI/CD, Kubernetes, and Observability.</p>
+                        <span class="sample-tag">98 Match</span>
+                    </div>
+                    <div class="sample-card" onclick="loadSample('Product')">
+                        <h4>Product Manager</h4>
+                        <p>Focuses on strategy, roadmap, and user metrics.</p>
+                        <span class="sample-tag">97 Match</span>
+                    </div>
                 </div>
             </div>
-            <textarea id="resume-editor" spellcheck="false">{{ content }}</textarea>
-        </section>
+        </div>
 
         <!-- Dynamic Analysis Pane -->
         <aside class="analysis-pane">
+            <!-- Visual Template Selector -->
+            <div class="stat-card">
+                <h3 style="font-size: 0.9375rem; margin-bottom: 1rem;">Visual Layouts</h3>
+                <div class="visual-tpl-grid">
+                    <div class="visual-tpl-card active" onclick="setVisualTemplate('modern')">
+                        <div class="thumb">📄</div>
+                        <span>Modern</span>
+                    </div>
+                    <div class="visual-tpl-card" onclick="setVisualTemplate('classic')">
+                        <div class="thumb">📜</div>
+                        <span>Classic</span>
+                    </div>
+                    <div class="visual-tpl-card" onclick="setVisualTemplate('minimal')">
+                        <div class="thumb">📝</div>
+                        <span>Minimal</span>
+                    </div>
+                </div>
+            </div>
+
             <!-- Score Card -->
             <div class="stat-card score-large">
                 <div class="val" id="score-val">--</div>
@@ -460,16 +700,94 @@
         }
 
         function exportEditedResume() {
-            const blob = new Blob([editor.value], { type: 'text/plain' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Optimized_Resume.txt';
-            a.click();
+            // Trigger browser print which we've styled for PDF
+            window.print();
         }
 
+        function setVisualTemplate(type) {
+            const container = document.querySelector('.editor-container');
+            container.classList.remove('template-modern', 'template-classic', 'template-minimal');
+            container.classList.add('template-' + type);
+
+            document.querySelectorAll('.visual-tpl-card').forEach(c => {
+                c.classList.remove('active');
+                if (c.innerText.toLowerCase().includes(type)) c.classList.add('active');
+            });
+        }
+
+        function openGallery() {
+            document.getElementById('gallery-modal').style.display = 'flex';
+        }
+
+        function closeGallery() {
+            document.getElementById('gallery-modal').style.display = 'none';
+        }
+
+        function loadSample(type) {
+            const samples = {
+                'SDE': 'IMPROVED RESUME - SOFTWARE ENGINEER\n\nCore Skills: Java, Python, C++, Data Structures, Distributed Systems\n\nExperience: Designed APIs handling 10k+ users, increased performance by 40%...',
+                'DevOps': 'IMPROVED RESUME - DEVOPS ENGINEER\n\nCore Skills: Kubernetes, Docker, Terraform, AWS, Jenkins\n\nExperience: Reduced deployment time by 60%, implemented zero-downtime infra...',
+                'Product': 'IMPROVED RESUME - PRODUCT MANAGER\n\nCore Skills: Agile, Product Roadmap, Market Analysis, SQL\n\nExperience: Managed product lifecycle for 500k active users, increased retention by 15%...'
+            };
+            editor.value = samples[type];
+            closeGallery();
+            performLiveAnalysis();
+        }
+
+        function useGoldenSample() {
+            const golden = document.getElementById('perfect-resume-text').innerText;
+            if (golden && golden.trim().length > 10) {
+                editor.value = golden;
+                performLiveAnalysis();
+            } else {
+                alert('The Golden Sample is still being generated or is unavailable.');
+            }
+        }
+
+        function exportEditedResume() {
+            window.print();
+        }
+
+        async function shareEditedResume() {
+            const shareData = {
+                title: 'My Optimized Resume',
+                text: 'Check out my optimized resume from Skill Match AI!',
+                url: window.location.href
+            };
+            try {
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                } else {
+                    await navigator.clipboard.writeText(window.location.href);
+                    alert('Link copied to clipboard!');
+                }
+            } catch (err) {
+                console.error('Share failed:', err);
+            }
+        }
+
+        function togglePreview() {
+            const aside = document.querySelector('.analysis-pane');
+            const editorPane = document.querySelector('.editor-pane');
+            const isHidden = aside.style.display === 'none';
+
+            if (isHidden) {
+                aside.style.display = 'flex';
+                document.querySelector('.editor-layout').style.gridTemplateColumns = '1fr 400px';
+                editorPane.style.padding = '3rem 0';
+            } else {
+                aside.style.display = 'none';
+                document.querySelector('.editor-layout').style.gridTemplateColumns = '1fr';
+                editorPane.style.padding = '5rem 0';
+            }
+        }
+
+        document.querySelector('.share-btn')?.addEventListener('click', shareEditedResume);
+
         // Initial Analysis
-        performLiveAnalysis();
+        if (editor.value.length > 20) {
+            performLiveAnalysis();
+        }
     </script>
 </body>
 
