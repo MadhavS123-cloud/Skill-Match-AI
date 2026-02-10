@@ -307,6 +307,23 @@ def index():
                            stats={"total": len(all_matches), "avg": avg_score, "roles": unique_roles, "week": len(all_matches)},
                            error_message=error_message)
 
+@app.route("/rejection-simulator", methods=["POST"])
+def rejection_simulator():
+    data = request.json
+    company = data.get("company")
+    role = data.get("role")
+    resume = data.get("resume")
+    
+    if not all([company, role, resume]):
+        return jsonify({"status": "error", "error": "All fields are required"}), 400
+        
+    try:
+        results = simulate_rejection(resume, company, role)
+        return jsonify({"status": "success", "data": results})
+    except Exception as e:
+        print(f"Simulation failed: {e}")
+        return jsonify({"status": "error", "error": str(e)}), 500
+
 @app.route("/modify-resume", methods=["GET", "POST"])
 def modify_resume():
     # In-app editor for resume refinement
