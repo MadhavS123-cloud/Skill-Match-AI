@@ -116,11 +116,20 @@
 <body>
 
     <div class="signup-card">
+        <div class="logo-icon" style="margin: 0 auto 1.5rem; display: flex; justify-content: center; color: #1e40af;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="8" cy="12" r="7" stroke="currentColor" stroke-width="2.5" />
+                <circle cx="16" cy="12" r="7" stroke="currentColor" stroke-width="2.5" />
+                <path d="M10 12L11.5 13.5L14.5 10.5" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </div>
         <h2>Sign Up</h2>
         <p>Create your Skill Match AI account</p>
 
         <!-- GOOGLE SIGNUP -->
-        <a href="/login/google" style="text-decoration: none;">
+        <a href="{{ url_for('google.login') if google_bp else '#' }}" style="text-decoration: none;">
             <button class="google-btn">
                 <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google">
                 Sign up with Google
@@ -128,7 +137,7 @@
         </a>
 
         <!-- LINKEDIN SIGNUP -->
-        <a href="/login/linkedin" style="text-decoration: none;">
+        <a href="{{ url_for('linkedin.login') if linkedin_bp else '#' }}" style="text-decoration: none;">
             <button class="linkedin-btn">
                 <img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
                     alt="LinkedIn">

@@ -109,12 +109,11 @@ body {
 .logo-icon {
     width: 32px;
     height: 32px;
-    background: var(--primary);
-    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--primary);
+    transition: var(--transition);
 }
 
 .logo h1 {
