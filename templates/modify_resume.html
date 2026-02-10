@@ -346,7 +346,7 @@
         const scoreBar = document.getElementById('score-bar');
         const statusText = document.getElementById('match-status');
         const suggestionsList = document.getElementById('suggestions-list');
-        const jdContext = "{{ jd }}";
+        const jdContext = {{ jd | tojson }};
         let currentTemplate = 'Google'; // Default
 
         let debounceTimer;
