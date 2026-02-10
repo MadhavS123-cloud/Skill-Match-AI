@@ -258,8 +258,9 @@ def index():
                         "roadmap": ats_results.get("roadmap", []),
                         "risk_analysis": ats_results.get("risk_analysis", {"level": "Low", "findings": []}),
                         "feedback_loop": ats_results.get("feedback_loop", {}),
+                        "sample_ideal_resume": ats_results.get("sample_ideal_resume", ""),
                         "content": raw_resumes[index],
-                        "style_fit": style_analysis
+                        "company_style_fit": style_analysis
                     }
                     
                     # Suggest Template
