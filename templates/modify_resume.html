@@ -325,6 +325,18 @@
                         improvements...</div>
                 </div>
             </div>
+
+            <!-- Perfect Resume Reference (Golden Sample) -->
+            <div class="stat-card" id="perfect-resume-container" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3 style="font-size: 0.9375rem; color: var(--primary);">Perfect Resume Reference</h3>
+                    <button onclick="copySampleResume()"
+                        style="background: transparent; border: none; color: var(--primary); font-size: 0.75rem; cursor: pointer; font-weight: 600;">Copy</button>
+                </div>
+                <div id="perfect-resume-text"
+                    style="font-family: 'Courier New', Courier, monospace; font-size: 0.75rem; background: var(--bg-main); padding: 1rem; border-radius: 8px; border: 1px dashed var(--primary); white-space: pre-wrap; max-height: 300px; overflow-y: auto; color: var(--text-main);">
+                </div>
+            </div>
         </aside>
     </main>
 
@@ -403,13 +415,35 @@
 
             // GSAP Animation for new items
             gsap.from('.fade-in', { opacity: 0, y: 10, duration: 0.4, stagger: 0.1 });
+
+            // Update Golden Sample
+            const sampleContainer = document.getElementById('perfect-resume-container');
+            const sampleText = document.getElementById('perfect-resume-text');
+            if (data.sample_ideal_resume) {
+                sampleContainer.style.display = 'block';
+                sampleText.innerText = data.sample_ideal_resume;
+            }
+        }
+
+        async function copySampleResume() {
+            const text = document.getElementById('perfect-resume-text').innerText;
+            try {
+                await navigator.clipboard.writeText(text);
+                const btn = event.target;
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                setTimeout(() => btn.innerText = originalText, 2000);
+            } catch (err) {
+                console.error("Copy failed:", err);
+            }
         }
 
         function selectTemplate(name) {
             currentTemplate = name;
-            document.querySelectorAll('.tpl-card').forEach(c => c.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-
+            document.querySelectorAll('.tpl-card').forEach(c => {
+                c.classList.remove('active');
+                if (c.innerText.includes(name)) c.classList.add('active');
+            });
             // Re-trigger analysis immediately with the new template
             performLiveAnalysis();
         }
