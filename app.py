@@ -110,7 +110,7 @@ if google_client_id and google_client_secret:
         client_secret=google_client_secret,
         scope=["openid", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"],
         offline=True,
-        repropose_consent=True,
+        reprompt_consent=True,
         login_url="/google",
         authorized_url="/google/authorized"
     )
