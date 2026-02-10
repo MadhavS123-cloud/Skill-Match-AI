@@ -360,6 +360,12 @@
             const content = editor.value.trim();
             if (content.length < 30) return;
 
+            // Show loading state
+            scoreVal.innerText = '...';
+            scoreBar.style.width = '0%';
+            statusText.innerText = 'Analyzing...';
+            statusText.style.color = 'var(--text-muted)';
+
             try {
                 const response = await fetch('/modify-resume', {
                     method: 'POST',
@@ -367,10 +373,15 @@
                     body: JSON.stringify({ content, jd: jdContext, template: currentTemplate })
                 });
 
+                if (!response.ok) throw new Error('Network response was not ok');
+
                 const data = await response.json();
                 updateUI(data);
             } catch (err) {
                 console.error("Sync failed:", err);
+                scoreVal.innerText = 'Err';
+                statusText.innerText = 'Reconnect failed. Trying again...';
+                statusText.style.color = 'var(--danger)';
             }
         }
 

@@ -60,7 +60,7 @@ def check_ats_friendliness(resume_text, job_description=None, template=None):
     "summary": (str),
     "tips": [(str)],
     "sample_ideal_resume": (CRITICAL: Provide a full, multi-section markdown resume optimized to 100% for this role using high-impact metrics and specific technical keywords from the JD),
-    "feedback_loop": { "current_percentile": (int), "gap_to_top_10": (int), "sections_to_improve": [] }
+    "feedback_loop": {{ "current_percentile": (int), "gap_to_top_10": (int), "sections_to_improve": [] }}
     
     Resume:
     {resume_text}
