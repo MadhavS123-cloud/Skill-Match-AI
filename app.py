@@ -110,7 +110,9 @@ if google_client_id and google_client_secret:
         client_secret=google_client_secret,
         scope=["openid", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"],
         offline=True,
-        repropose_consent=True
+        repropose_consent=True,
+        login_url="/google",
+        authorized_url="/google/authorized"
     )
     app.register_blueprint(google_bp, url_prefix="/login")
 
@@ -122,6 +124,8 @@ if linkedin_client_id and linkedin_client_secret:
         client_id=linkedin_client_id,
         client_secret=linkedin_client_secret,
         scope=["r_emailaddress", "r_liteprofile"],
+        login_url="/linkedin",
+        authorized_url="/linkedin/authorized"
     )
     app.register_blueprint(linkedin_bp, url_prefix="/login")
 
@@ -132,12 +136,26 @@ if github_client_id and github_client_secret:
     github_bp = make_github_blueprint(
         client_id=github_client_id,
         client_secret=github_client_secret,
+        login_url="/github",
+        authorized_url="/github/authorized"
     )
     app.register_blueprint(github_bp, url_prefix="/login")
 
 # =========================
+# Template Context Processor
+# =========================
+@app.context_processor
+def inject_auth_status():
+    return {
+        "google_enabled": google_bp is not None,
+        "linkedin_enabled": linkedin_bp is not None,
+        "github_enabled": github_bp is not None
+    }
+
+# =========================
 # Routes
 # =========================
+
 
 @app.route("/health")
 def health():
