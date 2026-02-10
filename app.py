@@ -123,7 +123,7 @@ if linkedin_client_id and linkedin_client_secret:
     linkedin_bp = make_linkedin_blueprint(
         client_id=linkedin_client_id,
         client_secret=linkedin_client_secret,
-        scope=["r_emailaddress", "r_liteprofile"],
+        scope=["openid", "profile", "email"],
         login_url="/linkedin",
         authorized_url="/linkedin/authorized"
     )
