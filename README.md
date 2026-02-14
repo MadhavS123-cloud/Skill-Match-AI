@@ -1,8 +1,8 @@
-# Skill Match AI 🚀
+# Skill Match AI 
 
 Skill Match AI is a premium, modern web application that leverages AI to bridge the gap between job seekers and their dream roles. It provides instant resume-to-job description matching, identifies skill gaps, and offers strategic career advice.
 
-## ✨ Key Features
+ Key Features
 
 - **AI-Powered Matching**: Uses **Groq (Llama 3.3 70B)** to calculate highly accurate match scores between resumes and job requirements.
 - **ATS Insights**: Get a detailed breakdown of how well your resume is formatted for Applicant Tracking Systems.
@@ -13,7 +13,7 @@ Skill Match AI is a premium, modern web application that leverages AI to bridge 
 - **Smart Sharing**: Native sharing capabilities (WhatsApp, Mail, etc.) using the Web Share API.
 - **PDF Export**: Export your detailed analysis results as a clean PDF document.
 
-## 🛠️ Tech Stack
+Tech Stack
 
 - **Backend**: Python (Flask)
 - **AI Engine**: Groq API (Llama 3.3 70B Versatile)
@@ -22,9 +22,9 @@ Skill Match AI is a premium, modern web application that leverages AI to bridge 
 - **Authentication**: Google & LinkedIn OAuth2
 - **Database/Storage**: Supabase Integration
 
-## 🚀 Getting Started
+Getting Started
 
-### Prerequisites
+ Prerequisites
 
 - Python 3.8+
 - Groq API Key
@@ -61,7 +61,7 @@ Skill Match AI is a premium, modern web application that leverages AI to bridge 
    ```
    Open `http://localhost:5000` in your browser.
 
-## 📱 Mobile Compatibility
+Mobile Compatibility
 
 The app is fully responsive and optimized for:
 - Desktop (1440px+)
