@@ -1452,15 +1452,17 @@
                 e.preventDefault();
                 e.stopPropagation();
 
+                // Clear any pending opening animation
+                clearTimeout(dropdownTimeout);
+
                 // Toggle behavior
                 if (profileDropdown.classList.contains('show')) {
-                    clearTimeout(dropdownTimeout);
                     profileDropdown.classList.remove('show');
                 } else {
-                    // Artificial delay for premium feel (250ms)
+                    // Artificial delay for premium feel (200ms)
                     dropdownTimeout = setTimeout(() => {
                         profileDropdown.classList.add('show');
-                    }, 250);
+                    }, 200);
                 }
             });
 
