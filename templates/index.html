@@ -118,8 +118,8 @@
                     </svg>
 
                     <div class="profile-dropdown">
-                        <a href="#" class="dropdown-item">Your Profile</a>
-                        <a href="#" class="dropdown-item">Settings</a>
+                        <a href="#" class="dropdown-item" onclick="openProfileModal(); return false;">Your Profile</a>
+                        <a href="#" class="dropdown-item" onclick="openSettingsModal(); return false;">Settings</a>
                         <a href="/logout" class="dropdown-item logout">Sign out</a>
                     </div>
                 </div>
@@ -1301,9 +1301,123 @@
                     alert('Sharing not supported on this browser. Link copied to clipboard!');
                 }
             } catch (err) {
-                console.log('Error sharing:', err);
             }
         }
+    </script>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Your Profile</h3>
+                <button class="modal-close" onclick="closeModal('profileModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="profileNameInput" class="input-field" value="{{ user.name }}">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" class="input-field" value="{{ user.email }}" disabled
+                        style="background: var(--bg-main); cursor: not-allowed;">
+                </div>
+                <div
+                    style="display: flex; gap: 1rem; margin-top: 1.5rem; padding: 1.25rem; background: var(--primary-light); border-radius: 12px; border: 1px solid var(--primary-dark);">
+                    <div style="font-size: 1.25rem;">🛡️</div>
+                    <div style="font-size: 0.8125rem;">
+                        <strong>Account Status:</strong> Your account is active. Your resume matching history is being
+                        saved securely.
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal('profileModal')">Cancel</button>
+                <button class="btn-primary" onclick="saveProfile()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Settings Modal-- >
+    <div id="settingsModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Account Settings</h3>
+                <button class="modal-close" onclick="closeModal('settingsModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border);">
+                    <div>
+                        <div style="font-weight: 700; font-size: 0.9375rem;">Email Notifications</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">Receive weekly progress reports and AI tips</div>
+                    </div>
+                    <div style="width: 40px; height: 20px; background: var(--primary); border-radius: 20px; position: relative; cursor: pointer;">
+                        <div style="position: absolute; right: 2px; top: 2px; width: 16px; height: 16px; background: white; border-radius: 50%;"></div>
+                    </div>
+                </div>
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border);">
+                    <div>
+                        <div style="font-weight: 700; font-size: 0.9375rem;">Privacy Mode</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">Hide your profile name from leaderboard</div>
+                    </div>
+                    <div style="width: 40px; height: 20px; background: var(--border); border-radius: 20px; position: relative; cursor: pointer;">
+                        <div style="position: absolute; left: 2px; top: 2px; width: 16px; height: 16px; background: white; border-radius: 50%;"></div>
+                    </div>
+                </div>
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0;">
+                    <div>
+                        <div style="font-weight: 700; font-size: 0.9375rem;">Interface Language</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">Default language for AI analysis</div>
+                    </div>
+                    <div style="font-size: 0.8125rem; font-weight: 700; color: var(--primary);">English (US)</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" onclick="closeModal('settingsModal')">Close Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal Handling
+        function openProfileModal() { document.getElementById('profileModal').classList.add('open'); }
+        function openSettingsModal() { document.getElementById('settingsModal').classList.add('open'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+        async function saveProfile() {
+            const newName = document.getElementById('profileNameInput').value;
+            try {
+                const response = await fetch('/update-profile', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: newName })
+                });
+                const data = await response.json();
+                if (data.status === 'success') {
+                    // Update UI immediately
+                    document.querySelector('.user-display-name').textContent = data.name;
+                    document.querySelector('.avatar').textContent = data.name.substring(0, 2).toUpperCase();
+                    closeModal('profileModal');
+                    
+                    // Show success notification or similar
+                    alert("Profile updated successfully!");
+                }
+            } catch (err) {
+                console.error("Failed to update profile", err);
+            }
+        }
+
+        // Close modal on click outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.classList.remove('open');
+            }
+        }
+
+        // Existing JS Logic...
     </script>
 </body>
 

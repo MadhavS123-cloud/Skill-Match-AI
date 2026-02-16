@@ -1158,20 +1158,22 @@ textarea.input-field {
     position: absolute;
     top: 100%;
     right: 0;
-    width: 220px;
+    width: 240px;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
     box-shadow: var(--shadow-lg);
     z-index: 1000;
     overflow: hidden;
-    /* Snappier Hover Transitions */
+    /* Transition for visibility and transform */
     opacity: 0;
     visibility: hidden;
-    transform: translateY(8px);
+    transform: translateY(12px);
     pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0s linear 0.4s;
 }
 
 .user-profile:hover .profile-dropdown {
@@ -1179,9 +1181,90 @@ textarea.input-field {
     visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear;
-    transition-delay: 0.15s;
-    /* Snappier delay before showing */
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0s linear;
+    transition-delay: 0.1s;
+}
+
+/* Modal System */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.open {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: var(--bg-card);
+    width: 100%;
+    max-width: 500px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+}
+
+.modal-overlay.open .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    color: var(--text-main);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-footer {
+    padding: 1.5rem 2rem;
+    background: var(--bg-main);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
 }
 
 .dropdown-item {

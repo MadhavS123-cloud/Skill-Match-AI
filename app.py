@@ -182,7 +182,10 @@ def index():
     if not any([is_google_authorized, is_linkedin_authorized, is_github_authorized, is_guest]):
         return redirect(url_for("login"))
 
-    user = {"name": "Guest Candidate", "email": "guest@example.com"}
+    user = {
+        "name": session.get("custom_name") or "Guest Candidate", 
+        "email": "guest@example.com"
+    }
     if is_google_authorized:
         try:
             resp = google.get("/oauth2/v2/userinfo")
@@ -225,7 +228,7 @@ def index():
 
     elif is_guest:
         guest_id = session.get("guest_id", "anonymous")
-        user["name"] = f"Guest ({guest_id[:4]})"
+        user["name"] = session.get("custom_name") or f"Guest ({guest_id[:4]})"
         user["email"] = f"guest_{guest_id}@local"
 
     all_matches = load_matches()
@@ -404,6 +407,15 @@ def linkedin_login():
 def logout():
     session.clear()
     return redirect(url_for("login"))
+
+@app.route("/update-profile", methods=["POST"])
+def update_profile():
+    data = request.json
+    new_name = data.get("name")
+    if new_name:
+        session["custom_name"] = new_name
+        return jsonify({"status": "success", "name": new_name})
+    return jsonify({"status": "error", "message": "Name is required"}), 400
 
 if __name__ == "__main__":
     app.run(debug=True)
