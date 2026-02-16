@@ -1154,6 +1154,7 @@ textarea.input-field {
 }
 
 /* Dropdown Menu (Placeholder) */
+/* Profile Dropdown Interaction */
 .profile-dropdown {
     position: absolute;
     top: 100%;
@@ -1166,25 +1167,27 @@ textarea.input-field {
     box-shadow: var(--shadow-lg);
     z-index: 1000;
     overflow: hidden;
-    /* Transition for visibility and transform */
+
+    /* Initial State */
     opacity: 0;
     visibility: hidden;
-    transform: translateY(12px);
+    transform: translateY(-8px);
     pointer-events: none;
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        visibility 0s linear 0.4s;
+
+    /* Animation Timing: 250ms duration, cubic-bezier for premium feel */
+    transition: opacity 250ms cubic-bezier(0.16, 1, 0.3, 1),
+        transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0s linear 250ms;
 }
 
-.user-profile:hover .profile-dropdown {
+.profile-dropdown.show {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transition: opacity 250ms cubic-bezier(0.16, 1, 0.3, 1),
+        transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
         visibility 0s linear;
-    transition-delay: 0.1s;
 }
 
 /* Modal System */

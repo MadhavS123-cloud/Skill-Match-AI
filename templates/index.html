@@ -104,7 +104,7 @@
                     </svg>
                     <span>AI Assistant</span>
                 </button>
-                <div class="user-profile">
+                <div class="user-profile" id="userProfileBtn">
                     <div class="avatar">
                         {{ (user.name | default('Guest'))[:2].upper() }}
                     </div>
@@ -1410,12 +1410,36 @@
             }
         }
 
-        // Close modal on click outside
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal-overlay')) {
-                event.target.classList.remove('open');
+        // Dropdown Click Handling with Delay
+        const profileBtn = document.getElementById('userProfileBtn');
+        const profileDropdown = profileBtn.querySelector('.profile-dropdown');
+        let dropdownTimeout;
+
+        profileBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            // If already open, close it instantly
+            if (profileDropdown.classList.contains('show')) {
+                clearTimeout(dropdownTimeout);
+                profileDropdown.classList.remove('show');
+                return;
             }
-        }
+
+            // Artificial delay for premium feel (200ms)
+            dropdownTimeout = setTimeout(() => {
+                profileDropdown.classList.add('show');
+            }, 200);
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!profileBtn.contains(e.target)) {
+                clearTimeout(dropdownTimeout);
+                profileDropdown.classList.remove('show');
+            }
+        });
+
+        // Close modal on click outside
 
         // Existing JS Logic...
     </script>
