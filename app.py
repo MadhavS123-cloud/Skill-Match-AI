@@ -29,9 +29,9 @@ load_dotenv()
 # Allow OAuth over HTTP (ONLY for local development)
 if os.getenv("FLASK_ENV") == "development" or os.getenv("FLASK_DEBUG") == "1":
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-else:
-    # On Render, we should ensure HTTPS for OAuth
-    os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"
+
+# Always allow relaxed token scope to handle LinkedIn's extra scopes
+os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"
 
 # =========================
 # Flask App Setup
@@ -41,7 +41,10 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-key")
 
 # Enable ProxyFix for deployment (Render/Heroku/Vercel)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1)
-app.config["PREFERRED_URL_SCHEME"] = "https"
+
+# Only force HTTPS for URL generation in production
+if os.getenv("FLASK_ENV") != "development" and os.getenv("FLASK_DEBUG") != "1":
+    app.config["PREFERRED_URL_SCHEME"] = "https"
 
 # Force HTTPS for cookies if not in development
 if os.getenv("FLASK_ENV") != "development":
@@ -164,6 +167,9 @@ def health():
 @app.route("/bypass-login")
 def bypass_login():
     session["guest_user"] = True
+    if "guest_id" not in session:
+        import os
+        session["guest_id"] = os.urandom(8).hex()
     return redirect(url_for("index"))
 
 @app.route("/", methods=["GET", "POST"])
@@ -188,12 +194,25 @@ def index():
             print(f"Google OAuth info failed: {e}")
     elif is_linkedin_authorized:
         try:
-            resp = linkedin.get("me")
+            # Try OpenID Connect userinfo endpoint first (modern LinkedIn API)
+            resp = linkedin.get("userinfo")
             if resp.ok:
                 data = resp.json()
-                user["name"] = f"{data.get('localizedFirstName', '')} {data.get('localizedLastName', '')}".strip() or "Guest"
+                user["name"] = data.get("name") or f"{data.get('given_name', '')} {data.get('family_name', '')}".strip() or "Guest"
+                user["email"] = data.get("email", "")
+                print(f"LinkedIn OIDC info success: {user['name']}")
+            else:
+                # Fallback to old profile endpoint if OIDC fails
+                resp = linkedin.get("me")
+                if resp.ok:
+                    data = resp.json()
+                    user["name"] = f"{data.get('localizedFirstName', '')} {data.get('localizedLastName', '')}".strip() or "Guest"
+                    print(f"LinkedIn Legacy info success: {user['name']}")
+                else:
+                    print(f"LinkedIn OAuth failed both endpoints. Userinfo status: {resp.status_code}")
         except Exception as e:
             print(f"LinkedIn OAuth info failed: {e}")
+            traceback.print_exc()
     elif is_github_authorized:
         try:
             resp = github.get("/user")
@@ -204,8 +223,16 @@ def index():
         except Exception as e:
             print(f"GitHub OAuth info failed: {e}")
 
+    elif is_guest:
+        guest_id = session.get("guest_id", "anonymous")
+        user["name"] = f"Guest ({guest_id[:4]})"
+        user["email"] = f"guest_{guest_id}@local"
+
     all_matches = load_matches()
-    recent_matches = all_matches[:10]
+    # FILTERING: Ensure users only see their own data
+    user_email = user.get("email")
+    user_matches = [m for m in all_matches if m.get("user_email") == user_email]
+    recent_matches = user_matches[:10]
     
     results = None
     error_message = None
@@ -269,8 +296,9 @@ def index():
                     
                     results.append(analysis_result)
                     
-                    # Save to history
+                    # Save to history with privacy association
                     new_match_entry = {
+                        "user_email": user.get("email"),
                         "role": job_title or "Unnamed Role",
                         "candidate": f"Candidate {index + 1}",
                         "score": analysis_result['ats_score'],
@@ -278,33 +306,34 @@ def index():
                         "full_analysis": analysis_result
                     }
                     all_matches.insert(0, new_match_entry)
+                    user_matches.insert(0, new_match_entry)
                 
                 save_matches(all_matches)
                 
-                # Simple stats calculation
-                total_score = sum(m['score'] for m in all_matches if 'score' in m)
-                avg_score = f"{round(total_score / len(all_matches), 1)}%" if all_matches else "0%"
-                unique_roles = len(set(m['role'] for m in all_matches if 'role' in m))
+                # Simple stats calculation for THIS user
+                total_score = sum(m['score'] for m in user_matches if 'score' in m)
+                avg_score = f"{round(total_score / len(user_matches), 1)}%" if user_matches else "0%"
+                unique_roles = len(set(m['role'] for m in user_matches if 'role' in m))
                 
                 return render_template("index.html", 
                                      user=user, 
                                      results=results, 
-                                     recent_matches=recent_matches, 
-                                     stats={"total": len(all_matches), "avg": avg_score, "roles": unique_roles, "week": len(all_matches)},
+                                     recent_matches=user_matches[:10], 
+                                     stats={"total": len(user_matches), "avg": avg_score, "roles": unique_roles, "week": len(user_matches)},
                                      job_title=job_title,
                                      job_description=job_description,
                                      expanded_jd=was_expanded,
                                      error_message=error_message)
 
-    # Initial stats for Get request
-    total_score = sum(m['score'] for m in all_matches if 'score' in m)
-    avg_score = f"{round(total_score / len(all_matches), 1)}%" if all_matches else "0%"
-    unique_roles = len(set(m['role'] for m in all_matches if 'role' in m))
+    # Initial stats for Get request (Filtered for privacy)
+    total_score = sum(m['score'] for m in user_matches if 'score' in m)
+    avg_score = f"{round(total_score / len(user_matches), 1)}%" if user_matches else "0%"
+    unique_roles = len(set(m['role'] for m in user_matches if 'role' in m))
     
     return render_template("index.html", 
                            user=user, 
                            recent_matches=recent_matches, 
-                           stats={"total": len(all_matches), "avg": avg_score, "roles": unique_roles, "week": len(all_matches)},
+                           stats={"total": len(user_matches), "avg": avg_score, "roles": unique_roles, "week": len(user_matches)},
                            error_message=error_message)
 
 @app.route("/rejection-simulator", methods=["POST"])
