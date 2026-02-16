@@ -371,6 +371,19 @@ def modify_resume():
     templates = get_company_templates()
     return render_template("modify_resume.html", content=resume_content, jd=job_desc, templates=templates)
 
+@app.route("/login/magic", methods=["POST"])
+def login_magic():
+    email = request.form.get("email")
+    if email:
+        session["guest_user"] = True
+        session["guest_id"] = email.split("@")[0]
+        return redirect(url_for("index"))
+    return redirect(url_for("login"))
+
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
+
 @app.route("/login")
 def login():
     return render_template("login.html")
