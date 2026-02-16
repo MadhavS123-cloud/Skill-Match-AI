@@ -1353,11 +1353,10 @@
                         <div style="font-size: 0.75rem; color: var(--text-muted);">Receive weekly progress reports and
                             AI tips</div>
                     </div>
-                    <div
-                        style="width: 40px; height: 20px; background: var(--primary); border-radius: 20px; position: relative; cursor: pointer;">
-                        <div
-                            style="position: absolute; right: 2px; top: 2px; width: 16px; height: 16px; background: white; border-radius: 50%;">
-                        </div>
+                    <div id="toggle-notifications"
+                        class="settings-switch {% if session.get('email_notifications', True) %}active{% endif %}"
+                        onclick="toggleSetting(this, 'email_notifications')">
+                        <div class="switch-dot"></div>
                     </div>
                 </div>
                 <div
@@ -1367,11 +1366,10 @@
                         <div style="font-size: 0.75rem; color: var(--text-muted);">Hide your profile name from
                             leaderboard</div>
                     </div>
-                    <div
-                        style="width: 40px; height: 20px; background: var(--border); border-radius: 20px; position: relative; cursor: pointer;">
-                        <div
-                            style="position: absolute; left: 2px; top: 2px; width: 16px; height: 16px; background: white; border-radius: 50%;">
-                        </div>
+                    <div id="toggle-privacy"
+                        class="settings-switch {% if session.get('privacy_mode', False) %}active{% endif %}"
+                        onclick="toggleSetting(this, 'privacy_mode')">
+                        <div class="switch-dot"></div>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0;">
@@ -1394,6 +1392,23 @@
         function openProfileModal() { document.getElementById('profileModal').classList.add('open'); }
         function openSettingsModal() { document.getElementById('settingsModal').classList.add('open'); }
         function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+        async function toggleSetting(element, settingName) {
+            const newValue = !element.classList.contains('active');
+            try {
+                const response = await fetch('/toggle-setting', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ setting: settingName, value: newValue })
+                });
+                const data = await response.json();
+                if (data.status === 'success') {
+                    element.classList.toggle('active', newValue);
+                }
+            } catch (err) {
+                console.error(`Failed to toggle ${settingName}`, err);
+            }
+        }
 
         async function saveProfile() {
             const newName = document.getElementById('profileNameInput').value;

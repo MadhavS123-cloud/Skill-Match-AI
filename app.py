@@ -417,5 +417,15 @@ def update_profile():
         return jsonify({"status": "success", "name": new_name})
     return jsonify({"status": "error", "message": "Name is required"}), 400
 
+@app.route("/toggle-setting", methods=["POST"])
+def toggle_setting():
+    data = request.json
+    setting = data.get("setting")
+    value = data.get("value")
+    if setting is not None:
+        session[setting] = value
+        return jsonify({"status": "success", setting: value})
+    return jsonify({"status": "error", "message": "Setting name is required"}), 400
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1190,6 +1190,36 @@ textarea.input-field {
         visibility 0s linear;
 }
 
+/* Settings Toggle Styles */
+.settings-switch {
+    width: 40px;
+    height: 20px;
+    background: var(--border);
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.settings-switch.active {
+    background: var(--primary);
+}
+
+.settings-switch .switch-dot {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.settings-switch.active .switch-dot {
+    left: 22px;
+}
+
 /* Modal System */
 .modal-overlay {
     position: fixed;
