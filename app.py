@@ -13,13 +13,14 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 # Import models
 from models.resume_ranker import rank_resumes
-from models.ats_checker import check_ats_friendliness
+from models.ats_checker import check_ats_friendliness, get_company_templates
 from models.job_expander import expand_job_requirements
 from models.file_parser import extract_text_from_file
 from models.style_analyzer import analyze_company_style
 from models.evolution_tracker import track_evolution
 from models.rejection_simulator import simulate_rejection
-from models.template_matcher import suggest_template, get_company_templates
+from models.salary_simulator import estimate_salary
+from models.template_matcher import suggest_template
 
 # =========================
 # Load environment variables
@@ -426,6 +427,26 @@ def toggle_setting():
         session[setting] = value
         return jsonify({"status": "success", setting: value})
     return jsonify({"status": "error", "message": "Setting name is required"}), 400
+
+@app.route("/simulate-salary", methods=["POST"])
+def simulate_salary_route():
+    data = request.json
+    role = data.get("role")
+    company = data.get("company")
+    location = data.get("location")
+    experience = data.get("experience")
+    score = data.get("score")
+    education = data.get("education", "")
+    seniority = data.get("seniority", "")
+    
+    if not all([role, company, location, experience, score]):
+        return jsonify({"status": "error", "message": "Missing required fields"}), 400
+        
+    try:
+        result = estimate_salary(role, company, location, experience, score, education, seniority)
+        return jsonify({"status": "success", "data": result})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
