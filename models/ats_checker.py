@@ -45,6 +45,8 @@ def check_ats_friendliness(resume_text, job_description=None, template=None):
     {role_weighting_context}
     {template_instruction}
     
+    IMPORTANT: Do NOT use ANY emojis in your response. Keep the tone professional and text-based only.
+    
     SCORING LOGIC:
     - If a resume explicitly includes and quantifies practically all skills/requirements from the JD, the score should be 95-100.
     - If there are minor gaps, score 80-90.

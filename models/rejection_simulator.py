@@ -26,6 +26,8 @@ def simulate_rejection(resume_text, company, role):
         - line_of_doubt: a specific 1-line quote from the resume that made them stop
         - strategic_fixes: list of 3 high-impact changes to get past them next time
 
+        IMPORTANT: Do NOT use ANY emojis in your response. Keep the tone professional or cynical as requested, but text-only.
+
         Resume Content:
         {resume_text}
         """

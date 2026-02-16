@@ -472,15 +472,15 @@
             <div style="position: sticky; bottom: 2rem; display: flex; gap: 1rem; z-index: 100;">
                 <button class="btn-primary" onclick="useGoldenSample()"
                     style="border-radius: 30px; padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 0.5rem; box-shadow: var(--shadow-lg); background: #059669;">
-                    <span>✨ Use Golden Sample</span>
+                    <span>Use Golden Sample</span>
                 </button>
                 <button class="btn-secondary" onclick="openGallery()"
                     style="border-radius: 30px; padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 0.5rem; box-shadow: var(--shadow-lg); background: white; color: #1e293b; border: 1px solid #e2e8f0;">
-                    <span>📂 Select from Gallery</span>
+                    <span>Select from Gallery</span>
                 </button>
                 <button class="btn-primary share-btn"
                     style="border-radius: 30px; padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 0.5rem; box-shadow: var(--shadow-lg);">
-                    <span>📤 Share Link</span>
+                    <span>Share Link</span>
                 </button>
             </div>
         </section>
@@ -520,15 +520,15 @@
                 <h3 style="font-size: 0.9375rem; margin-bottom: 1rem;">Visual Layouts</h3>
                 <div class="visual-tpl-grid">
                     <div class="visual-tpl-card active" onclick="setVisualTemplate('modern')">
-                        <div class="thumb">📄</div>
+                        <div class="thumb">Modern</div>
                         <span>Modern</span>
                     </div>
                     <div class="visual-tpl-card" onclick="setVisualTemplate('classic')">
-                        <div class="thumb">📜</div>
+                        <div class="thumb">Classic</div>
                         <span>Classic</span>
                     </div>
                     <div class="visual-tpl-card" onclick="setVisualTemplate('minimal')">
-                        <div class="thumb">📝</div>
+                        <div class="thumb">Minimal</div>
                         <span>Minimal</span>
                     </div>
                 </div>
@@ -658,7 +658,7 @@
                 const div = document.createElement('div');
                 div.className = 'suggestion-item fade-in';
                 div.innerHTML = `
-                    <div class="suggestion-icon">✨</div>
+                    <div class="suggestion-icon">AI</div>
                     <div>${tip}</div>
                 `;
                 suggestionsList.appendChild(div);
