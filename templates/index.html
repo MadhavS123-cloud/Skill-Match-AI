@@ -1431,6 +1431,9 @@
             let dropdownTimeout;
 
             profileBtn.addEventListener('click', (e) => {
+                // If the click happened inside the dropdown, don't intercept it
+                if (profileDropdown.contains(e.target)) return;
+
                 e.preventDefault();
                 e.stopPropagation();
 
