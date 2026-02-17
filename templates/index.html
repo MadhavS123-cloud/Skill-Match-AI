@@ -59,7 +59,8 @@
                     <h1>Skill Match AI</h1>
                 </a>
                 <nav class="nav-links">
-                    <a href="#" class="nav-link active" id="navDashboard">
+                    <a href="#" class="nav-link active" id="navDashboard"
+                        onclick="switchView('dashboard'); return false;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="3" y="3" width="7" height="7"></rect>
@@ -69,7 +70,7 @@
                         </svg>
                         Dashboard
                     </a>
-                    <a href="#" class="nav-link" id="navNewMatch">
+                    <a href="#" class="nav-link" id="navNewMatch" onclick="switchView('newMatch'); return false;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -79,7 +80,7 @@
                         </svg>
                         New Match
                     </a>
-                    <a href="#" class="nav-link" id="navSimulator">
+                    <a href="#" class="nav-link" id="navSimulator" onclick="switchView('simulator'); return false;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
@@ -691,39 +692,7 @@
         const newMatchView = document.getElementById('newMatchView');
         const simulatorView = document.getElementById('simulatorView');
 
-        function showDashboard() {
-            dashboardView.style.display = 'block';
-            newMatchView.style.display = 'none';
-            simulatorView.style.display = 'none';
-            navDashboard.classList.add('active');
-            navNewMatch.classList.remove('active');
-            navSimulator.classList.remove('active');
-            localStorage.setItem('lastView', 'dashboard');
-        }
 
-        function showNewMatch() {
-            dashboardView.style.display = 'none';
-            newMatchView.style.display = 'block';
-            simulatorView.style.display = 'none';
-            navDashboard.classList.remove('active');
-            navNewMatch.classList.add('active');
-            navSimulator.classList.remove('active');
-            localStorage.setItem('lastView', 'newMatch');
-        }
-
-        function showSimulator() {
-            dashboardView.style.display = 'none';
-            newMatchView.style.display = 'none';
-            simulatorView.style.display = 'block';
-            navDashboard.classList.remove('active');
-            navNewMatch.classList.remove('active');
-            navSimulator.classList.add('active');
-            localStorage.setItem('lastView', 'simulator');
-        }
-
-        navDashboard.addEventListener('click', (e) => { e.preventDefault(); showDashboard(); });
-        navNewMatch.addEventListener('click', (e) => { e.preventDefault(); showNewMatch(); });
-        navSimulator.addEventListener('click', (e) => { e.preventDefault(); showSimulator(); });
 
         // Auto-show views
         {% if results %}
@@ -1166,7 +1135,7 @@
         }
 
         function switchView(viewId) {
-            const views = ['dashboardView', 'newMatchView', 'resultsView', 'analysisView'];
+            const views = ['dashboardView', 'newMatchView', 'resultsView', 'analysisView', 'simulatorView'];
             const targetView = document.getElementById(viewId + 'View');
 
             if (!targetView) return;
@@ -1200,9 +1169,9 @@
             localStorage.setItem('lastView', viewId);
         }
 
-        // Keep legacy aliases if needed for templates
         function showDashboard() { switchView('dashboard'); }
         function showNewMatch() { switchView('newMatch'); }
+        function showSimulator() { switchView('simulator'); }
         // Tab Switching for Forms
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1445,6 +1414,12 @@
                                 <option value="Advanced">Advanced / Expert</option>
                             </select>
                         </div>
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label>Resume Strength: <span id="scoreVal">85</span>%</label>
+                            <input type="range" id="salaryScore" min="0" max="100" value="85" class="input-field"
+                                style="padding: 0; height: auto;"
+                                oninput="document.getElementById('scoreVal').innerText = this.value">
+                        </div>
                     </div>
 
                     <div id="salaryResultArea" style="margin-top: 2rem; display: none;">
@@ -1530,7 +1505,7 @@
                 experience: document.getElementById('salaryExp').value,
                 edu: document.getElementById('salaryEdu').value,
                 seniority: document.getElementById('salarySeniority').value,
-                score: 85 // Mock score for now, normally derived from global state
+                score: document.getElementById('salaryScore').value
             };
 
             if (!data.role || !data.company || !data.location) {
