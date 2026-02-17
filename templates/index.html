@@ -1358,133 +1358,128 @@
                     <div style="font-size: 0.8125rem; font-weight: 700; color: var(--primary);">English (US)</div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button class="btn-primary" onclick="closeModal('settingsModal')">Close Settings</button>
-            </div>
         </div>
-        <!-- Salary Simulator Modal -->
-        <div id="salaryModal" class="modal-overlay">
-            <div class="modal-content" style="max-width: 700px;">
-                <div class="modal-header">
-                    <div>
-                        <h3 style="margin: 0;">Salary Range Simulator</h3>
-                        <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0.25rem 0 0;">Estimate
-                            data-driven annual
-                            compensation packages</p>
-                    </div>
-                    <button class="modal-close" onclick="closeModal('salaryModal')">&times;</button>
+    </div>
+    </div>
+    <!-- Salary Simulator Modal -->
+    <div id="salaryModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <div>
+                    <h3 style="margin: 0;">Salary Range Simulator</h3>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0.25rem 0 0;">Estimate
+                        data-driven annual
+                        compensation packages</p>
                 </div>
-                <div class="modal-body" style="padding-top: 1rem;">
-                    <div class="simulator-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
-                        <div class="form-group">
-                            <label>Target Role</label>
-                            <input type="text" id="salaryRole" class="input-field"
-                                placeholder="e.g. Senior Backend Engineer">
-                        </div>
-                        <div class="form-group">
-                            <label>Target Company</label>
-                            <input type="text" id="salaryCompany" class="input-field"
-                                placeholder="e.g. Google, Microsoft, Startup">
-                        </div>
-                        <div class="form-group">
-                            <label>Location</label>
-                            <input type="text" id="salaryLocation" class="input-field"
-                                placeholder="e.g. India, Remote, US">
-                        </div>
-                        <div class="form-group">
-                            <label>Years of Experience: <span id="expVal">5</span></label>
-                            <input type="range" id="salaryExp" min="0" max="30" value="5" class="input-field"
-                                style="padding: 0; height: auto;"
-                                oninput="document.getElementById('expVal').innerText = this.value">
-                        </div>
-                        <div class="form-group">
-                            <label>Education Level</label>
-                            <select id="salaryEdu" class="input-field">
-                                <option value="Bachelors">Bachelor's Degree</option>
-                                <option value="Masters">Master's Degree</option>
-                                <option value="PhD">PhD</option>
-                                <option value="Self-taught">Self-taught / Bootcamp</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Skill Seniority</label>
-                            <select id="salarySeniority" class="input-field">
-                                <option value="Beginner">Beginner / Junior</option>
-                                <option value="Intermediate" selected>Intermediate / Mid-level</option>
-                                <option value="Advanced">Advanced / Expert</option>
-                            </select>
-                        </div>
-                        <div class="form-group" style="grid-column: span 2;">
-                            <label>Resume Strength: <span id="scoreVal">85</span>%</label>
-                            <input type="range" id="salaryScore" min="0" max="100" value="85" class="input-field"
-                                style="padding: 0; height: auto;"
-                                oninput="document.getElementById('scoreVal').innerText = this.value">
-                        </div>
+                <button class="modal-close" onclick="closeModal('salaryModal')">&times;</button>
+            </div>
+            <div class="modal-body" style="padding-top: 1rem;">
+                <div class="simulator-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                    <div class="form-group">
+                        <label>Target Role</label>
+                        <input type="text" id="salaryRole" class="input-field"
+                            placeholder="e.g. Senior Backend Engineer">
                     </div>
+                    <div class="form-group">
+                        <label>Target Company</label>
+                        <input type="text" id="salaryCompany" class="input-field"
+                            placeholder="e.g. Google, Microsoft, Startup">
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="salaryLocation" class="input-field" placeholder="e.g. India, Remote, US">
+                    </div>
+                    <div class="form-group">
+                        <label>Years of Experience: <span id="expVal">5</span></label>
+                        <input type="range" id="salaryExp" min="0" max="30" value="5" class="input-field"
+                            style="padding: 0; height: auto;"
+                            oninput="document.getElementById('expVal').innerText = this.value">
+                    </div>
+                    <div class="form-group">
+                        <label>Education Level</label>
+                        <select id="salaryEdu" class="input-field">
+                            <option value="Bachelors">Bachelor's Degree</option>
+                            <option value="Masters">Master's Degree</option>
+                            <option value="PhD">PhD</option>
+                            <option value="Self-taught">Self-taught / Bootcamp</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Skill Seniority</label>
+                        <select id="salarySeniority" class="input-field">
+                            <option value="Beginner">Beginner / Junior</option>
+                            <option value="Intermediate" selected>Intermediate / Mid-level</option>
+                            <option value="Advanced">Advanced / Expert</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>Resume Strength: <span id="scoreVal">85</span>%</label>
+                        <input type="range" id="salaryScore" min="0" max="100" value="85" class="input-field"
+                            style="padding: 0; height: auto;"
+                            oninput="document.getElementById('scoreVal').innerText = this.value">
+                    </div>
+                </div>
 
-                    <div id="salaryResultArea" style="margin-top: 2rem; display: none;">
-                        <div class="salary-box"
-                            style="background: var(--primary-light); border: 1px solid var(--primary-dark); border-radius: 12px; padding: 1.5rem; animation: slideUp 0.5s ease;">
-                            <div
-                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                <span id="salaryTierBadge" class="status-badge"
-                                    style="background: var(--primary); color: white; border: none;"></span>
-                                <span id="salaryConfidence" style="font-size: 0.75rem; font-weight: 700;"></span>
-                            </div>
+                <div id="salaryResultArea" style="margin-top: 2rem; display: none;">
+                    <div class="salary-box"
+                        style="background: var(--primary-light); border: 1px solid var(--primary-dark); border-radius: 12px; padding: 1.5rem; animation: slideUp 0.5s ease;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span id="salaryTierBadge" class="status-badge"
+                                style="background: var(--primary); color: white; border: none;"></span>
+                            <span id="salaryConfidence" style="font-size: 0.75rem; font-weight: 700;"></span>
+                        </div>
 
-                            <div class="salary-range-display"
-                                style="display: flex; gap: 1rem; text-align: center; margin-bottom: 1.5rem;">
-                                <div style="flex: 1;">
-                                    <div
-                                        style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">
-                                        Minimum
-                                    </div>
-                                    <div id="salaryMin"
-                                        style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">
-                                    </div>
+                        <div class="salary-range-display"
+                            style="display: flex; gap: 1rem; text-align: center; margin-bottom: 1.5rem;">
+                            <div style="flex: 1;">
+                                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">
+                                    Minimum
                                 </div>
+                                <div id="salaryMin"
+                                    style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">
+                                </div>
+                            </div>
+                            <div
+                                style="flex: 1; transform: scale(1.1); background: white; border-radius: 8px; padding: 0.5rem; box-shadow: var(--shadow-sm);">
                                 <div
-                                    style="flex: 1; transform: scale(1.1); background: white; border-radius: 8px; padding: 0.5rem; box-shadow: var(--shadow-sm);">
-                                    <div
-                                        style="font-size: 0.75rem; color: var(--primary); text-transform: uppercase; font-weight: 700;">
-                                        Average</div>
-                                    <div id="salaryAvg"
-                                        style="font-size: 1.5rem; font-weight: 900; color: var(--primary);"></div>
-                                </div>
-                                <div style="flex: 1;">
-                                    <div
-                                        style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">
-                                        Maximum
-                                    </div>
-                                    <div id="salaryMax"
-                                        style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">
-                                    </div>
+                                    style="font-size: 0.75rem; color: var(--primary); text-transform: uppercase; font-weight: 700;">
+                                    Average</div>
+                                <div id="salaryAvg" style="font-size: 1.5rem; font-weight: 900; color: var(--primary);">
                                 </div>
                             </div>
-
-                            <div
-                                style="background: rgba(255,255,255,0.5); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
-                                <div style="font-weight: 700; font-size: 0.8125rem; margin-bottom: 0.25rem;">Equity &
-                                    Bonuses</div>
-                                <p id="salaryBonus" style="font-size: 0.8125rem; margin: 0; color: var(--text-muted);">
-                                </p>
+                            <div style="flex: 1;">
+                                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">
+                                    Maximum
+                                </div>
+                                <div id="salaryMax"
+                                    style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">
+                                </div>
                             </div>
+                        </div>
 
-                            <div style="font-size: 0.8125rem; line-height: 1.5;">
-                                <strong>Analysis:</strong> <span id="salaryExplain"
-                                    style="color: var(--text-muted);"></span>
-                            </div>
+                        <div
+                            style="background: rgba(255,255,255,0.5); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                            <div style="font-weight: 700; font-size: 0.8125rem; margin-bottom: 0.25rem;">Equity &
+                                Bonuses</div>
+                            <p id="salaryBonus" style="font-size: 0.8125rem; margin: 0; color: var(--text-muted);">
+                            </p>
+                        </div>
+
+                        <div style="font-size: 0.8125rem; line-height: 1.5;">
+                            <strong>Analysis:</strong> <span id="salaryExplain"
+                                style="color: var(--text-muted);"></span>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <p style="font-size: 0.625rem; color: var(--text-muted); flex: 1; margin: 0; font-style: italic;">
-                        Estimated values based on current market trends. Not a guarantee of actual offer.
-                    </p>
-                    <button class="btn-secondary" onclick="closeModal('salaryModal')">Cancel</button>
-                    <button id="simulateSalaryBtn" class="btn-primary" onclick="runSalarySimulation()">Simulate
-                        Salary</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <p style="font-size: 0.625rem; color: var(--text-muted); flex: 1; margin: 0; font-style: italic;">
+                    Estimated values based on current market trends. Not a guarantee of actual offer.
+                </p>
+                <button class="btn-secondary" onclick="closeModal('salaryModal')">Cancel</button>
+                <button id="simulateSalaryBtn" class="btn-primary" onclick="runSalarySimulation()">Simulate
+                    Salary</button>
             </div>
         </div>
     </div>
@@ -1503,7 +1498,7 @@
                 company: document.getElementById('salaryCompany').value,
                 location: document.getElementById('salaryLocation').value,
                 experience: document.getElementById('salaryExp').value,
-                edu: document.getElementById('salaryEdu').value,
+                education: document.getElementById('salaryEdu').value,
                 seniority: document.getElementById('salarySeniority').value,
                 score: document.getElementById('salaryScore').value
             };
