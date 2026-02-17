@@ -45,6 +45,7 @@ os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"
 # Flask App Setup
 # =========================
 app = Flask(__name__)
+print(f"Flask app instance created: {__name__}")
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-key")
 
 # Enable ProxyFix for deployment (Render/Heroku/Vercel)
