@@ -13,14 +13,14 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 # Import models
 from models.resume_ranker import rank_resumes
-from models.ats_checker import check_ats_friendliness, get_company_templates
+from models.ats_checker import check_ats_friendliness
 from models.job_expander import expand_job_requirements
 from models.file_parser import extract_text_from_file
 from models.style_analyzer import analyze_company_style
 from models.evolution_tracker import track_evolution
 from models.rejection_simulator import simulate_rejection
 from models.salary_simulator import estimate_salary
-from models.template_matcher import suggest_template
+from models.template_matcher import suggest_template, get_company_templates
 
 # =========================
 # Load environment variables
