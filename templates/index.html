@@ -377,10 +377,10 @@
                     style="display: flex; gap: 1rem; align-items: flex-start; background: var(--primary-light); border: 1px solid var(--primary); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
                     <div class="banner-icon" style="font-size: 1.5rem;">🤖</div>
                     <div class="banner-content">
-                        <h4 style="font-weight: 700; margin-bottom: 0.25rem; color: var(--primary);">AI Requirement
+                        <h4 style="font-weight: 800; margin-bottom: 0.25rem; color: var(--primary);">AI Requirement
                             Intelligence</h4>
-                        <p style="font-size: 0.875rem; color: var(--text-muted);">Detected short title. Automatically
-                            expanded into industry-standard requirements for precise matching.</p>
+                        <p style="font-size: 0.875rem; color: var(--text-main); font-weight: 500;">Detected short title.
+                            Automatically expanded into industry-standard requirements for precise matching.</p>
                     </div>
                 </div>
                 {% endif %}
@@ -419,13 +419,9 @@
                             {% if r.score >= 70 %}
                             <span class="status-badge status-strong">Excellent Match</span>
                             {% elif r.score >= 50 %}
-                            <span class="status-badge"
-                                style="background: var(--warning-light); color: var(--warning);">Good
-                                Match</span>
+                            <span class="status-badge status-average">Good Match</span>
                             {% else %}
-                            <span class="status-badge"
-                                style="background: var(--danger-light); color: var(--danger);">Needs
-                                Review</span>
+                            <span class="status-badge status-needs-review">Needs Review</span>
                             {% endif %}
                         </div>
 
@@ -767,15 +763,15 @@
                             </ul>
                         </div>
 
-                        <div class="panel-card" style="background: linear-gradient(135deg, #1F2937, #111827); border: 1px solid #374151; border-radius: 16px; padding: 2rem; color: white;">
+                        <div class="panel-card" style="background: var(--bg-hover); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; color: var(--text-main);">
                             <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
-                                <span style="font-size: 1.5rem;">Info</span>
-                                <h4 style="font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem;">Internal Monologue</h4>
+                                <span style="font-size: 1.25rem;">💬</span>
+                                <h4 style="font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem;">Internal Monologue</h4>
                             </div>
-                            <p style="font-size: 1.25rem; font-weight: 500; line-height: 1.5; font-style: italic;">
+                            <p style="font-size: 1.25rem; font-weight: 600; line-height: 1.5; font-style: italic; color: var(--text-main);">
                                 "${res.internal_monologue}"
                             </p>
-                            <p style="margin-top: 1.5rem; font-size: 0.75rem; color: #6B7280; text-align: right;">— Anonymous Hiring Manager</p>
+                            <p style="margin-top: 1.5rem; font-size: 0.75rem; color: var(--text-muted); text-align: right;">— Anonymous Hiring Manager</p>
                         </div>
                     </div>
 

@@ -3,55 +3,66 @@
    ========================================== */
 
 :root {
-    /* Primary Colors */
-    --primary: #2563eb;
-    --primary-light: #eff6ff;
-    --primary-dark: #1e40af;
+    /* Premium Tech Palette */
+    --primary: #6366f1;
+    --primary-light: #eef2ff;
+    --primary-dark: #4338ca;
+    --accent: #a855f7;
 
-    /* Semantic Colors */
-    --success: #10b981;
+    /* Semantic High-Contrast Colors */
+    --success: #059669;
     --success-light: #ecfdf5;
-    --warning: #f59e0b;
+    --warning: #d97706;
     --warning-light: #fffbeb;
-    --danger: #ef4444;
+    --danger: #dc2626;
     --danger-light: #fef2f2;
-    --info: #3b82f6;
+    --info: #2563eb;
     --info-light: #eff6ff;
 
-    /* Transition */
-    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    /* Transition & Shadows */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
-    /* Light Theme (Default) */
+    /* Light Theme - Clean & Professional */
     --bg-main: #f8fafc;
     --bg-card: #ffffff;
     --bg-hover: #f1f5f9;
     --border: #e2e8f0;
     --text-main: #0f172a;
-    --text-muted: #64748b;
+    /* High contrast dark slate */
+    --text-muted: #475569;
+    /* Accessible gray */
     --text-inverse: #ffffff;
-    --header-bg: rgba(255, 255, 255, 0.8);
+    --header-bg: rgba(255, 255, 255, 0.85);
     --input-bg: #ffffff;
-    --input-border: #e2e8f0;
+    --input-border: #cbd5e1;
 }
 
 .dark-theme {
-    --bg-main: #0f172a;
-    --bg-card: #1e293b;
-    --bg-hover: #334155;
+    /* Deep Navy Dark Mode - Premium Feel */
+    --bg-main: #020617;
+    /* Deepest navy */
+    --bg-card: #0f172a;
+    /* Slate navy */
+    --bg-hover: #1e293b;
     --border: #334155;
-    --text-main: #f1f5f9;
+    --text-main: #f8fafc;
+    /* Crisp white-ish */
     --text-muted: #94a3b8;
-    --text-inverse: #0f172a;
-    --header-bg: rgba(15, 23, 42, 0.8);
+    /* Readable slate */
+    --text-inverse: #020617;
+    --header-bg: rgba(2, 6, 23, 0.85);
     --input-bg: #1e293b;
     --input-border: #334155;
 
-    /* Adjusted Primary for Dark Mode */
-    --primary-light: rgba(37, 99, 235, 0.1);
+    /* Adjusted Semantic for Dark */
+    --success-light: rgba(5, 150, 105, 0.15);
+    --warning-light: rgba(217, 119, 6, 0.15);
+    --danger-light: rgba(220, 38, 38, 0.15);
+    --primary-light: rgba(99, 102, 241, 0.15);
 }
 
 /* Base Styles */
@@ -624,39 +635,86 @@ textarea.input-field {
 /* File Upload Zone */
 .file-upload-zone {
     border: 2px dashed var(--border);
-    border-radius: 12px;
-    padding: 3rem;
+    border-radius: 16px;
+    padding: 3.5rem;
     text-align: center;
     transition: var(--transition);
     cursor: pointer;
     background: var(--bg-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .file-upload-zone:hover,
 .file-upload-zone.drag-over {
     border-color: var(--primary);
     background: var(--primary-light);
+    transform: scale(1.01);
 }
 
 .upload-icon {
-    font-size: 2rem;
-    color: var(--text-muted);
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1.25rem;
+    opacity: 0.8;
 }
 
 .upload-text {
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
 }
 
 .upload-text span {
     color: var(--primary);
+    text-decoration: underline;
 }
 
 .upload-subtext {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     color: var(--text-muted);
+}
+
+/* Live Indicator Styles */
+.live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--success);
+    background: var(--success-light);
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+}
+
+.pulse {
+    width: 8px;
+    height: 8px;
+    background: var(--success);
+    border-radius: 50%;
+    position: relative;
+    animation: pulse-ring 1.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.8);
+        box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 8px rgba(5, 150, 105, 0);
+    }
+
+    100% {
+        transform: scale(0.8);
+        box-shadow: 0 0 0 0 rgba(5, 150, 105, 0);
+    }
 }
 
 /* Results Custom Styles */

@@ -219,6 +219,7 @@
         </div>
 
         <div class="social-login">
+            {% if google_enabled %}
             <a href="{{ url_for('google.login') }}" class="btn-social">
                 <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -236,6 +237,8 @@
                 </svg>
                 Sign up with Google
             </a>
+            {% endif %}
+            {% if github_enabled %}
             <a href="{{ url_for('github.login') }}" class="btn-social">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path
@@ -243,6 +246,7 @@
                 </svg>
                 Sign up with GitHub
             </a>
+            {% endif %}
         </div>
 
         <div class="divider">or</div>

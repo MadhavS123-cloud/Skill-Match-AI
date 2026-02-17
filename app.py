@@ -8,7 +8,13 @@ from flask_dance.contrib.github import make_github_blueprint, github
 from oauthlib.oauth2 import TokenExpiredError
 from dotenv import load_dotenv
 import traceback
-from werkzeug.middleware.proxy_fix import ProxyFix
+try:
+    from werkzeug.middleware.proxy_fix import ProxyFix
+except ImportError:
+    try:
+        from werkzeug.contrib.fixers import ProxyFix
+    except ImportError:
+        ProxyFix = None
 
 # Import models
 from models.resume_ranker import rank_resumes
@@ -40,7 +46,10 @@ app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-key")
 
 # Enable ProxyFix for deployment (Render/Heroku/Vercel)
-app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1)
+if ProxyFix:
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1)
+else:
+    print("WARNING: ProxyFix could not be imported. URL generation might be incorrect in production.")
 
 # Only force HTTPS for URL generation in production
 if os.getenv("FLASK_ENV") != "development" and os.getenv("FLASK_DEBUG") != "1":
@@ -436,4 +445,7 @@ def simulate_salary_route():
         return jsonify({"status": "error", "message": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.getenv("PORT", 5000))
+    # Bind to 0.0.0.0 to be accessible in containerized environments like Render
+    print(f"Starting Skill Match AI on port {port}...")
+    app.run(host="0.0.0.0", port=port, debug=os.getenv("FLASK_DEBUG") == "1")

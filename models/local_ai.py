@@ -3,7 +3,10 @@ import re
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import ollama
+try:
+    import ollama
+except ImportError:
+    ollama = None
 
 def calculate_similarity(text1, text2):
     """
