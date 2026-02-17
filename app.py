@@ -15,6 +15,8 @@ except ImportError:
         from werkzeug.contrib.fixers import ProxyFix
     except ImportError:
         ProxyFix = None
+    except Exception:
+        ProxyFix = None
 
 # Import models
 from models.resume_ranker import rank_resumes
@@ -47,7 +49,15 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-key")
 
 # Enable ProxyFix for deployment (Render/Heroku/Vercel)
 if ProxyFix:
-    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1)
+    try:
+        # Modern Werkzeug (0.15+)
+        app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1)
+    except TypeError:
+        # Older Werkzeug
+        try:
+            app.wsgi_app = ProxyFix(app.wsgi_app, num_proxies=1)
+        except Exception as e:
+            print(f"WARNING: Failed to apply legacy ProxyFix: {e}")
 else:
     print("WARNING: ProxyFix could not be imported. URL generation might be incorrect in production.")
 
