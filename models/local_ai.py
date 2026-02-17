@@ -1,53 +1,39 @@
 import os
 import re
 import numpy as np
-from sentence_transformers import SentenceTransformer
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import ollama
 
-# Singleton for local embedding model
-_embedding_model = None
-
-def get_embedding_model():
-    global _embedding_model
-    if _embedding_model is None:
-        # Using a lightweight, fast model suitable for local deployment
-        try:
-            _embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
-        except Exception as e:
-            print(f"Error loading embedding model: {e}")
-            return None
-    return _embedding_model
-
-def get_embeddings(texts):
-    model = get_embedding_model()
-    if model is None:
-        return None
-    return model.encode(texts)
-
 def calculate_similarity(text1, text2):
-    embeddings = get_embeddings([text1, text2])
-    if embeddings is None:
+    """
+    Calculates similarity using lightweight TF-IDF (Credit-free & Hosting-friendly).
+    """
+    try:
+        vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1, 2))
+        tfidf_matrix = vectorizer.fit_transform([text1, text2])
+        return float(cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:2])[0][0])
+    except:
         return 0.0
-    return float(cosine_similarity([embeddings[0]], [embeddings[1]])[0][0])
 
 def call_local_llm(prompt, system_prompt="You are a helpful career assistant."):
     """
-    Calls Ollama locally. Requires Ollama to be installed and running.
+    Calls Ollama locally. Requires Ollama to be installed and running on the host.
     """
     try:
+        # Note: This will only work if the host has Ollama installed. 
+        # On cloud hosting like Render, this will safely fail and trigger fallbacks.
         response = ollama.chat(model='llama3', messages=[
             {'role': 'system', 'content': system_prompt},
             {'role': 'user', 'content': prompt},
         ])
         return response['message']['content']
-    except Exception as e:
-        print(f"Ollama call failed: {e}")
-        return "Local LLM service (Ollama) is not reachable. Please ensure Ollama is installed and running with 'llama3' model."
+    except:
+        return "Local LLM service (Ollama) is not reachable. Using deterministic fallback logic."
 
 def extract_skills_locally(text):
     """
-    Extracts common tech skills using regex (fast/deterministic fallback).
+    Extracts common tech skills using logic (fast/deterministic).
     """
     common_skills = [
         "Python", "JavaScript", "Java", "C++", "C#", "React", "Angular", "Vue", "Node.js", 
@@ -65,40 +51,19 @@ def extract_skills_locally(text):
 
 def match_skills_semantic(resume_text, required_skills):
     """
-    Checks for required skills in resume using semantic similarity.
-    This helps find "Backend" if resume says "Server-side", etc.
+    Checks for required skills in resume using lightweight matching.
     """
     if not required_skills:
         return [], []
         
-    resume_sentences = re.split(r'[.\n]', resume_text)
-    resume_sentences = [s.strip() for s in resume_sentences if len(s.strip()) > 10]
-    
-    if not resume_sentences:
-        return [], required_skills
-        
-    model = get_embedding_model()
-    if not model:
-        # Fallback to simple keyword match
-        found = []
-        missing = []
-        for s in required_skills:
-            if s.lower() in resume_text.lower(): found.append(s)
-            else: missing.append(s)
-        return found, missing
-
-    # Semantic matching logic
-    required_embeddings = model.encode(required_skills)
-    resume_embeddings = model.encode(resume_sentences)
-    
-    similarities = cosine_similarity(required_embeddings, resume_embeddings)
-    
     found = []
     missing = []
     
-    for i, skill in enumerate(required_skills):
-        best_match_score = np.max(similarities[i])
-        if best_match_score > 0.6: # Threshold for semantic match
+    resume_lower = resume_text.lower()
+    
+    for skill in required_skills:
+        # Simple but effective keyword match for hosting environments
+        if skill.lower() in resume_lower:
             found.append(skill)
         else:
             missing.append(skill)
