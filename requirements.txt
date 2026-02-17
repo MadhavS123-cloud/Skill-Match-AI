@@ -9,3 +9,8 @@ blinker
 cryptography
 httpx
 gunicorn
+sentence-transformers
+scikit-learn
+numpy
+torch
+ollama

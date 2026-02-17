@@ -1,48 +1,60 @@
-from groq import Groq
-import os
+from .local_ai import call_local_llm, calculate_similarity, extract_skills_locally
 import json
-from dotenv import load_dotenv
-
-load_dotenv()
 
 def simulate_rejection(resume_text, company, role):
-    api_key = os.getenv("GROQ_API_KEY")
-    if not api_key: 
-        return {
-            "rejection_risks": ["Service unavailable (Missing API Key)"],
-            "internal_monologue": "I can't even look at this right now. The system is down.",
-            "line_of_doubt": "Configuration Error",
-            "strategic_fixes": ["Contact support to fix API connectivity."]
-        }
+    """
+    Simulates a rejection using local AI (Ollama) or deterministic logic if offline.
+    """
+    
+    # 1. Try Ollama for rich, cynical personality
+    prompt = f"""
+    Simulate a cynical, high-stakes HR manager at {company} rejecting this resume for a {role} position.
+    Be brutal but constructive.
+    Output MUST be a JSON object with:
+    - rejection_risks: list of 3 specific red flags
+    - internal_monologue: a short, blunt string of what they actually think
+    - line_of_doubt: a specific 1-line quote from the resume that made them stop
+    - strategic_fixes: list of 3 high-impact changes to get past them next time
+
+    IMPORTANT: Do NOT use ANY emojis in your response. Keep the tone cynical but professional.
+
+    Resume Content:
+    {resume_text[:2000]}  # Truncate for local LLM context limits
+    """
+    
+    system_prompt = "You are a cynical hiring manager who provides feedback in JSON format."
+    
+    response = call_local_llm(prompt, system_prompt)
     
     try:
-        client = Groq(api_key=api_key)
-        prompt = f"""
-        Simulate a cynical, high-stakes HR manager at {company} rejecting this resume for a {role} position.
-        Be brutal but constructive.
-        Output MUST be a JSON object with:
-        - rejection_risks: list of 3 specific red flags
-        - internal_monologue: a short, blunt string of what they actually think
-        - line_of_doubt: a specific 1-line quote from the resume that made them stop
-        - strategic_fixes: list of 3 high-impact changes to get past them next time
+        # If response looks like JSON, parse it
+        if '{' in response and '}' in response:
+            json_str = response[response.find('{'):response.rfind('}')+1]
+            return json.loads(json_str)
+    except:
+        pass
 
-        IMPORTANT: Do NOT use ANY emojis in your response. Keep the tone professional or cynical as requested, but text-only.
+    # 2. Deterministic Fallback (if Ollama is not running)
+    similarity = calculate_similarity(resume_text, f"{role} at {company}")
+    resume_skills = extract_skills_locally(resume_text)
+    
+    monologue = "This resume feels generic. I've seen 50 of these today."
+    if similarity < 0.4:
+        monologue = "Is this candidate even applying for the right job? The alignment is way off."
+    elif len(resume_skills) < 5:
+        monologue = "Too light on specific technical keywords. Probably won't survive the first round of interviews."
 
-        Resume Content:
-        {resume_text}
-        """
-        
-        completion = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
-            messages=[{"role": "user", "content": prompt}],
-            response_format={"type": "json_object"}
-        )
-        return json.loads(completion.choices[0].message.content)
-    except Exception as e:
-        print(f"Simulator Error: {e}")
-        return {
-            "rejection_risks": ["AI Simulator Failed"],
-            "internal_monologue": "My brain just melted trying to process this. Error in simulation logic.",
-            "line_of_doubt": "System Interrupt",
-            "strategic_fixes": ["Try again in a few minutes.", "Check if Groq API is reachable."]
-        }
+    return {
+        "rejection_risks": [
+            "Lack of specific industry-standard keywords" if len(resume_skills) < 10 else "Experience level appears slightly below bracket",
+            "Formatting is basic and doesn't stand out in a high-volume pile",
+            "Missing clear impact metrics in recent roles"
+        ],
+        "internal_monologue": monologue,
+        "line_of_doubt": "The presentation lacks the 'wow' factor required for a top-tier firm like " + company,
+        "strategic_fixes": [
+            "Inject specific metrics (%, $) into every single experience bullet point",
+            "Re-align the summary to speak directly to " + company + "'s core business values",
+            "Modernize the layout to be more visually striking while maintaining ATS readability"
+        ]
+    }

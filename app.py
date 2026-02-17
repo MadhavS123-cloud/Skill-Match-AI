@@ -1,4 +1,3 @@
-from groq import Groq
 import os
 import json
 from datetime import datetime
@@ -87,20 +86,8 @@ def save_matches(matches):
     except Exception as e:
         print(f"Error saving matches: {e}")
 
-# =========================
-# Groq AI Setup
-# =========================
-def get_groq_client():
-    api_key = os.getenv("GROQ_API_KEY")
-    if not api_key:
-        return None
-    try:
-        return Groq(api_key=api_key)
-    except Exception:
-        return None
-
-client = get_groq_client()
-MODEL_NAME = "llama-3.3-70b-versatile"
+# AI Setup (Local Models)
+# All AI calls are now handled within their respective model modules using local engines.
 
 # =========================
 # OAuth Blueprints
