@@ -192,100 +192,166 @@
     </style>
 </head>
 
-<body class="dark-theme">
-    <div class="bg-animate"></div>
-
-    <div class="auth-container fade-in">
-        <div class="auth-header">
-            <div class="auth-logo">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"
-                        fill="url(#ai-grad-auth)" />
-                    <circle cx="12" cy="12" r="4" fill="white" fill-opacity="0.2" />
-                    <path d="m9 12 2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <defs>
-                        <linearGradient id="ai-grad-auth" x1="3" y1="3" x2="21" y2="21" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#6366f1" />
-                            <stop offset="1" stop-color="#a855f7" />
-                        </linearGradient>
-                    </defs>
-                </svg>
+<body>
+    <div class="auth-split-screen">
+        <!-- Left Side: Information side -->
+        <div class="auth-info-side">
+            <div class="sidebar-logo">
+                <div class="logo-symbol"></div>
+                <span
+                    style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em;">SkillMatch
+                    <span
+                        style="font-size: 0.625rem; background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; vertical-align: middle; margin-left: 4px;">AI</span></span>
             </div>
-            <h1>Welcome back</h1>
-            <p>Enter your details to access your account</p>
+
+            <div style="max-width: 480px;">
+                <div style="margin-bottom: 2rem;">
+                    <span
+                        style="font-size: 0.625rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); background: rgba(197, 165, 114, 0.1); padding: 4px 12px; border-radius: 50px; border: 1px solid rgba(197, 165, 114, 0.2);">Member
+                        Intelligence</span>
+                </div>
+                <h1
+                    style="font-family: 'Outfit', sans-serif; font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 2rem; letter-spacing: -0.02em;">
+                    Access your career advantage.</h1>
+                <p style="font-size: 1.125rem; color: var(--text-nav); line-height: 1.6;">Sign in to continue analyzing
+                    your match potential and simulating role outcomes with enterprise-grade precision.</p>
+            </div>
+
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.2);">
+                &copy; 2026 Skill Match AI. Private Early Access.
+            </div>
         </div>
 
-        <div class="social-login">
-            {% if google_enabled %}
-            <a href="{{ url_for('google.login') }}" class="btn-social">
-                <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                        fill="#4285F4" />
-                    <path
-                        d="M12 23c3.11 0 5.71-1.02 7.62-2.77l-3.57-2.77c-.99.66-2.23 1.06-4.05 1.06-3.11 0-5.74-2.11-6.68-4.96H1.74v2.85C3.64 20.31 7.6 23 12 23z"
-                        fill="#34A853" />
-                    <path
-                        d="M5.32 13.56c-.24-.71-.37-1.47-.37-2.26s.13-1.55.37-2.26V6.19H1.74c-.8 1.6-1.25 3.39-1.25 5.31s.45 3.71 1.25 5.31l3.58-2.84z"
-                        fill="#FBBC05" />
-                    <path
-                        d="M12 4.75c1.69 0 3.21.58 4.41 1.71l3.3-3.3C17.69 1.02 15.11 0 12 0 7.6 0 3.64 2.69 1.74 6.19l3.58 2.84c.94-2.85 3.57-4.96 6.68-4.96z"
-                        fill="#EA4335" />
-                </svg>
-                Continue with Google
-            </a>
-            {% endif %}
+        <!-- Right Side: Interaction side -->
+        <div class="auth-form-side">
+            <div class="auth-form-wrapper">
+                <div style="margin-bottom: 2.5rem;">
+                    <h2
+                        style="font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--primary);">
+                        Welcome back</h2>
+                    <p style="color: var(--text-muted); font-size: 0.9375rem;">Enter your credentials to access your
+                        dashboard.</p>
+                </div>
 
-            {% if github_enabled %}
-            <a href="{{ url_for('github.login') }}" class="btn-social">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                </svg>
-                Continue with GitHub
-            </a>
-            {% endif %}
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ 'error' if category == 'error' else 'success' }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
 
-            {% if linkedin_enabled %}
-            <a href="{{ url_for('linkedin.login') }}" class="btn-social">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="#0077b5">
-                    <path
-                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                </svg>
-                Continue with LinkedIn
-            </a>
-            {% endif %}
-            <a href="/bypass-login" class="btn-social" style="background: var(--primary); color: white; border: none;">
-                Continue as Guest (Skip Login)
-            </a>
-        </div>
+                <form action="/login" method="POST" style="margin-bottom: 2rem;">
+                    <div class="form-group" style="margin-bottom: 1.25rem;">
+                        <label
+                            style="text-transform: uppercase; font-size: 0.625rem; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 800; margin-bottom: 0.5rem; display: block;">Work
+                            Email</label>
+                        <div style="position: relative;">
+                            <input type="email" name="email" class="input-field" placeholder="name@company.com" required
+                                style="height: 52px; padding-left: 3rem; border-radius: 12px; border: 1px solid var(--border); background: #fcfcfc;">
+                            <span
+                                style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-nav); display: flex;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 2rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <label
+                                style="text-transform: uppercase; font-size: 0.625rem; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 800;">Password</label>
+                            <a href="#"
+                                style="font-size: 0.75rem; color: var(--accent); font-weight: 700; text-decoration: none;">Forgot
+                                password?</a>
+                        </div>
+                        <div style="position: relative;">
+                            <input type="password" name="password" class="input-field" placeholder="••••••••" required
+                                style="height: 52px; padding-left: 3rem; border-radius: 12px; border: 1px solid var(--border); background: #fcfcfc;">
+                            <span
+                                style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-nav); display: flex;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
 
-        <div class="divider">or</div>
+                    <button type="submit" class="btn-primary"
+                        style="width: 100%; height: 56px; border-radius: 12px; justify-content: center; font-size: 0.9375rem; background: var(--bg-sidebar); border: none; color: white; cursor: pointer; font-weight: 700;">
+                        Sign In &rarr;
+                    </button>
+                </form>
 
-        <form action="/login/magic" method="POST" class="magic-link-form">
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" class="input-field" placeholder="name@company.com" required>
+                <div style="position: relative; text-align: center; margin-bottom: 2rem;">
+                    <div style="position: absolute; top: 50%; width: 100%; height: 1px; background: var(--border);">
+                    </div>
+                    <span
+                        style="position: relative; background: white; padding: 0 1rem; color: var(--text-nav); font-size: 0.625rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;">Or
+                        continue with</span>
+                </div>
+
+                <div class="social-login"
+                    style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2.5rem;">
+                    <a href="{{ url_for('google_login', next=request.args.get('next')) }}" class="btn-social"
+                        style="border-radius: 12px; height: 52px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); text-decoration: none; background: white; transition: var(--transition); box-shadow: var(--shadow-sm);"
+                        title="Sign in with Google">
+                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20"
+                            height="20" alt="Google">
+                    </a>
+                    <a href="{{ url_for('linkedin_login', next=request.args.get('next')) }}" class="btn-social"
+                        style="border-radius: 12px; height: 52px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); text-decoration: none; background: white; transition: var(--transition); box-shadow: var(--shadow-sm);"
+                        title="Sign in with LinkedIn">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+                            width="20" height="20" alt="LinkedIn">
+                    </a>
+                    <a href="{{ url_for('github_login', next=request.args.get('next')) }}" class="btn-social"
+                        style="border-radius: 12px; height: 52px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); text-decoration: none; background: white; transition: var(--transition); box-shadow: var(--shadow-sm);"
+                        title="Sign in with GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: #000;">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div style="text-align: center; font-size: 0.875rem; color: var(--text-muted);">
+                    Don't have an account? <a href="/signup"
+                        style="color: var(--accent); font-weight: 700; text-decoration: none;">Request early access</a>
+                </div>
             </div>
-            <button type="submit" class="btn-primary btn-submit">
-                Send Magic Link
-            </button>
-        </form>
-
-        <p class="footer-text">
-            Don't have an account? <a href="/signup">Sign up</a>
-        </p>
+        </div>
     </div>
 
-    <script>
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            document.body.classList.remove('dark-theme');
+    <!-- Maintain specific styles for transitions and icons -->
+    <style>
+        .input-field:focus {
+            background: white !important;
+            border-color: var(--accent) !important;
+            box-shadow: 0 0 0 4px rgba(197, 165, 114, 0.1) !important;
+            outline: none;
         }
-    </script>
+
+        .btn-social:hover {
+            background: #f8fafc !important;
+            border-color: var(--text-nav) !important;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.2);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(10, 17, 40, 0.2) !important;
+        }
+    </style>
 </body>
 
 </html>

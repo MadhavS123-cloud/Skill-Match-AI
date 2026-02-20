@@ -59,6 +59,7 @@ if ProxyFix:
             app.wsgi_app = ProxyFix(app.wsgi_app, num_proxies=1)
         except Exception as e:
             print(f"WARNING: Failed to apply legacy ProxyFix: {e}")
+    print("DEBUG: ProxyFix applied for production environment.")
 else:
     print("WARNING: ProxyFix could not be imported. URL generation might be incorrect in production.")
 
@@ -110,58 +111,227 @@ def save_matches(matches):
 # All AI calls are now handled within their respective model modules using local engines.
 
 # =========================
-# OAuth Blueprints
+# OAuth Blueprints & Session Population
 # =========================
-google_client_id = os.getenv("GOOGLE_CLIENT_ID")
-google_client_secret = os.getenv("GOOGLE_CLIENT_SECRET")
-google_bp = None
-if google_client_id and google_client_secret:
-    google_bp = make_google_blueprint(
-        client_id=google_client_id,
-        client_secret=google_client_secret,
-        scope=["openid", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"],
-        offline=True,
-        reprompt_consent=True,
-        login_url="/google",
-        authorized_url="/google/authorized"
-    )
-    app.register_blueprint(google_bp, url_prefix="/login")
+# =========================
+# User Management (JSON Storage)
+# =========================
+def get_users_file():
+    if os.environ.get("VERCEL"):
+        return "/tmp/users_data.json"
+    return os.path.join(os.path.dirname(__file__), 'users_data.json')
 
-linkedin_client_id = os.getenv("LINKEDIN_CLIENT_ID")
-linkedin_client_secret = os.getenv("LINKEDIN_CLIENT_SECRET")
-linkedin_bp = None
-if linkedin_client_id and linkedin_client_secret:
-    linkedin_bp = make_linkedin_blueprint(
-        client_id=linkedin_client_id,
-        client_secret=linkedin_client_secret,
-        scope=["openid", "profile", "email"],
-        login_url="/linkedin",
-        authorized_url="/linkedin/authorized"
-    )
-    app.register_blueprint(linkedin_bp, url_prefix="/login")
+def load_users():
+    users_file = get_users_file()
+    try:
+        if os.path.exists(users_file):
+            with open(users_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+    except Exception as e:
+        print(f"Error loading users: {e}")
+    return {}
 
-github_client_id = os.getenv("GITHUB_CLIENT_ID")
-github_client_secret = os.getenv("GITHUB_CLIENT_SECRET")
-github_bp = None
-if github_client_id and github_client_secret:
-    github_bp = make_github_blueprint(
-        client_id=github_client_id,
-        client_secret=github_client_secret,
-        login_url="/github",
-        authorized_url="/github/authorized"
-    )
-    app.register_blueprint(github_bp, url_prefix="/login")
+def save_user(user_profile):
+    users = load_users()
+    email = user_profile.get("email")
+    if email:
+        users[email] = user_profile
+        users_file = get_users_file()
+        try:
+            with open(users_file, 'w', encoding='utf-8') as f:
+                json.dump(users, f, indent=2)
+        except Exception as e:
+            print(f"Error saving user: {e}")
+
+# =========================
+# OAuth Blueprints Configuration
+# =========================
+from flask_dance.consumer import oauth_authorized, oauth_error
+
+google_id = os.getenv("GOOGLE_CLIENT_ID")
+google_secret = os.getenv("GOOGLE_CLIENT_SECRET")
+google_bp = make_google_blueprint(
+    client_id=google_id,
+    client_secret=google_secret,
+    scope=["openid", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"],
+    offline=True,
+    reprompt_consent=True,
+    authorized_url="/callback"
+)
+app.register_blueprint(google_bp, url_prefix="/auth/google")
+
+linkedin_id = os.getenv("LINKEDIN_CLIENT_ID")
+linkedin_secret = os.getenv("LINKEDIN_CLIENT_SECRET")
+linkedin_bp = make_linkedin_blueprint(
+    client_id=linkedin_id,
+    client_secret=linkedin_secret,
+    scope=["openid", "profile", "email"],
+    authorized_url="/callback"
+)
+app.register_blueprint(linkedin_bp, url_prefix="/auth/linkedin")
+
+github_id = os.getenv("GITHUB_CLIENT_ID")
+github_secret = os.getenv("GITHUB_CLIENT_SECRET")
+github_bp = make_github_blueprint(
+    client_id=github_id,
+    client_secret=github_secret,
+    authorized_url="/callback"
+)
+app.register_blueprint(github_bp, url_prefix="/auth/github")
+
+# =========================
+# Unified Authorized Handler
+# =========================
+def unified_auth_handler(blueprint, token, provider_name):
+    from flask import flash
+    if not token:
+        flash(f"Failed to login with {provider_name.capitalize()}.", "error")
+        return None
+
+    user_info = {}
+    try:
+        if provider_name == "google":
+            resp = blueprint.session.get("/oauth2/v2/userinfo")
+            if resp.ok:
+                data = resp.json()
+                user_info = {
+                    "name": data.get("name"),
+                    "email": data.get("email"),
+                    "image": data.get("picture"),
+                    "provider": "google"
+                }
+        
+        elif provider_name == "linkedin":
+            resp = blueprint.session.get("https://api.linkedin.com/openid/userinfo")
+            if resp.ok:
+                data = resp.json()
+                user_info = {
+                    "name": data.get("name") or f"{data.get('given_name', '')} {data.get('family_name', '')}".strip(),
+                    "email": data.get("email"),
+                    "image": data.get("picture"),
+                    "provider": "linkedin"
+                }
+        
+        elif provider_name == "github":
+            resp = blueprint.session.get("/user")
+            if resp.ok:
+                data = resp.json()
+                # Secondary check for email if not public
+                email = data.get("email")
+                if not email:
+                    emails_resp = blueprint.session.get("/user/emails")
+                    if emails_resp.ok:
+                        emails = emails_resp.json()
+                        email = next((e["email"] for e in emails if e["primary"]), emails[0]["email"] if emails else None)
+                
+                user_info = {
+                    "name": data.get("name") or data.get("login"),
+                    "email": email,
+                    "image": data.get("avatar_url"),
+                    "provider": "github"
+                }
+
+    except Exception as e:
+        flash(f"Error fetching user data from {provider_name.capitalize()}.", "error")
+        print(f"Error fetching user info from {provider_name}: {e}")
+        return None
+
+    if not user_info.get("email"):
+        flash(f"{provider_name.capitalize()} did not provide an email address. Please ensure your email is public or verified.", "error")
+        return None
+
+    # Check for duplicate email with different provider
+    users = load_users()
+    existing_user = users.get(user_info["email"])
+    if existing_user and existing_user.get("provider") != provider_name:
+        flash(f"An account with this email already exists via {existing_user.get('provider').capitalize()}. Please use that instead.", "error")
+        return None
+
+    # Store in session
+    session["user_name"] = user_info["name"]
+    session["user_email"] = user_info["email"]
+    session["user_image"] = user_info["image"]
+    session["auth_provider"] = user_info["provider"]
+    session.permanent = True
+
+    # Persist user profile
+    save_user(user_info)
+    return user_info
+
+# Connect signals
+@oauth_authorized.connect_via(google_bp)
+def google_authorized(blueprint, token):
+    if not unified_auth_handler(blueprint, token, "google"):
+        return redirect(url_for("login"))
+
+@oauth_authorized.connect_via(linkedin_bp)
+def linkedin_authorized(blueprint, token):
+    if not unified_auth_handler(blueprint, token, "linkedin"):
+        return redirect(url_for("login"))
+
+@oauth_authorized.connect_via(github_bp)
+def github_authorized(blueprint, token):
+    if not unified_auth_handler(blueprint, token, "github"):
+        return redirect(url_for("login"))
+
+@oauth_error.connect
+def oauth_error_handler(blueprint, message, response):
+    print(f"OAuth Error from {blueprint.name}: {message}")
+    from flask import flash
+    flash(f"Authentication failed: {message}", "error")
+
+# =========================
+# Auth Helpers
+# =========================
+def get_current_user():
+    email = session.get("user_email")
+    if email:
+        # Try to load from "database" for most up-to-date info
+        users = load_users()
+        if email in users:
+            return users[email]
+        # Fallback to session
+        return {
+            "name": session.get("user_name"),
+            "email": email,
+            "image": session.get("user_image"),
+            "provider": session.get("auth_provider")
+        }
+    
+    if session.get("guest_user"):
+        guest_id = session.get("guest_id", "anonymous")
+        return {
+            "name": session.get("custom_name") or f"Guest ({guest_id[:4]})",
+            "email": f"guest_{guest_id}@local",
+            "image": None,
+            "provider": "guest"
+        }
+    return None
 
 # =========================
 # Template Context Processor
 # =========================
 @app.context_processor
-def inject_auth_status():
+def inject_globals():
     return {
-        "google_enabled": google_bp is not None,
-        "linkedin_enabled": linkedin_bp is not None,
-        "github_enabled": github_bp is not None
+        "google_enabled": bool(google_id and google_secret),
+        "linkedin_enabled": bool(linkedin_id and linkedin_secret),
+        "github_enabled": bool(github_id and github_secret),
+        "current_user": get_current_user()
     }
+
+# =========================
+# Auth Decorator
+# =========================
+from functools import wraps
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not get_current_user():
+            return redirect(url_for("login", next=request.url))
+        return f(*args, **kwargs)
+    return decorated_function
 
 # =========================
 # Routes
@@ -178,77 +348,32 @@ def bypass_login():
     if "guest_id" not in session:
         import os
         session["guest_id"] = os.urandom(8).hex()
-    return redirect(url_for("index"))
+    
+    # Handle redirect back to original page
+    next_url = session.pop("next_url", None)
+    return redirect(next_url or url_for("index"))
 
 @app.route("/", methods=["GET", "POST"])
+@login_required
 def index():
-    is_guest = session.get("guest_user", False)
-    is_google_authorized = google_bp is not None and google.authorized
-    is_linkedin_authorized = linkedin_bp is not None and linkedin.authorized
-    is_github_authorized = github_bp is not None and github.authorized
-    
-    if not any([is_google_authorized, is_linkedin_authorized, is_github_authorized, is_guest]):
-        return redirect(url_for("login"))
+    # Handle post-auth redirect if present
+    next_url = session.pop("next_url", None)
+    if next_url and next_url != request.path and next_url != request.url:
+        print(f"DEBUG: Redirecting to saved next_url: {next_url}")
+        return redirect(next_url)
 
-    user = {
-        "name": session.get("custom_name") or "Guest Candidate", 
-        "email": "guest@example.com"
-    }
-    if is_google_authorized:
-        try:
-            resp = google.get("/oauth2/v2/userinfo")
-            if resp.ok: 
-                user_data = resp.json()
-                user["name"] = user_data.get("name", "Guest")
-                user["email"] = user_data.get("email", "")
-        except Exception as e:
-            print(f"Google OAuth info failed: {e}")
-    elif is_linkedin_authorized:
-        try:
-            # Try OpenID Connect userinfo endpoint first (modern LinkedIn API)
-            resp = linkedin.get("userinfo")
-            if resp.ok:
-                data = resp.json()
-                user["name"] = data.get("name") or f"{data.get('given_name', '')} {data.get('family_name', '')}".strip() or "Guest"
-                user["email"] = data.get("email", "")
-                print(f"LinkedIn OIDC info success: {user['name']}")
-            else:
-                # Fallback to old profile endpoint if OIDC fails
-                resp = linkedin.get("me")
-                if resp.ok:
-                    data = resp.json()
-                    user["name"] = f"{data.get('localizedFirstName', '')} {data.get('localizedLastName', '')}".strip() or "Guest"
-                    print(f"LinkedIn Legacy info success: {user['name']}")
-                else:
-                    print(f"LinkedIn OAuth failed both endpoints. Userinfo status: {resp.status_code}")
-        except Exception as e:
-            print(f"LinkedIn OAuth info failed: {e}")
-            traceback.print_exc()
-    elif is_github_authorized:
-        try:
-            resp = github.get("/user")
-            if resp.ok:
-                user_data = resp.json()
-                user["name"] = user_data.get("name") or user_data.get("login", "Guest")
-                user["email"] = user_data.get("email", "")
-        except Exception as e:
-            print(f"GitHub OAuth info failed: {e}")
-
-    elif is_guest:
-        guest_id = session.get("guest_id", "anonymous")
-        user["name"] = session.get("custom_name") or f"Guest ({guest_id[:4]})"
-        user["email"] = f"guest_{guest_id}@local"
+    user = get_current_user()
+    user_email = user.get("email")
 
     all_matches = load_matches()
     # FILTERING: Ensure users only see their own data
-    user_email = user.get("email")
     user_matches = [m for m in all_matches if m.get("user_email") == user_email]
     recent_matches = user_matches[:10]
     
     results = None
     error_message = None
     if request.method == "POST":
-        print(f"DEBUG: POST request received. Guest Mode: {is_guest}")
+        print(f"DEBUG: POST request received for user: {user_email}")
         job_title = request.form.get("job_title", "").strip()
         job_description = request.form.get("job_description", "").strip()
         
@@ -309,7 +434,7 @@ def index():
                     
                     # Save to history with privacy association
                     new_match_entry = {
-                        "user_email": user.get("email"),
+                        "user_email": user_email,
                         "role": job_title or "Unnamed Role",
                         "candidate": f"Candidate {index + 1}",
                         "score": analysis_result['ats_score'],
@@ -348,6 +473,7 @@ def index():
                            error_message=error_message)
 
 @app.route("/rejection-simulator", methods=["POST"])
+@login_required
 def rejection_simulator():
     data = request.json
     company = data.get("company")
@@ -365,6 +491,7 @@ def rejection_simulator():
         return jsonify({"status": "error", "error": str(e)}), 500
 
 @app.route("/modify-resume", methods=["GET", "POST"])
+@login_required
 def modify_resume():
     # In-app editor for resume refinement
     resume_content = request.args.get("content", "")
@@ -386,29 +513,72 @@ def modify_resume():
 def login_magic():
     email = request.form.get("email")
     if email:
-        session["guest_user"] = True
-        session["guest_id"] = email.split("@")[0]
-        return redirect(url_for("index"))
+        session["guest_user"] = False
+        session["user_email"] = email
+        session["user_name"] = email.split("@")[0].capitalize()
+        session["auth_provider"] = "magic"
+        session.permanent = True
+        
+        # Handle redirect back to original page
+        next_url = session.pop("next_url", None)
+        return redirect(next_url or url_for("index"))
     return redirect(url_for("login"))
 
 @app.route("/signup")
 def signup():
+    if get_current_user():
+        return redirect(url_for("index"))
+    
+    # Store requested next URL for redirection after auth
+    next_url = request.args.get("next")
+    if next_url:
+        session["next_url"] = next_url
+        
     return render_template("signup.html")
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+        
+        # Simple authentication simulation
+        if email and password:
+            session["user_email"] = email
+            session["user_name"] = email.split("@")[0].capitalize()
+            session["auth_provider"] = "email"
+            session.permanent = True
+            
+            # Handle redirect back to original page
+            next_url = session.pop("next_url", None)
+            return redirect(next_url or url_for("index"))
+
+    if get_current_user():
+        return redirect(url_for("index"))
+    
+    # Store requested next URL for redirection after auth
+    next_url = request.args.get("next")
+    if next_url:
+        session["next_url"] = next_url
+        
     return render_template("login.html")
 
 @app.route("/google-login")
 def google_login():
+    next_url = request.args.get("next")
+    if next_url: session["next_url"] = next_url
     return redirect(url_for("google.login"))
 
 @app.route("/github-login")
 def github_login():
+    next_url = request.args.get("next")
+    if next_url: session["next_url"] = next_url
     return redirect(url_for("github.login"))
 
 @app.route("/linkedin-login")
 def linkedin_login():
+    next_url = request.args.get("next")
+    if next_url: session["next_url"] = next_url
     return redirect(url_for("linkedin.login"))
 
 @app.route("/logout")
@@ -417,15 +587,28 @@ def logout():
     return redirect(url_for("login"))
 
 @app.route("/update-profile", methods=["POST"])
+@login_required
 def update_profile():
     data = request.json
     new_name = data.get("name")
-    if new_name:
-        session["custom_name"] = new_name
-        return jsonify({"status": "success", "name": new_name})
-    return jsonify({"status": "error", "message": "Name is required"}), 400
+    new_role = data.get("role")
+    
+    user = get_current_user()
+    if user:
+        if new_name:
+            user["name"] = new_name
+            session["user_name"] = new_name
+        if new_role is not None:
+            user["role"] = new_role
+            session["user_role"] = new_role
+            
+        save_user(user)
+        return jsonify({"status": "success", "user": user})
+    
+    return jsonify({"status": "error", "message": "User not found"}), 404
 
 @app.route("/toggle-setting", methods=["POST"])
+@login_required
 def toggle_setting():
     data = request.json
     setting = data.get("setting")
@@ -436,6 +619,7 @@ def toggle_setting():
     return jsonify({"status": "error", "message": "Setting name is required"}), 400
 
 @app.route("/simulate-salary", methods=["POST"])
+@login_required
 def simulate_salary_route():
     data = request.json
     role = data.get("role")
