@@ -324,6 +324,23 @@
                     </a>
                 </div>
 
+                <div style="position: relative; text-align: center; margin-bottom: 1.5rem;">
+                    <div style="position: absolute; top: 50%; width: 100%; height: 1px; background: var(--border);">
+                    </div>
+                    <span
+                        style="position: relative; background: white; padding: 0 1rem; color: var(--text-nav); font-size: 0.625rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;">Or</span>
+                </div>
+
+                <a href="/bypass-login" id="guest-login-btn"
+                    style="display: flex; align-items: center; justify-content: center; gap: 0.6rem; width: 100%; height: 48px; border-radius: 12px; border: 1.5px dashed var(--border); background: transparent; color: var(--text-muted); font-size: 0.8125rem; font-weight: 600; text-decoration: none; transition: var(--transition); margin-bottom: 2rem;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    Continue as Guest
+                </a>
+
                 <div style="text-align: center; font-size: 0.875rem; color: var(--text-muted);">
                     Don't have an account? <a href="/signup"
                         style="color: var(--accent); font-weight: 700; text-decoration: none;">Request early access</a>
@@ -350,6 +367,13 @@
             filter: brightness(1.2);
             transform: translateY(-1px);
             box-shadow: 0 10px 20px rgba(10, 17, 40, 0.2) !important;
+        }
+
+        #guest-login-btn:hover {
+            background: var(--bg-main) !important;
+            border-color: var(--text-nav) !important;
+            color: var(--text-main) !important;
+            transform: translateY(-1px);
         }
     </style>
 </body>

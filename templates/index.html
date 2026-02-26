@@ -458,8 +458,13 @@
                                             </svg>
                                         </div>
                                         <div>
-                                            <span style="font-weight: 700; font-size: 1rem; display: block;">+{{
-                                                r.evolution.delta }}% Gain</span>
+                                            <span style="font-weight: 700; font-size: 1rem; display: block;">
+                                                {% if r.get('evolution') and r.evolution.get('delta') %}
+                                                {{ '+' if r.evolution.delta >= 0 else '' }}{{ r.evolution.delta }}% Gain
+                                                {% else %}
+                                                N/A
+                                                {% endif %}
+                                            </span>
                                             <span style="font-size: 0.75rem; color: var(--text-muted);">Role
                                                 Trajectory</span>
                                         </div>
