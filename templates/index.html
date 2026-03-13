@@ -516,7 +516,7 @@
                                     style="font-size: 0.625rem; font-weight: 800; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 1rem;">Quick
                                     Success Wins</span>
                                 <div style="display: flex; flex-direction: column; gap: 1rem;">
-                                    {% for win in r.feedback_loop.quick_wins[:3] %}
+                                    {% for win in r.feedback_loop.get('quick_wins', [])[:3] %}
                                     <div style="display: flex; gap: 0.75rem;">
                                         <div
                                             style="width: 20px; height: 20px; background: rgba(197, 165, 114, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 10px;">
