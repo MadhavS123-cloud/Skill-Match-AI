@@ -1,5 +1,353 @@
 [
   {
+    "user_email": "guest_84a55dd372ea5b06@local",
+    "role": "SDE",
+    "candidate": "Candidate 1",
+    "score": 37,
+    "timestamp": "2026-03-14T02:26:04.131166",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 37,
+      "similarity_score": 4.6,
+      "ats_score": 37,
+      "ats_summary": "The resume shows a 4.6% semantic alignment with the role.",
+      "role_focus": "General Professional",
+      "missing_skills": [],
+      "detailed_skills": [
+        {
+          "name": "Python",
+          "level": "High",
+          "score": 90
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Title Alignment",
+          "candidate": "High",
+          "required": "High",
+          "pct": 4
+        },
+        {
+          "label": "Skill Coverage",
+          "candidate": "1 items",
+          "required": "1 items",
+          "pct": 100
+        }
+      ],
+      "strengths": [
+        "Strong alignment in Python",
+        "Clear section headers detected",
+        "Sufficient textual detail for ATS"
+      ],
+      "areas_to_develop": [
+        "None critical",
+        "Quantify more achievements with metrics",
+        "Ensure contact information is prominent"
+      ],
+      "recommendation": "Focus on integrating the specific missing keywords identified to boost ATS ranking.",
+      "roadmap": [
+        "Step 1: Add missing skill keywords",
+        "Step 2: Quantify impact in experience",
+        "Step 3: Re-verify contact details"
+      ],
+      "risk_analysis": {
+        "level": "High",
+        "findings": [
+          "Missing email address",
+          "Missing or unparseable phone number",
+          "Resume is unusually short (likely lacking detail)"
+        ]
+      },
+      "feedback_loop": {
+        "current_percentile": 37,
+        "gap_to_top_10": 53,
+        "sections_to_improve": [
+          "Skills Section",
+          "Experience Bullet Points"
+        ]
+      },
+      "sample_ideal_resume": "### IDEAL RESUME STRUCTURE\n\n**Name**\nLocation | Phone | Email\n\n**Summary**\nHigh-impact professional with expertise in Python.\n\n**Experience**\n**Company A** | Role | Date\n- Improved system performance by 30% using Python.\n- Led a team of 5 to deliver X project ahead of schedule.",
+      "content": "I know Python and Java",
+      "company_style_fit": {
+        "best_fit_culture": "Research",
+        "fit_score": 40,
+        "style_summary": "Focuses heavily on theoretical depth and formal contributions.",
+        "top_style_improvements": [
+          "Include more peer-reviewed citations",
+          "Showcase more end-to-end ownership",
+          "Standardize formatting for ATS readability"
+        ]
+      },
+      "suggested_template": {
+        "name": "High-Velocity Builder",
+        "description": "Highlights rapid shipping, breadth of skills, and zero-to-one ownership.",
+        "style": "Fast-paced, versatile",
+        "structure": "Name -> Contact -> Key Accomplishments -> Technical Stack -> Rapid Growth Experience"
+      }
+    }
+  },
+  {
+    "user_email": "guest_b4a61b4e5ab36a92@local",
+    "role": "SDE",
+    "candidate": "Candidate 1",
+    "score": 37,
+    "timestamp": "2026-03-14T01:57:31.581989",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 37,
+      "similarity_score": 4.6,
+      "ats_score": 37,
+      "ats_summary": "The resume shows a 4.6% semantic alignment with the role.",
+      "role_focus": "General Professional",
+      "missing_skills": [],
+      "detailed_skills": [
+        {
+          "name": "Python",
+          "level": "High",
+          "score": 90
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Title Alignment",
+          "candidate": "High",
+          "required": "High",
+          "pct": 4
+        },
+        {
+          "label": "Skill Coverage",
+          "candidate": "1 items",
+          "required": "1 items",
+          "pct": 100
+        }
+      ],
+      "strengths": [
+        "Strong alignment in Python",
+        "Clear section headers detected",
+        "Sufficient textual detail for ATS"
+      ],
+      "areas_to_develop": [
+        "None critical",
+        "Quantify more achievements with metrics",
+        "Ensure contact information is prominent"
+      ],
+      "recommendation": "Focus on integrating the specific missing keywords identified to boost ATS ranking.",
+      "roadmap": [
+        "Step 1: Add missing skill keywords",
+        "Step 2: Quantify impact in experience",
+        "Step 3: Re-verify contact details"
+      ],
+      "risk_analysis": {
+        "level": "High",
+        "findings": [
+          "Missing email address",
+          "Missing or unparseable phone number",
+          "Resume is unusually short (likely lacking detail)"
+        ]
+      },
+      "feedback_loop": {
+        "current_percentile": 37,
+        "gap_to_top_10": 53,
+        "sections_to_improve": [
+          "Skills Section",
+          "Experience Bullet Points"
+        ]
+      },
+      "sample_ideal_resume": "### IDEAL RESUME STRUCTURE\n\n**Name**\nLocation | Phone | Email\n\n**Summary**\nHigh-impact professional with expertise in Python.\n\n**Experience**\n**Company A** | Role | Date\n- Improved system performance by 30% using Python.\n- Led a team of 5 to deliver X project ahead of schedule.",
+      "content": "I know Python and Java",
+      "company_style_fit": {
+        "best_fit_culture": "Research",
+        "fit_score": 40,
+        "style_summary": "Focuses heavily on theoretical depth and formal contributions.",
+        "top_style_improvements": [
+          "Include more peer-reviewed citations",
+          "Showcase more end-to-end ownership",
+          "Standardize formatting for ATS readability"
+        ]
+      },
+      "suggested_template": {
+        "name": "High-Velocity Builder",
+        "description": "Highlights rapid shipping, breadth of skills, and zero-to-one ownership.",
+        "style": "Fast-paced, versatile",
+        "structure": "Name -> Contact -> Key Accomplishments -> Technical Stack -> Rapid Growth Experience"
+      }
+    }
+  },
+  {
+    "user_email": "guest_052e887748353d84@local",
+    "role": "SDE",
+    "candidate": "Candidate 1",
+    "score": 37,
+    "timestamp": "2026-03-14T01:43:51.706704",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 37,
+      "similarity_score": 4.6,
+      "ats_score": 37,
+      "ats_summary": "The resume shows a 4.6% semantic alignment with the role.",
+      "role_focus": "General Professional",
+      "missing_skills": [],
+      "detailed_skills": [
+        {
+          "name": "Python",
+          "level": "High",
+          "score": 90
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Title Alignment",
+          "candidate": "High",
+          "required": "High",
+          "pct": 4
+        },
+        {
+          "label": "Skill Coverage",
+          "candidate": "1 items",
+          "required": "1 items",
+          "pct": 100
+        }
+      ],
+      "strengths": [
+        "Strong alignment in Python",
+        "Clear section headers detected",
+        "Sufficient textual detail for ATS"
+      ],
+      "areas_to_develop": [
+        "None critical",
+        "Quantify more achievements with metrics",
+        "Ensure contact information is prominent"
+      ],
+      "recommendation": "Focus on integrating the specific missing keywords identified to boost ATS ranking.",
+      "roadmap": [
+        "Step 1: Add missing skill keywords",
+        "Step 2: Quantify impact in experience",
+        "Step 3: Re-verify contact details"
+      ],
+      "risk_analysis": {
+        "level": "High",
+        "findings": [
+          "Missing email address",
+          "Missing or unparseable phone number",
+          "Resume is unusually short (likely lacking detail)"
+        ]
+      },
+      "feedback_loop": {
+        "current_percentile": 37,
+        "gap_to_top_10": 53,
+        "sections_to_improve": [
+          "Skills Section",
+          "Experience Bullet Points"
+        ]
+      },
+      "sample_ideal_resume": "### IDEAL RESUME STRUCTURE\n\n**Name**\nLocation | Phone | Email\n\n**Summary**\nHigh-impact professional with expertise in Python.\n\n**Experience**\n**Company A** | Role | Date\n- Improved system performance by 30% using Python.\n- Led a team of 5 to deliver X project ahead of schedule.",
+      "content": "I know Python and Java",
+      "company_style_fit": {
+        "best_fit_culture": "Research",
+        "fit_score": 40,
+        "style_summary": "Focuses heavily on theoretical depth and formal contributions.",
+        "top_style_improvements": [
+          "Include more peer-reviewed citations",
+          "Showcase more end-to-end ownership",
+          "Standardize formatting for ATS readability"
+        ]
+      },
+      "suggested_template": {
+        "name": "High-Velocity Builder",
+        "description": "Highlights rapid shipping, breadth of skills, and zero-to-one ownership.",
+        "style": "Fast-paced, versatile",
+        "structure": "Name -> Contact -> Key Accomplishments -> Technical Stack -> Rapid Growth Experience"
+      }
+    }
+  },
+  {
+    "user_email": "guest_58c4e11e07aff94b@local",
+    "role": "SDE",
+    "candidate": "Candidate 1",
+    "score": 37,
+    "timestamp": "2026-03-14T01:42:35.581550",
+    "full_analysis": {
+      "resume_no": 1,
+      "score": 37,
+      "similarity_score": 4.6,
+      "ats_score": 37,
+      "ats_summary": "The resume shows a 4.6% semantic alignment with the role.",
+      "role_focus": "General Professional",
+      "missing_skills": [],
+      "detailed_skills": [
+        {
+          "name": "Python",
+          "level": "High",
+          "score": 90
+        }
+      ],
+      "experience_match": [
+        {
+          "label": "Title Alignment",
+          "candidate": "High",
+          "required": "High",
+          "pct": 4
+        },
+        {
+          "label": "Skill Coverage",
+          "candidate": "1 items",
+          "required": "1 items",
+          "pct": 100
+        }
+      ],
+      "strengths": [
+        "Strong alignment in Python",
+        "Clear section headers detected",
+        "Sufficient textual detail for ATS"
+      ],
+      "areas_to_develop": [
+        "None critical",
+        "Quantify more achievements with metrics",
+        "Ensure contact information is prominent"
+      ],
+      "recommendation": "Focus on integrating the specific missing keywords identified to boost ATS ranking.",
+      "roadmap": [
+        "Step 1: Add missing skill keywords",
+        "Step 2: Quantify impact in experience",
+        "Step 3: Re-verify contact details"
+      ],
+      "risk_analysis": {
+        "level": "High",
+        "findings": [
+          "Missing email address",
+          "Missing or unparseable phone number",
+          "Resume is unusually short (likely lacking detail)"
+        ]
+      },
+      "feedback_loop": {
+        "current_percentile": 37,
+        "gap_to_top_10": 53,
+        "sections_to_improve": [
+          "Skills Section",
+          "Experience Bullet Points"
+        ]
+      },
+      "sample_ideal_resume": "### IDEAL RESUME STRUCTURE\n\n**Name**\nLocation | Phone | Email\n\n**Summary**\nHigh-impact professional with expertise in Python.\n\n**Experience**\n**Company A** | Role | Date\n- Improved system performance by 30% using Python.\n- Led a team of 5 to deliver X project ahead of schedule.",
+      "content": "I know Python and Java",
+      "company_style_fit": {
+        "best_fit_culture": "Research",
+        "fit_score": 40,
+        "style_summary": "Focuses heavily on theoretical depth and formal contributions.",
+        "top_style_improvements": [
+          "Include more peer-reviewed citations",
+          "Showcase more end-to-end ownership",
+          "Standardize formatting for ATS readability"
+        ]
+      },
+      "suggested_template": {
+        "name": "High-Velocity Builder",
+        "description": "Highlights rapid shipping, breadth of skills, and zero-to-one ownership.",
+        "style": "Fast-paced, versatile",
+        "structure": "Name -> Contact -> Key Accomplishments -> Technical Stack -> Rapid Growth Experience"
+      }
+    }
+  },
+  {
     "user_email": "guest_07c9c4def7b83736@local",
     "role": "swe at google",
     "candidate": "Candidate 1",
